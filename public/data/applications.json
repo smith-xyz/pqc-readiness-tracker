@@ -1,0 +1,171 @@
+{
+    "last_updated": "2025-10-15",
+    "applications": {
+        "go-1.23": [
+            {
+                "id": "kubernetes",
+                "name": "Kubernetes",
+                "description": "Container orchestration platform",
+                "category": "Infrastructure"
+            },
+            {
+                "id": "docker",
+                "name": "Docker",
+                "description": "Container runtime",
+                "category": "Infrastructure"
+            },
+            {
+                "id": "etcd",
+                "name": "etcd",
+                "description": "Distributed key-value store",
+                "category": "Database"
+            },
+            {
+                "id": "prometheus",
+                "name": "Prometheus",
+                "description": "Monitoring and alerting",
+                "category": "Observability"
+            },
+            {
+                "id": "traefik",
+                "name": "Traefik",
+                "description": "Cloud-native load balancer",
+                "category": "Infrastructure"
+            },
+            {
+                "id": "cockroachdb",
+                "name": "CockroachDB",
+                "description": "Distributed SQL database",
+                "category": "Database"
+            }
+        ],
+        "nodejs-24.7": [
+            {
+                "id": "express",
+                "name": "Express.js",
+                "description": "Web application framework",
+                "category": "Web Framework"
+            },
+            {
+                "id": "nextjs",
+                "name": "Next.js",
+                "description": "React framework for production",
+                "category": "Web Framework"
+            },
+            {
+                "id": "nestjs",
+                "name": "NestJS",
+                "description": "Enterprise Node.js framework",
+                "category": "Web Framework"
+            },
+            {
+                "id": "fastify",
+                "name": "Fastify",
+                "description": "Fast web framework",
+                "category": "Web Framework"
+            }
+        ],
+        "python-3": [
+            {
+                "id": "django",
+                "name": "Django",
+                "description": "High-level web framework",
+                "category": "Web Framework"
+            },
+            {
+                "id": "flask",
+                "name": "Flask",
+                "description": "Lightweight web framework",
+                "category": "Web Framework"
+            },
+            {
+                "id": "fastapi",
+                "name": "FastAPI",
+                "description": "Modern API framework",
+                "category": "Web Framework"
+            },
+            {
+                "id": "ansible",
+                "name": "Ansible",
+                "description": "IT automation platform",
+                "category": "Infrastructure"
+            }
+        ],
+        "java-jdk": [
+            {
+                "id": "spring-boot",
+                "name": "Spring Boot",
+                "description": "Enterprise application framework",
+                "category": "Web Framework"
+            },
+            {
+                "id": "tomcat",
+                "name": "Apache Tomcat",
+                "description": "Servlet container",
+                "category": "Application Server"
+            },
+            {
+                "id": "kafka",
+                "name": "Apache Kafka",
+                "description": "Event streaming platform",
+                "category": "Infrastructure"
+            }
+        ],
+        "rust-lang": [
+            {
+                "id": "actix",
+                "name": "Actix Web",
+                "description": "Powerful web framework",
+                "category": "Web Framework"
+            },
+            {
+                "id": "rocket",
+                "name": "Rocket",
+                "description": "Web framework for Rust",
+                "category": "Web Framework"
+            }
+        ],
+        "dotnet": [
+            {
+                "id": "aspnet-core",
+                "name": "ASP.NET Core",
+                "description": "Cross-platform web framework",
+                "category": "Web Framework"
+            }
+        ],
+        "ruby": [
+            {
+                "id": "rails",
+                "name": "Ruby on Rails",
+                "description": "Full-stack web framework",
+                "category": "Web Framework"
+            },
+            {
+                "id": "sinatra",
+                "name": "Sinatra",
+                "description": "Lightweight web framework",
+                "category": "Web Framework"
+            }
+        ],
+        "php": [
+            {
+                "id": "laravel",
+                "name": "Laravel",
+                "description": "PHP web framework",
+                "category": "Web Framework"
+            },
+            {
+                "id": "symfony",
+                "name": "Symfony",
+                "description": "PHP framework for web apps",
+                "category": "Web Framework"
+            },
+            {
+                "id": "wordpress",
+                "name": "WordPress",
+                "description": "Content management system",
+                "category": "CMS"
+            }
+        ]
+    }
+}

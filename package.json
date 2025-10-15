@@ -1,0 +1,30 @@
+{
+  "name": "pqc-readiness-tracker",
+  "version": "1.0.0",
+  "description": "Community-maintained dashboard tracking Post-Quantum Cryptography (PQC) implementation status across programming languages, crypto libraries, and standards.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "post-quantum",
+    "cryptography",
+    "pqc",
+    "security"
+  ],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.4",
+    "vite": "^7.1.9"
+  },
+  "dependencies": {
+    "cytoscape": "^3.33.1",
+    "cytoscape-dagre": "^2.5.0",
+    "react": "^19.2.0",
+    "react-cytoscape": "^1.0.6",
+    "react-dom": "^19.2.0"
+  }
+}

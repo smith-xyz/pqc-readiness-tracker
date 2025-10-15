@@ -1,0 +1,145 @@
+{
+    "last_updated": "2025-10-15",
+    "edges": [
+        {
+            "from": "openssl-3.5",
+            "to": "nist-fips-203",
+            "type": "implements",
+            "description": "OpenSSL implements ML-KEM algorithms from NIST standard"
+        },
+        {
+            "from": "openssl-3.5",
+            "to": "nist-fips-204",
+            "type": "implements",
+            "description": "OpenSSL implements ML-DSA algorithms from NIST standard"
+        },
+        {
+            "from": "openssl-3.5",
+            "to": "ietf-tls-hybrid",
+            "type": "blocks_on",
+            "description": "OpenSSL TLS integration blocked on IETF standards"
+        },
+        {
+            "from": "go-stdlib-crypto",
+            "to": "nist-fips-203",
+            "type": "implements",
+            "description": "Go crypto/tls implements ML-KEM with TLS integration"
+        },
+        {
+            "from": "nodejs-24.7",
+            "to": "openssl-3.5",
+            "type": "depends_on",
+            "description": "Node.js uses OpenSSL for crypto operations"
+        },
+        {
+            "from": "python-3",
+            "to": "openssl-3.5",
+            "type": "depends_on",
+            "description": "Python cryptography package uses OpenSSL"
+        },
+        {
+            "from": "go-1.23",
+            "to": "go-stdlib-crypto",
+            "type": "uses",
+            "description": "Go uses its own stdlib crypto implementation"
+        },
+        {
+            "from": "boringssl",
+            "to": "nist-fips-203",
+            "type": "implements",
+            "description": "BoringSSL implements ML-KEM for Chrome/QUIC"
+        },
+        {
+            "from": "bouncy-castle",
+            "to": "nist-fips-203",
+            "type": "implements",
+            "description": "Bouncy Castle implements ML-KEM algorithms"
+        },
+        {
+            "from": "bouncy-castle",
+            "to": "nist-fips-204",
+            "type": "implements",
+            "description": "Bouncy Castle implements ML-DSA algorithms"
+        },
+        {
+            "from": "rustls",
+            "to": "nist-fips-203",
+            "type": "implements",
+            "description": "rustls experimental ML-KEM implementation"
+        },
+        {
+            "from": "wolfssl",
+            "to": "nist-fips-203",
+            "type": "implements",
+            "description": "wolfSSL implements ML-KEM algorithms"
+        },
+        {
+            "from": "wolfssl",
+            "to": "nist-fips-204",
+            "type": "implements",
+            "description": "wolfSSL implements ML-DSA algorithms"
+        },
+        {
+            "from": "java-jdk",
+            "to": "bouncy-castle",
+            "type": "depends_on",
+            "description": "Java uses Bouncy Castle for PQC crypto"
+        },
+        {
+            "from": "rust-lang",
+            "to": "rustls",
+            "type": "depends_on",
+            "description": "Rust applications use rustls for TLS"
+        },
+        {
+            "from": "dotnet",
+            "to": "openssl-3.5",
+            "type": "depends_on",
+            "description": ".NET depends on OpenSSL on Linux"
+        },
+        {
+            "from": "ruby",
+            "to": "openssl-3.5",
+            "type": "depends_on",
+            "description": "Ruby depends on OpenSSL via openssl gem"
+        },
+        {
+            "from": "php",
+            "to": "openssl-3.5",
+            "type": "depends_on",
+            "description": "PHP depends on OpenSSL for crypto"
+        }
+    ],
+    "paths": {
+        "nodejs-to-standard": {
+            "description": "Node.js PQC readiness path",
+            "path": [
+                "nodejs-24.7",
+                "openssl-3.5",
+                "nist-fips-203"
+            ],
+            "blocker": "openssl-3.5",
+            "blocker_reason": "OpenSSL has algorithms but no TLS integration"
+        },
+        "go-to-standard": {
+            "description": "Go PQC readiness path",
+            "path": [
+                "go-1.23",
+                "go-stdlib-crypto",
+                "nist-fips-203"
+            ],
+            "blocker": null,
+            "status": "ready"
+        },
+        "python-to-standard": {
+            "description": "Python PQC readiness path",
+            "path": [
+                "python-3",
+                "openssl-3.5",
+                "nist-fips-203"
+            ],
+            "blocker": "python-3",
+            "blocker_reason": "Python cryptography package hasn't adopted OpenSSL 3.5 yet"
+        }
+    }
+}
