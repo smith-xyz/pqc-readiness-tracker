@@ -29,6 +29,14 @@ Language runtimes and compilers
 
 - Example: Node.js, Python, Go, Java, Rust, .NET, Ruby, PHP
 
+### 4. `infrastructure`
+
+Critical infrastructure software that depends on crypto libraries
+
+- Example: OpenSSH, nginx, Apache HTTP Server, HAProxy, curl/libcurl
+- These are enterprise-critical applications that inherit PQC support from their crypto library (typically OpenSSL)
+- Positioned as a side branch from crypto libraries to show real-world impact
+
 ## Node Properties
 
 ```json
@@ -93,13 +101,20 @@ If any dependency is blocked, status is:
 
 ```
 Layer 0 (Standard) → Layer 1 (Crypto Lib) → Layer 2 (Runtime)
+                                          ↘
+                                         Layer 3 (Infrastructure)
 
-nist-fips-203 ─→ openssl-3.5 ─→ nodejs-24.7
-    ✅              🟡 partial       🟡 blocked
-  [done]         [API only]    [inherits status]
-               [TLS: blocked]  [TLS: blocked]
+nist-fips-203 ─→ openssl-3.5 ─→ nodejs
+    ✅              ✅ available       🔴 blocked
+  [done]         [API + TLS]      [inherits status]
+                               [TLS: available]  [TLS: blocked]
+                     ↓
+                   nginx (infrastructure)
+                     ✅ ready
+                   [inherits from OpenSSL 3.5]
+                   [TLS 1.3 PQC: available]
 
-nist-fips-203 ─→ go-stdlib-crypto ─→ go-1.23
+nist-fips-203 ─→ go-stdlib-crypto ─→ go
     ✅              ✅ available      ✅ ready
   [done]         [API + TLS]      [independent]
                [TLS: production] [TLS: production]
@@ -109,7 +124,11 @@ nist-fips-203 ─→ bouncy-castle ─→ java-jdk
   [done]         [API only]     [waiting on TLS]
 ```
 
-**Note**: Protocol support (TLS, SSH, IPSec, QUIC) is shown in crypto library metadata. Click nodes to see protocol details.
+**Note**:
+
+- Protocol support (TLS, SSH, IPSec, QUIC) is shown in crypto library metadata. Click nodes to see protocol details.
+- Infrastructure nodes branch from crypto libraries to show enterprise-critical applications that inherit PQC support.
+- Click runtime nodes to see applications/frameworks that depend on them.
 
 ## Visualization Goals
 

@@ -2,13 +2,15 @@
 export const NODE_TYPES = {
   STANDARD: 'standard',
   CRYPTO_LIBRARY: 'crypto_library',
-  RUNTIME: 'runtime'
+  RUNTIME: 'runtime',
+  INFRASTRUCTURE: 'infrastructure'
 };
 
 export const NODE_TYPE_LABELS = {
   [NODE_TYPES.STANDARD]: 'Standard',
   [NODE_TYPES.CRYPTO_LIBRARY]: 'Crypto Library',
-  [NODE_TYPES.RUNTIME]: 'Runtime'
+  [NODE_TYPES.RUNTIME]: 'Runtime',
+  [NODE_TYPES.INFRASTRUCTURE]: 'Infrastructure'
 };
 
 // Status Values
@@ -19,7 +21,8 @@ export const STATUS = {
   NOT_AVAILABLE: 'not_available',
   PLANNED: 'planned',
   FINAL: 'final',
-  DRAFT: 'draft'
+  DRAFT: 'draft',
+  EVALUATION: 'evaluation'
 };
 
 export const STATUS_LABELS = {
@@ -29,7 +32,8 @@ export const STATUS_LABELS = {
   [STATUS.NOT_AVAILABLE]: 'Not Available',
   [STATUS.PLANNED]: 'Planned',
   [STATUS.FINAL]: 'Final',
-  [STATUS.DRAFT]: 'Draft'
+  [STATUS.DRAFT]: 'Draft',
+  [STATUS.EVALUATION]: 'Evaluation'
 };
 
 // Layer Filters
@@ -37,14 +41,16 @@ export const LAYERS = {
   ALL: 'all',
   STANDARDS: '0',
   CRYPTO_LIBRARIES: '1',
-  RUNTIMES: '2'
+  RUNTIMES: '2',
+  INFRASTRUCTURE: '3'
 };
 
 export const LAYER_LABELS = {
   [LAYERS.ALL]: 'All',
   [LAYERS.STANDARDS]: 'Standards',
   [LAYERS.CRYPTO_LIBRARIES]: 'Crypto Libraries',
-  [LAYERS.RUNTIMES]: 'Runtimes'
+  [LAYERS.RUNTIMES]: 'Runtimes',
+  [LAYERS.INFRASTRUCTURE]: 'Infrastructure'
 };
 
 // Detail Field Labels
@@ -88,7 +94,8 @@ export const LAYER_FILTERS = [
   { value: LAYERS.ALL, label: LAYER_LABELS[LAYERS.ALL] },
   { value: LAYERS.STANDARDS, label: LAYER_LABELS[LAYERS.STANDARDS] },
   { value: LAYERS.CRYPTO_LIBRARIES, label: LAYER_LABELS[LAYERS.CRYPTO_LIBRARIES] },
-  { value: LAYERS.RUNTIMES, label: LAYER_LABELS[LAYERS.RUNTIMES] }
+  { value: LAYERS.RUNTIMES, label: LAYER_LABELS[LAYERS.RUNTIMES] },
+  { value: LAYERS.INFRASTRUCTURE, label: LAYER_LABELS[LAYERS.INFRASTRUCTURE] }
 ];
 
 // Status Filters (with values and labels)

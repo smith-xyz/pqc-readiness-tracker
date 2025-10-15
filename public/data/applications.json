@@ -1,7 +1,7 @@
 {
     "last_updated": "2025-10-15",
     "applications": {
-        "go-1.23": [
+        "go": [
             {
                 "id": "kubernetes",
                 "name": "Kubernetes",
@@ -33,13 +33,37 @@
                 "category": "Infrastructure"
             },
             {
-                "id": "cockroachdb",
-                "name": "CockroachDB",
-                "description": "Distributed SQL database",
+                "id": "influxdb",
+                "name": "InfluxDB",
+                "description": "Time-series database for metrics and monitoring",
                 "category": "Database"
+            },
+            {
+                "id": "consul",
+                "name": "Consul",
+                "description": "Service mesh and discovery platform",
+                "category": "Infrastructure"
+            },
+            {
+                "id": "vault",
+                "name": "Vault",
+                "description": "Secrets management and encryption",
+                "category": "Security"
+            },
+            {
+                "id": "podman",
+                "name": "Podman",
+                "description": "Daemonless container engine (Red Hat)",
+                "category": "Infrastructure"
+            },
+            {
+                "id": "istio",
+                "name": "Istio",
+                "description": "Service mesh for Kubernetes",
+                "category": "Infrastructure"
             }
         ],
-        "nodejs-24.7": [
+        "nodejs": [
             {
                 "id": "express",
                 "name": "Express.js",

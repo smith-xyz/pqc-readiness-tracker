@@ -5,7 +5,10 @@ export const COLORS = {
   [STATUS.PARTIAL]: '#f59e0b',
   [STATUS.EXPERIMENTAL]: '#6366f1',
   [STATUS.NOT_AVAILABLE]: '#ef4444',
-  [STATUS.PLANNED]: '#71717a'
+  [STATUS.PLANNED]: '#71717a',
+  [STATUS.FINAL]: '#22c55e',
+  [STATUS.DRAFT]: '#f59e0b',
+  [STATUS.EVALUATION]: '#a855f7'
 };
 
 // Common UI colors

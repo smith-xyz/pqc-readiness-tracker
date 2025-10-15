@@ -15,9 +15,27 @@
         },
         {
             "from": "openssl-3.5",
+            "to": "nist-fips-205",
+            "type": "implements",
+            "description": "OpenSSL implements SLH-DSA algorithms from NIST standard"
+        },
+        {
+            "from": "openssl-3.5",
             "to": "ietf-tls-hybrid",
             "type": "blocks_on",
             "description": "OpenSSL TLS integration blocked on IETF standards"
+        },
+        {
+            "from": "nss",
+            "to": "nist-fips-203",
+            "type": "implements",
+            "description": "NSS implements ML-KEM with hybrid TLS 1.3 support"
+        },
+        {
+            "from": "nss",
+            "to": "nist-fips-204",
+            "type": "blocks_on",
+            "description": "NSS ML-DSA support under development, expected in RHEL 10.1+"
         },
         {
             "from": "go-stdlib-crypto",
@@ -26,7 +44,7 @@
             "description": "Go crypto/tls implements ML-KEM with TLS integration"
         },
         {
-            "from": "nodejs-24.7",
+            "from": "nodejs",
             "to": "openssl-3.5",
             "type": "depends_on",
             "description": "Node.js uses OpenSSL for crypto operations"
@@ -38,7 +56,7 @@
             "description": "Python cryptography package uses OpenSSL"
         },
         {
-            "from": "go-1.23",
+            "from": "go",
             "to": "go-stdlib-crypto",
             "type": "uses",
             "description": "Go uses its own stdlib crypto implementation"
@@ -108,13 +126,49 @@
             "to": "openssl-3.5",
             "type": "depends_on",
             "description": "PHP depends on OpenSSL for crypto"
+        },
+        {
+            "from": "openssh",
+            "to": "openssl-3.5",
+            "type": "depends_on",
+            "description": "OpenSSH depends on OpenSSL for ML-KEM key exchange"
+        },
+        {
+            "from": "nginx",
+            "to": "openssl-3.5",
+            "type": "depends_on",
+            "description": "nginx depends on OpenSSL for TLS"
+        },
+        {
+            "from": "apache-httpd",
+            "to": "openssl-3.5",
+            "type": "depends_on",
+            "description": "Apache HTTP Server depends on OpenSSL for TLS"
+        },
+        {
+            "from": "haproxy",
+            "to": "openssl-3.5",
+            "type": "depends_on",
+            "description": "HAProxy depends on OpenSSL for TLS"
+        },
+        {
+            "from": "curl",
+            "to": "openssl-3.5",
+            "type": "depends_on",
+            "description": "curl/libcurl depends on OpenSSL for TLS"
+        },
+        {
+            "from": "postgresql",
+            "to": "openssl-3.5",
+            "type": "depends_on",
+            "description": "PostgreSQL depends on OpenSSL for TLS connections"
         }
     ],
     "paths": {
         "nodejs-to-standard": {
             "description": "Node.js PQC readiness path",
             "path": [
-                "nodejs-24.7",
+                "nodejs",
                 "openssl-3.5",
                 "nist-fips-203"
             ],
@@ -124,7 +178,7 @@
         "go-to-standard": {
             "description": "Go PQC readiness path",
             "path": [
-                "go-1.23",
+                "go",
                 "go-stdlib-crypto",
                 "nist-fips-203"
             ],
@@ -140,6 +194,66 @@
             ],
             "blocker": "python-3",
             "blocker_reason": "Python cryptography package hasn't adopted OpenSSL 3.5 yet"
+        },
+        "openssl-to-openssh": {
+            "description": "OpenSSH depends on OpenSSL for TLS features",
+            "path": [
+                "openssh",
+                "openssl-3.5",
+                "nist-fips-203"
+            ],
+            "blocker": null,
+            "status": "ready"
+        },
+        "openssl-to-nginx": {
+            "description": "nginx depends on OpenSSL for TLS",
+            "path": [
+                "nginx",
+                "openssl-3.5",
+                "nist-fips-203"
+            ],
+            "blocker": null,
+            "status": "ready"
+        },
+        "openssl-to-apache": {
+            "description": "Apache depends on OpenSSL for TLS",
+            "path": [
+                "apache-httpd",
+                "openssl-3.5",
+                "nist-fips-203"
+            ],
+            "blocker": null,
+            "status": "ready"
+        },
+        "openssl-to-haproxy": {
+            "description": "HAProxy depends on OpenSSL for TLS",
+            "path": [
+                "haproxy",
+                "openssl-3.5",
+                "nist-fips-203"
+            ],
+            "blocker": null,
+            "status": "ready"
+        },
+        "openssl-to-curl": {
+            "description": "curl depends on OpenSSL for TLS",
+            "path": [
+                "curl",
+                "openssl-3.5",
+                "nist-fips-203"
+            ],
+            "blocker": null,
+            "status": "ready"
+        },
+        "openssl-to-postgresql": {
+            "description": "PostgreSQL depends on OpenSSL for TLS",
+            "path": [
+                "postgresql",
+                "openssl-3.5",
+                "nist-fips-203"
+            ],
+            "blocker": null,
+            "status": "ready"
         }
     }
 }

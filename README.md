@@ -11,8 +11,9 @@ Community-maintained dashboard tracking Post-Quantum Cryptography (PQC) implemen
 This project visualizes the **dependency tree** of PQC readiness as an interactive graph:
 
 - **Standards** (Layer 0): NIST FIPS & IETF specifications
-- **Crypto Libraries** (Layer 1): OpenSSL, BoringSSL, Bouncy Castle, rustls, wolfSSL (with protocol support info)
+- **Crypto Libraries** (Layer 1): OpenSSL, BoringSSL, Bouncy Castle, rustls, wolfSSL, NSS (with protocol support info)
 - **Language Runtimes** (Layer 2): Node.js, Python, Go, Java, Rust, .NET, Ruby, PHP
+- **Infrastructure** (Layer 3): Enterprise-critical software (OpenSSH, nginx, Apache, HAProxy, curl) branching from crypto libraries
 
 ## Why This Exists
 

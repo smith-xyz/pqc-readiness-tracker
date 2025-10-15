@@ -17,7 +17,18 @@ export function useCytoscape(containerRef, nodesData, edgesData, cyRef, onNodeCl
       container: containerRef.current,
       elements: elements,
       style: cytoscapeStyles,
-      layout: cytoscapeLayout
+      layout: cytoscapeLayout,
+      minZoom: 0.3,
+      maxZoom: 2.5
+    });
+
+    cy.ready(() => {
+      cy.fit(cy.elements(), 80);
+      const currentZoom = cy.zoom();
+      cy.zoom({
+        level: currentZoom * 1.75,
+        renderedPosition: { x: cy.width() / 2, y: cy.height() / 2 }
+      });
     });
 
     cy.on('tap', 'node', (event) => {

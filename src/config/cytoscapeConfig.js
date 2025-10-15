@@ -104,6 +104,25 @@ export const cytoscapeStyles = [
       'border-color': '#8b5cf6',
       'box-shadow': '0 0 20px #8b5cf6'
     }
+  },
+  {
+    selector: 'node[type="infrastructure"]',
+    style: {
+      'width': 70,
+      'height': 70,
+      'shape': 'round-rectangle',
+      'border-width': 2,
+      'border-style': 'solid',
+      'text-wrap': 'wrap',
+      'text-max-width': 65,
+      'font-size': '11px'
+    }
+  },
+  {
+    selector: 'node[type="infrastructure"]:hover',
+    style: {
+      'border-width': 3
+    }
   }
 ];
 
@@ -116,6 +135,8 @@ export const cytoscapeLayout = {
   edgeSep: 50,
   rankSep: 150,
   padding: 50,
-  animate: false
+  animate: false,
+  ranker: 'longest-path',
+  rank: (node) => node.data('layer')
 };
 
