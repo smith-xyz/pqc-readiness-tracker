@@ -21,17 +21,25 @@ export function getNodeStatusDisplay(node) {
   }
 
   const hasKemApi = node.status.ml_kem_api === STATUS.AVAILABLE;
-  const hasKemTls = node.status.ml_kem_tls === STATUS.AVAILABLE;
   const hasDsaApi = node.status.ml_dsa_api === STATUS.AVAILABLE;
-  const hasDsaTls = node.status.ml_dsa_tls === STATUS.AVAILABLE;
+
+  const kemProtocols = node.status.ml_kem_protocols ? 
+    Object.entries(node.status.ml_kem_protocols)
+      .filter(([_, status]) => status === STATUS.AVAILABLE)
+      .map(([protocol, _]) => protocol.toUpperCase()) : [];
+
+  const dsaProtocols = node.status.ml_dsa_protocols ? 
+    Object.entries(node.status.ml_dsa_protocols)
+      .filter(([_, status]) => status === STATUS.AVAILABLE)
+      .map(([protocol, _]) => protocol.toUpperCase()) : [];
 
   let statusText = STATUS_LABELS[overallStatus];
   
   if (overallStatus === STATUS.PARTIAL) {
     const available = [];
-    if (hasKemTls) available.push('ML-KEM TLS');
+    if (kemProtocols.length > 0) available.push(`ML-KEM (${kemProtocols.join(', ')})`);
     else if (hasKemApi) available.push('ML-KEM API');
-    if (hasDsaTls) available.push('ML-DSA TLS');
+    if (dsaProtocols.length > 0) available.push(`ML-DSA (${dsaProtocols.join(', ')})`);
     else if (hasDsaApi) available.push('ML-DSA API');
     
     if (available.length > 0) {

@@ -423,3 +423,40 @@ a:hover {
     text-align: center;
   }
 }
+
+/* PQC Readiness Criteria */
+.pqc-readiness-criteria {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.pqc-readiness-criteria h3 {
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.pqc-readiness-criteria p {
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.pqc-readiness-criteria p:last-child {
+  margin-bottom: 0;
+}
+
+.protocol-note {
+  background: rgba(139, 92, 246, 0.1);
+  border-left: 3px solid var(--color-accent);
+  padding: 0.75rem;
+  margin-top: 1rem;
+  border-radius: 0 4px 4px 0;
+}
+
+.protocol-note em {
+  color: var(--color-text-muted);
+  font-style: normal;
+}

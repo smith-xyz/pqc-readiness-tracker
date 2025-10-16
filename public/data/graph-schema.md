@@ -47,9 +47,17 @@ Critical infrastructure software that depends on crypto libraries
   "version": "1.0.0",
   "status": {
     "ml_kem_api": "available|experimental|not_available",
-    "ml_kem_tls": "available|experimental|not_available",
+    "ml_kem_protocols": {
+      "tls": "available|experimental|not_available",
+      "ssh": "available|experimental|not_available",
+      "quic": "available|experimental|not_available",
+      "dtls": "available|experimental|not_available"
+    },
     "ml_dsa_api": "available|experimental|not_available",
-    "ml_dsa_tls": "available|experimental|not_available"
+    "ml_dsa_protocols": {
+      "tls": "available|experimental|not_available",
+      "ssh": "available|experimental|not_available"
+    }
   },
   "depends_on": ["node-id-1", "node-id-2"],
   "blocks_on": ["feature-name"],

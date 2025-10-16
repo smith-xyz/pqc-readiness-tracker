@@ -27,18 +27,25 @@ export function getNodeStatus(nodeData) {
     return nodeData.status.specification === STATUS.FINAL ? STATUS.AVAILABLE : STATUS.PARTIAL;
   }
 
-  const features = [
-    ['ml_kem_api', 'ml_kem_tls'],
-    ['ml_dsa_api', 'ml_dsa_tls']
-  ];
+  const hasKemApi = nodeData.status.ml_kem_api === STATUS.AVAILABLE;
+  const hasDsaApi = nodeData.status.ml_dsa_api === STATUS.AVAILABLE;
   
-  if (features.every(([api, tls]) => 
-    nodeData.status[api] === STATUS.AVAILABLE && 
-    nodeData.status[tls] === STATUS.AVAILABLE)) {
+  // Status will focus on critical protocols for PQC readiness: TLS, SSH, QUIC
+  const criticalProtocols = ['tls', 'ssh', 'quic'];
+  const hasKemInCriticalProtocol = nodeData.status.ml_kem_protocols && 
+    criticalProtocols.some(protocol => 
+      nodeData.status.ml_kem_protocols[protocol] === STATUS.AVAILABLE);
+  const hasDsaInCriticalProtocol = nodeData.status.ml_dsa_protocols && 
+    criticalProtocols.some(protocol => 
+      nodeData.status.ml_dsa_protocols[protocol] === STATUS.AVAILABLE);
+
+  // PQC ready = ML-KEM + ML-DSA both available in critical protocols
+  if (hasKemApi && hasKemInCriticalProtocol && hasDsaApi && hasDsaInCriticalProtocol) {
     return STATUS.AVAILABLE;
   }
   
-  if (Object.values(nodeData.status).includes(STATUS.AVAILABLE)) {
+  // Partial = has some PQC capabilities (API or critical protocol support)
+  if (hasKemApi || hasDsaApi || hasKemInCriticalProtocol || hasDsaInCriticalProtocol) {
     return STATUS.PARTIAL;
   }
   

@@ -35,18 +35,30 @@ function NodeDetails({ node, nodesData, onClose }) {
         {node.status.ml_kem_api !== undefined && (
           <DetailRow label={DETAIL_FIELDS.ML_KEM_STATUS}>
             {UI_LABELS.API}: {formatStatus(node.status.ml_kem_api)}
-            <br />
-            {UI_LABELS.TLS}: {formatStatus(node.status.ml_kem_tls)}
+            {node.status.ml_kem_protocols && Object.keys(node.status.ml_kem_protocols).length > 0 && (
+              <>
+                <br />
+                Protocols: {Object.entries(node.status.ml_kem_protocols).map(([protocol, status]) => (
+                  <div key={protocol} style={{ marginLeft: '1rem' }}>
+                    {protocol.toUpperCase()}: {formatStatus(status)}
+                  </div>
+                ))}
+              </>
+            )}
           </DetailRow>
         )}
 
         {node.status.ml_dsa_api !== undefined && (
           <DetailRow label={DETAIL_FIELDS.ML_DSA_STATUS}>
             {UI_LABELS.API}: {formatStatus(node.status.ml_dsa_api)}
-            {node.status.ml_dsa_tls && (
+            {node.status.ml_dsa_protocols && Object.keys(node.status.ml_dsa_protocols).length > 0 && (
               <>
                 <br />
-                {UI_LABELS.TLS}: {formatStatus(node.status.ml_dsa_tls)}
+                Protocols: {Object.entries(node.status.ml_dsa_protocols).map(([protocol, status]) => (
+                  <div key={protocol} style={{ marginLeft: '1rem' }}>
+                    {protocol.toUpperCase()}: {formatStatus(status)}
+                  </div>
+                ))}
               </>
             )}
           </DetailRow>
@@ -84,10 +96,10 @@ function NodeDetails({ node, nodesData, onClose }) {
 
         {node.metadata?.sources?.length > 0 && (
           <DetailRow label={DETAIL_FIELDS.SOURCES}>
-            {node.metadata.sources.map((url, idx) => (
+            {node.metadata.sources.map((source, idx) => (
               <div key={idx}>
-                <a href={url} target="_blank" rel="noopener noreferrer">
-                  {UI_LABELS.DOCUMENTATION}
+                <a href={source.url} target="_blank" rel="noopener noreferrer">
+                  {source.label} →
                 </a>
               </div>
             ))}
