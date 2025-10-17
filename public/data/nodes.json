@@ -88,6 +88,9 @@
             "type": "standard",
             "name": "IETF TLS Hybrid KEX",
             "layer": 0,
+            "depends_on": [
+                "nist-fips-203"
+            ],
             "status": {
                 "specification": "draft"
             },
@@ -103,6 +106,118 @@
                 "notes": "Required for PQC TLS cipher suites"
             }
         },
+        "ietf-lamps-kyber": {
+            "id": "ietf-lamps-kyber",
+            "type": "standard",
+            "name": "IETF LAMPS Kyber Certificates",
+            "layer": 0,
+            "depends_on": [
+                "nist-fips-203"
+            ],
+            "status": {
+                "specification": "draft"
+            },
+            "metadata": {
+                "est_date": "2026-Q2",
+                "description": "X.509 certificate format for ML-KEM keys",
+                "sources": [
+                    {
+                        "label": "IETF LAMPS Kyber Draft",
+                        "url": "https://datatracker.ietf.org/doc/draft-ietf-lamps-kyber-certificates/"
+                    }
+                ],
+                "notes": "Defines how ML-KEM keys are encoded in X.509 certificates"
+            }
+        },
+        "ietf-lamps-dilithium": {
+            "id": "ietf-lamps-dilithium",
+            "type": "standard",
+            "name": "IETF LAMPS Dilithium Certificates",
+            "layer": 0,
+            "depends_on": [
+                "nist-fips-204"
+            ],
+            "status": {
+                "specification": "draft"
+            },
+            "metadata": {
+                "est_date": "2026-Q2",
+                "description": "X.509 certificate format for ML-DSA keys",
+                "sources": [
+                    {
+                        "label": "IETF LAMPS Dilithium Draft",
+                        "url": "https://datatracker.ietf.org/doc/draft-ietf-lamps-dilithium-certificates/"
+                    }
+                ],
+                "notes": "Defines how ML-DSA keys are encoded in X.509 certificates"
+            }
+        },
+        "ietf-sshm-mlkem": {
+            "id": "ietf-sshm-mlkem",
+            "type": "standard",
+            "name": "IETF SSHM ML-KEM Hybrid KEX",
+            "layer": 0,
+            "depends_on": [
+                "nist-fips-203"
+            ],
+            "status": {
+                "specification": "draft"
+            },
+            "metadata": {
+                "est_date": "2026-Q2",
+                "description": "Hybrid key exchange for SSH",
+                "sources": [
+                    {
+                        "label": "IETF SSHM ML-KEM Draft",
+                        "url": "https://datatracker.ietf.org/doc/draft-ietf-sshm-mlkem-hybrid-kex/"
+                    }
+                ],
+                "notes": "Defines ML-KEM hybrid key exchange for SSH protocol"
+            }
+        },
+        "ietf-lamps-x509-slhdsa": {
+            "id": "ietf-lamps-x509-slhdsa",
+            "type": "standard",
+            "name": "IETF LAMPS X.509 SLH-DSA",
+            "layer": 0,
+            "depends_on": [
+                "nist-fips-205"
+            ],
+            "status": {
+                "specification": "draft"
+            },
+            "metadata": {
+                "est_date": "2026-Q2",
+                "description": "X.509 certificate format for SLH-DSA keys",
+                "sources": [
+                    {
+                        "label": "IETF LAMPS X.509 SLH-DSA Draft",
+                        "url": "https://datatracker.ietf.org/doc/draft-ietf-lamps-x509-slhdsa/"
+                    }
+                ],
+                "notes": "Defines how SLH-DSA keys are encoded in X.509 certificates"
+            }
+        },
+        "ietf-sshm-ntruprime": {
+            "id": "ietf-sshm-ntruprime",
+            "type": "standard",
+            "name": "IETF SSHM NTRU Prime",
+            "layer": 0,
+            "status": {
+                "specification": "draft"
+            },
+            "metadata": {
+                "est_date": "2026-Q2",
+                "description": "NTRU Prime key exchange for SSH",
+                "sources": [
+                    {
+                        "label": "IETF SSHM NTRU Prime Draft",
+                        "url": "https://datatracker.ietf.org/doc/draft-ietf-sshm-ntruprime-ssh/"
+                    }
+                ],
+                "notes": "Early SSH PQC implementation used by OpenSSH 9.0"
+            }
+        },
         "openssl-3.5": {
             "id": "openssl-3.5",
             "type": "crypto_library",
@@ -112,7 +227,11 @@
             "depends_on": [
                 "nist-fips-203",
                 "nist-fips-204",
-                "nist-fips-205"
+                "nist-fips-205",
+                "ietf-lamps-kyber",
+                "ietf-lamps-dilithium",
+                "ietf-lamps-x509-slhdsa",
+                "ietf-tls-hybrid"
             ],
             "status": {
                 "ml_kem_api": "available",
@@ -160,7 +279,9 @@
             "version": "3.112+",
             "depends_on": [
                 "nist-fips-203",
-                "nist-fips-204"
+                "nist-fips-204",
+                "ietf-lamps-dilithium",
+                "ietf-tls-hybrid"
             ],
             "status": {
                 "ml_kem_api": "available",
@@ -186,7 +307,7 @@
                         "url": "https://www.redhat.com/en/blog/post-quantum-cryptography-red-hat-enterprise-linux-10"
                     }
                 ],
-                "notes": "RHEL 10.0 ships with NSS 3.112 including ML-KEM support for hybrid TLS 1.3 key exchange. ML-DSA under active development, expected in RHEL 10.1+."
+                "notes": "Tracks upstream NSS. Enterprise distributions may include additional features. RHEL 10.0 ships with NSS 3.112 including ML-KEM support for hybrid TLS 1.3 key exchange. ML-DSA under active development, expected in RHEL 10.1+."
             }
         },
         "go-stdlib-crypto": {
@@ -196,7 +317,9 @@
             "layer": 1,
             "version": "1.24",
             "depends_on": [
-                "nist-fips-203"
+                "nist-fips-203",
+                "ietf-sshm-mlkem",
+                "ietf-tls-hybrid"
             ],
             "independent": true,
             "status": {
@@ -660,7 +783,7 @@
                         "url": "https://www.openssh.com/releasenotes.html"
                     }
                 ],
-                "notes": "OpenSSH 10.0 (April 2025) uses mlkem768x25519-sha256 as default hybrid key exchange, combining ML-KEM from OpenSSL 3.5+ with X25519. SSH protocol uses custom KEX (not TLS). ML-DSA for signatures not yet implemented, still using RSA/ECDSA. OpenSSH 9.0 (2024) used independent sntrup761x25519 implementation."
+                "notes": "OpenSSH 10.0 (April 2025) uses mlkem768x25519-sha256 as default hybrid key exchange, combining ML-KEM from OpenSSL 3.5+ with X25519. SSH protocol uses custom KEX (not TLS). ML-DSA for signatures not yet implemented, still using RSA/ECDSA. OpenSSH 9.0 (2024) used independent sntrup761x25519 implementation based on draft-ietf-sshm-ntruprime-ssh."
             }
         },
         "nginx": {

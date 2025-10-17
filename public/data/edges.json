@@ -26,6 +26,24 @@
             "description": "OpenSSL TLS integration blocked on IETF standards"
         },
         {
+            "from": "openssl-3.5",
+            "to": "ietf-lamps-kyber",
+            "type": "blocks_on",
+            "description": "OpenSSL X.509 ML-KEM support blocked on IETF LAMPS draft"
+        },
+        {
+            "from": "openssl-3.5",
+            "to": "ietf-lamps-dilithium",
+            "type": "blocks_on",
+            "description": "OpenSSL X.509 ML-DSA support blocked on IETF LAMPS draft"
+        },
+        {
+            "from": "openssl-3.5",
+            "to": "ietf-lamps-x509-slhdsa",
+            "type": "blocks_on",
+            "description": "OpenSSL X.509 SLH-DSA support blocked on IETF LAMPS draft"
+        },
+        {
             "from": "nss",
             "to": "nist-fips-203",
             "type": "implements",
@@ -38,10 +56,64 @@
             "description": "NSS ML-DSA support under development, expected in RHEL 10.1+"
         },
         {
+            "from": "nss",
+            "to": "ietf-lamps-dilithium",
+            "type": "blocks_on",
+            "description": "NSS X.509 ML-DSA support blocked on IETF LAMPS draft"
+        },
+        {
+            "from": "nss",
+            "to": "ietf-tls-hybrid",
+            "type": "blocks_on",
+            "description": "NSS TLS hybrid support blocked on IETF draft"
+        },
+        {
             "from": "go-stdlib-crypto",
             "to": "nist-fips-203",
             "type": "implements",
             "description": "Go crypto/tls implements ML-KEM with TLS integration"
+        },
+        {
+            "from": "go-stdlib-crypto",
+            "to": "ietf-sshm-mlkem",
+            "type": "blocks_on",
+            "description": "Go SSH ML-KEM support blocked on IETF SSHM draft"
+        },
+        {
+            "from": "go-stdlib-crypto",
+            "to": "ietf-tls-hybrid",
+            "type": "blocks_on",
+            "description": "Go TLS hybrid support blocked on IETF draft"
+        },
+        {
+            "from": "ietf-lamps-kyber",
+            "to": "nist-fips-203",
+            "type": "depends_on",
+            "description": "IETF LAMPS Kyber draft depends on NIST ML-KEM standard"
+        },
+        {
+            "from": "ietf-lamps-dilithium",
+            "to": "nist-fips-204",
+            "type": "depends_on",
+            "description": "IETF LAMPS Dilithium draft depends on NIST ML-DSA standard"
+        },
+        {
+            "from": "ietf-lamps-x509-slhdsa",
+            "to": "nist-fips-205",
+            "type": "depends_on",
+            "description": "IETF LAMPS SLH-DSA draft depends on NIST SLH-DSA standard"
+        },
+        {
+            "from": "ietf-sshm-mlkem",
+            "to": "nist-fips-203",
+            "type": "depends_on",
+            "description": "IETF SSHM ML-KEM draft depends on NIST ML-KEM standard"
+        },
+        {
+            "from": "ietf-tls-hybrid",
+            "to": "nist-fips-203",
+            "type": "depends_on",
+            "description": "IETF TLS Hybrid draft depends on NIST ML-KEM standard"
         },
         {
             "from": "nodejs",
