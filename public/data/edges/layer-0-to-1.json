@@ -1,0 +1,36 @@
+{
+    "from_layer": 0,
+    "to_layer": 1,
+    "edges": [
+        {
+            "from": "nist-fips-203",
+            "to": "ietf-tls-hybrid",
+            "type": "depends_on",
+            "description": "IETF TLS Hybrid depends on NIST FIPS 203"
+        },
+        {
+            "from": "nist-fips-203",
+            "to": "ietf-lamps-kyber",
+            "type": "depends_on",
+            "description": "IETF LAMPS Kyber depends on NIST FIPS 203"
+        },
+        {
+            "from": "nist-fips-204",
+            "to": "ietf-lamps-dilithium",
+            "type": "depends_on",
+            "description": "IETF LAMPS Dilithium depends on NIST FIPS 204"
+        },
+        {
+            "from": "nist-fips-203",
+            "to": "ietf-sshm-mlkem",
+            "type": "depends_on",
+            "description": "IETF SSHM ML-KEM depends on NIST FIPS 203"
+        },
+        {
+            "from": "nist-fips-205",
+            "to": "ietf-lamps-x509-slhdsa",
+            "type": "depends_on",
+            "description": "IETF LAMPS SLH-DSA depends on NIST FIPS 205"
+        }
+    ]
+}

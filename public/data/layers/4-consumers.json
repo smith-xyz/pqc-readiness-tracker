@@ -1,0 +1,433 @@
+{
+    "id": "layer-4",
+    "type": "layer",
+    "layer": 4,
+    "name": "Application Environment",
+    "description": "Runtimes + Infrastructure",
+    "color": "#8b5cf6",
+    "nodes": {
+        "nodejs": {
+            "id": "nodejs",
+            "type": "runtime",
+            "name": "Node.js",
+            "layer": 4,
+            "depends_on": [
+                "openssl-3.5",
+                "rhel-10"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "available",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "available",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "language": "JavaScript",
+                "runtime_language": "C++",
+                "architectures": [
+                    "x86_64",
+                    "aarch64",
+                    "arm64"
+                ],
+                "sources": [
+                    {
+                        "label": "Node.js v24.7.0 Release Notes",
+                        "url": "https://nodejs.org/en/blog/release/v24.7.0"
+                    }
+                ]
+            }
+        },
+        "python-3": {
+            "id": "python-3",
+            "type": "runtime",
+            "name": "Python 3",
+            "layer": 4,
+            "depends_on": [
+                "openssl-3.5",
+                "rhel-10"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "language": "Python",
+                "architectures": [
+                    "x86_64",
+                    "aarch64",
+                    "arm64"
+                ],
+                "sources": [
+                    {
+                        "label": "Python SSL/TLS Documentation",
+                        "url": "https://docs.python.org/3/library/ssl.html"
+                    }
+                ]
+            }
+        },
+        "go": {
+            "id": "go",
+            "type": "runtime",
+            "name": "Go",
+            "layer": 4,
+            "depends_on": [
+                "go-stdlib-crypto",
+                "rhel-10"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "available",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "available",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "language": "Go",
+                "architectures": [
+                    "x86_64",
+                    "aarch64",
+                    "arm64"
+                ],
+                "sources": [
+                    {
+                        "label": "Go crypto/tls Documentation",
+                        "url": "https://pkg.go.dev/crypto/tls"
+                    }
+                ]
+            }
+        },
+        "java-jdk": {
+            "id": "java-jdk",
+            "type": "runtime",
+            "name": "Java JDK",
+            "layer": 4,
+            "depends_on": [
+                "nss",
+                "rhel-10"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "language": "Java",
+                "architectures": [
+                    "x86_64",
+                    "aarch64"
+                ],
+                "protocols": {
+                    "TLS 1.3": "available"
+                },
+                "sources": [
+                    {
+                        "label": "Java JSSE Documentation",
+                        "url": "https://docs.oracle.com/en/java/javase/21/security/java-secure-socket-extension-jsse-reference-guide.html"
+                    }
+                ]
+            }
+        },
+        "dotnet": {
+            "id": "dotnet",
+            "type": "runtime",
+            "name": ".NET",
+            "layer": 4,
+            "depends_on": [
+                "nss",
+                "rhel-10"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "language": "C#",
+                "architectures": [
+                    "x86_64",
+                    "aarch64"
+                ],
+                "protocols": {
+                    "TLS 1.3": "available"
+                },
+                "sources": [
+                    {
+                        "label": ".NET SslStream Documentation",
+                        "url": "https://docs.microsoft.com/en-us/dotnet/api/system.net.security.sslstream"
+                    }
+                ]
+            }
+        },
+        "rust-lang": {
+            "id": "rust-lang",
+            "type": "runtime",
+            "name": "Rust",
+            "layer": 4,
+            "depends_on": [
+                "openssl-3.5",
+                "rhel-10"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "available",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "available",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "language": "Rust",
+                "architectures": [
+                    "x86_64",
+                    "aarch64",
+                    "arm64"
+                ],
+                "sources": [
+                    {
+                        "label": "Rust TLS Documentation",
+                        "url": "https://docs.rs/rustls/latest/rustls/"
+                    }
+                ]
+            }
+        },
+        "php": {
+            "id": "php",
+            "type": "runtime",
+            "name": "PHP",
+            "layer": 4,
+            "depends_on": [
+                "openssl-3.5",
+                "rhel-10"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "language": "PHP",
+                "architectures": [
+                    "x86_64",
+                    "aarch64",
+                    "arm64"
+                ],
+                "sources": [
+                    {
+                        "label": "PHP OpenSSL Documentation",
+                        "url": "https://www.php.net/manual/en/book.openssl.php"
+                    }
+                ]
+            }
+        },
+        "nginx": {
+            "id": "nginx",
+            "type": "infrastructure",
+            "name": "nginx",
+            "layer": 4,
+            "depends_on": [
+                "openssl-3.5",
+                "rhel-10"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "available",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "available",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "language": "C",
+                "architectures": [
+                    "x86_64",
+                    "aarch64"
+                ],
+                "sources": [
+                    {
+                        "label": "nginx SSL Documentation",
+                        "url": "https://nginx.org/en/docs/http/configuring_https_servers.html"
+                    }
+                ]
+            }
+        },
+        "postgresql": {
+            "id": "postgresql",
+            "type": "infrastructure",
+            "name": "PostgreSQL",
+            "layer": 4,
+            "depends_on": [
+                "openssl-3.5",
+                "rhel-10"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "language": "C",
+                "architectures": [
+                    "x86_64",
+                    "aarch64"
+                ],
+                "sources": [
+                    {
+                        "label": "PostgreSQL SSL Documentation",
+                        "url": "https://www.postgresql.org/docs/current/ssl-tcp.html"
+                    }
+                ]
+            }
+        },
+        "openssh": {
+            "id": "openssh",
+            "type": "infrastructure",
+            "name": "OpenSSH",
+            "layer": 4,
+            "depends_on": [
+                "openssl-3.5",
+                "ietf-ssh-ml-kem",
+                "rhel-10"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "not_applicable",
+                    "SSH": "available",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "not_applicable",
+                    "SSH": "available",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "language": "C",
+                "architectures": [
+                    "x86_64",
+                    "aarch64"
+                ],
+                "sources": [
+                    {
+                        "label": "OpenSSH Release Notes",
+                        "url": "https://www.openssh.com/releasenotes.html"
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,214 @@
+{
+    "id": "layer-3",
+    "type": "layer",
+    "layer": 3,
+    "name": "Operating Systems",
+    "description": "The Platform",
+    "color": "#6b7280",
+    "nodes": {
+        "rhel-10": {
+            "id": "rhel-10",
+            "type": "operating_system",
+            "name": "Red Hat Enterprise Linux 10",
+            "layer": 3,
+            "depends_on": [
+                "openssl-3.5",
+                "nss",
+                "go-stdlib-crypto"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "available",
+                    "QUIC": "available",
+                    "DTLS": "available",
+                    "IPSec/IKEv2": "available"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "available",
+                    "QUIC": "available",
+                    "DTLS": "available",
+                    "IPSec/IKEv2": "available"
+                }
+            },
+            "metadata": {
+                "architectures": [
+                    "x86_64",
+                    "aarch64"
+                ],
+                "notes": "Packages OpenSSL 3.5, NSS 3.112+ with PQC support",
+                "sources": [
+                    {
+                        "label": "RHEL 10 Release Notes",
+                        "url": "https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/10"
+                    }
+                ]
+            }
+        },
+        "ubuntu-24": {
+            "id": "ubuntu-24",
+            "type": "operating_system",
+            "name": "Ubuntu 24.04+",
+            "layer": 3,
+            "depends_on": [
+                "openssl-3.5",
+                "nss"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "available",
+                    "QUIC": "available",
+                    "DTLS": "available",
+                    "IPSec/IKEv2": "available"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "available",
+                    "QUIC": "available",
+                    "DTLS": "available",
+                    "IPSec/IKEv2": "available"
+                }
+            },
+            "metadata": {
+                "architectures": [
+                    "x86_64",
+                    "aarch64"
+                ],
+                "notes": "Ubuntu packages with PQC-enabled OpenSSL",
+                "sources": [
+                    {
+                        "label": "Ubuntu 24.04 Release Notes",
+                        "url": "https://wiki.ubuntu.com/Releases"
+                    }
+                ]
+            }
+        },
+        "windows-server-2025": {
+            "id": "windows-server-2025",
+            "type": "operating_system",
+            "name": "Windows Server 2025",
+            "layer": 3,
+            "depends_on": [
+                "nss"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "available",
+                    "DTLS": "available",
+                    "IPSec/IKEv2": "available"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "available",
+                    "DTLS": "available",
+                    "IPSec/IKEv2": "available"
+                }
+            },
+            "metadata": {
+                "architectures": [
+                    "x86_64",
+                    "aarch64"
+                ],
+                "notes": "Windows Server with NSS-based PQC support",
+                "sources": [
+                    {
+                        "label": "Windows Server 2025 Documentation",
+                        "url": "https://docs.microsoft.com/en-us/windows-server/"
+                    }
+                ]
+            }
+        },
+        "macos-sequoia": {
+            "id": "macos-sequoia",
+            "type": "operating_system",
+            "name": "macOS Sequoia+",
+            "layer": 3,
+            "depends_on": [
+                "openssl-3.5"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "available",
+                    "QUIC": "available",
+                    "DTLS": "available",
+                    "IPSec/IKEv2": "available"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "available",
+                    "QUIC": "available",
+                    "DTLS": "available",
+                    "IPSec/IKEv2": "available"
+                }
+            },
+            "metadata": {
+                "architectures": [
+                    "x86_64",
+                    "aarch64"
+                ],
+                "notes": "macOS with OpenSSL-based PQC support",
+                "sources": [
+                    {
+                        "label": "macOS Sequoia Release Notes",
+                        "url": "https://developer.apple.com/macos/"
+                    }
+                ]
+            }
+        },
+        "amazon-linux-2023": {
+            "id": "amazon-linux-2023",
+            "type": "operating_system",
+            "name": "Amazon Linux 2023",
+            "layer": 3,
+            "depends_on": [
+                "openssl-3.5",
+                "nss"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "available",
+                    "QUIC": "available",
+                    "DTLS": "available",
+                    "IPSec/IKEv2": "available"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "available",
+                    "QUIC": "available",
+                    "DTLS": "available",
+                    "IPSec/IKEv2": "available"
+                }
+            },
+            "metadata": {
+                "architectures": [
+                    "x86_64",
+                    "aarch64"
+                ],
+                "notes": "Amazon Linux with PQC-enabled crypto libraries",
+                "sources": [
+                    {
+                        "label": "Amazon Linux 2023 Documentation",
+                        "url": "https://docs.aws.amazon.com/linux/al2023/"
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,238 @@
+{
+    "id": "layer-5",
+    "type": "layer",
+    "layer": 5,
+    "name": "Technology Stack",
+    "description": "What We Build With",
+    "color": "#f97316",
+    "nodes": {
+        "kubernetes": {
+            "id": "kubernetes",
+            "type": "application",
+            "name": "Kubernetes",
+            "layer": 5,
+            "depends_on": [
+                "go",
+                "rhel-10"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "language": "Go",
+                "category": "Container Orchestration",
+                "sources": [
+                    {
+                        "label": "Kubernetes Security Documentation",
+                        "url": "https://kubernetes.io/docs/concepts/security/"
+                    }
+                ]
+            }
+        },
+        "docker": {
+            "id": "docker",
+            "type": "application",
+            "name": "Docker",
+            "layer": 5,
+            "depends_on": [
+                "go",
+                "rhel-10"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "language": "Go",
+                "category": "Container Runtime",
+                "sources": [
+                    {
+                        "label": "Docker Security Documentation",
+                        "url": "https://docs.docker.com/engine/security/"
+                    }
+                ]
+            }
+        },
+        "django": {
+            "id": "django",
+            "type": "application",
+            "name": "Django",
+            "layer": 5,
+            "depends_on": [
+                "python-3",
+                "postgresql"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "language": "Python",
+                "category": "Web Framework",
+                "sources": [
+                    {
+                        "label": "Django Security Documentation",
+                        "url": "https://docs.djangoproject.com/en/stable/topics/security/"
+                    }
+                ]
+            }
+        },
+        "express": {
+            "id": "express",
+            "type": "application",
+            "name": "Express.js",
+            "layer": 5,
+            "depends_on": [
+                "nodejs",
+                "nginx"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "available",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "available",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "language": "JavaScript",
+                "category": "Web Framework",
+                "sources": [
+                    {
+                        "label": "Express.js Security Best Practices",
+                        "url": "https://expressjs.com/en/advanced/best-practice-security.html"
+                    }
+                ]
+            }
+        },
+        "react": {
+            "id": "react",
+            "type": "application",
+            "name": "React",
+            "layer": 5,
+            "depends_on": [
+                "nodejs",
+                "nginx"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "available",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "available",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "language": "JavaScript",
+                "category": "Frontend Framework",
+                "sources": [
+                    {
+                        "label": "React Security Documentation",
+                        "url": "https://react.dev/learn/security"
+                    }
+                ]
+            }
+        },
+        "spring-boot": {
+            "id": "spring-boot",
+            "type": "application",
+            "name": "Spring Boot",
+            "layer": 5,
+            "depends_on": [
+                "java-jdk",
+                "postgresql"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "language": "Java",
+                "category": "Web Framework",
+                "sources": [
+                    {
+                        "label": "Spring Boot Security Documentation",
+                        "url": "https://spring.io/guides/gs/securing-web/"
+                    }
+                ]
+            }
+        }
+    }
+}

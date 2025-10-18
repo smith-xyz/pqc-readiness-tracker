@@ -1,0 +1,94 @@
+{
+    "id": "layer-0",
+    "type": "layer",
+    "layer": 0,
+    "name": "NIST Standards",
+    "description": "The Foundation",
+    "color": "#10b981",
+    "nodes": {
+        "nist-fips-203": {
+            "id": "nist-fips-203",
+            "type": "standard",
+            "name": "NIST FIPS 203 (ML-KEM)",
+            "layer": 0,
+            "version": "Final",
+            "status": {
+                "specification": "final"
+            },
+            "metadata": {
+                "date": "2024-08-24",
+                "description": "Module-Lattice-Based Key-Encapsulation Mechanism Standard",
+                "sources": [
+                    {
+                        "label": "NIST FIPS 203",
+                        "url": "https://csrc.nist.gov/pubs/fips/203/final"
+                    }
+                ],
+                "notes": "Final standard for ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism). Provides quantum-resistant key encapsulation for hybrid key exchange."
+            }
+        },
+        "nist-fips-204": {
+            "id": "nist-fips-204",
+            "type": "standard",
+            "name": "NIST FIPS 204 (ML-DSA)",
+            "layer": 0,
+            "version": "Final",
+            "status": {
+                "specification": "final"
+            },
+            "metadata": {
+                "date": "2024-08-24",
+                "description": "Module-Lattice-Based Digital Signature Algorithm Standard",
+                "sources": [
+                    {
+                        "label": "NIST FIPS 204",
+                        "url": "https://csrc.nist.gov/pubs/fips/204/final"
+                    }
+                ],
+                "notes": "Final standard for ML-DSA (Module-Lattice-Based Digital Signature Algorithm). Provides quantum-resistant digital signatures for authentication and integrity."
+            }
+        },
+        "nist-fips-205": {
+            "id": "nist-fips-205",
+            "type": "standard",
+            "name": "NIST FIPS 205 (SLH-DSA)",
+            "layer": 0,
+            "version": "Final",
+            "status": {
+                "specification": "final"
+            },
+            "metadata": {
+                "date": "2024-08-24",
+                "description": "Stateless Hash-Based Digital Signature Algorithm Standard",
+                "sources": [
+                    {
+                        "label": "NIST FIPS 205",
+                        "url": "https://csrc.nist.gov/pubs/fips/205/final"
+                    }
+                ],
+                "notes": "Final standard for SLH-DSA (Stateless Hash-Based Digital Signature Algorithm). Alternative quantum-resistant signature algorithm, more conservative but larger signatures."
+            }
+        },
+        "nist-falcon": {
+            "id": "nist-falcon",
+            "type": "standard",
+            "name": "NIST Falcon",
+            "layer": 0,
+            "version": "Evaluation",
+            "status": {
+                "specification": "evaluation"
+            },
+            "metadata": {
+                "date": "2024-08-24",
+                "description": "Falcon Digital Signature Algorithm (Round 4 Evaluation)",
+                "sources": [
+                    {
+                        "label": "NIST Falcon",
+                        "url": "https://csrc.nist.gov/pubs/fips/205/final"
+                    }
+                ],
+                "notes": "NIST Round 4 evaluation. ~30% more compact signatures than ML-DSA, but harder to implement securely. Future alternative for bandwidth-constrained applications."
+            }
+        }
+    }
+}

@@ -1,0 +1,55 @@
+{
+    "from_layer": 1,
+    "to_layer": 2,
+    "edges": [
+        {
+            "from": "ietf-lamps-kyber",
+            "to": "openssl-3.5",
+            "type": "depends_on",
+            "description": "OpenSSL 3.5 implements IETF LAMPS Kyber",
+            "blocker_reason": null
+        },
+        {
+            "from": "ietf-lamps-dilithium",
+            "to": "openssl-3.5",
+            "type": "depends_on",
+            "description": "OpenSSL 3.5 implements IETF LAMPS Dilithium",
+            "blocker_reason": null
+        },
+        {
+            "from": "ietf-tls-hybrid",
+            "to": "openssl-3.5",
+            "type": "depends_on",
+            "description": "OpenSSL 3.5 implements IETF TLS Hybrid",
+            "blocker_reason": null
+        },
+        {
+            "from": "ietf-lamps-kyber",
+            "to": "nss",
+            "type": "depends_on",
+            "description": "NSS implements IETF LAMPS Kyber",
+            "blocker_reason": null
+        },
+        {
+            "from": "ietf-lamps-dilithium",
+            "to": "nss",
+            "type": "depends_on",
+            "description": "NSS implements IETF LAMPS Dilithium",
+            "blocker_reason": null
+        },
+        {
+            "from": "ietf-lamps-kyber",
+            "to": "go-stdlib-crypto",
+            "type": "depends_on",
+            "description": "Go crypto/tls implements IETF LAMPS Kyber",
+            "blocker_reason": null
+        },
+        {
+            "from": "ietf-lamps-dilithium",
+            "to": "go-stdlib-crypto",
+            "type": "depends_on",
+            "description": "Go crypto/tls implements IETF LAMPS Dilithium",
+            "blocker_reason": null
+        }
+    ]
+}

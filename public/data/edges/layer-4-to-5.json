@@ -1,0 +1,90 @@
+{
+    "from_layer": 4,
+    "to_layer": 5,
+    "edges": [
+        {
+            "from": "go",
+            "to": "kubernetes",
+            "type": "depends_on",
+            "description": "Kubernetes is built with Go runtime",
+            "blocker_reason": null
+        },
+        {
+            "from": "rhel-10",
+            "to": "kubernetes",
+            "type": "depends_on",
+            "description": "Kubernetes runs on RHEL 10 platform",
+            "blocker_reason": null
+        },
+        {
+            "from": "go",
+            "to": "docker",
+            "type": "depends_on",
+            "description": "Docker is built with Go runtime",
+            "blocker_reason": null
+        },
+        {
+            "from": "rhel-10",
+            "to": "docker",
+            "type": "depends_on",
+            "description": "Docker runs on RHEL 10 platform",
+            "blocker_reason": null
+        },
+        {
+            "from": "python-3",
+            "to": "django",
+            "type": "depends_on",
+            "description": "Django is built with Python 3 runtime",
+            "blocker_reason": null
+        },
+        {
+            "from": "postgresql",
+            "to": "django",
+            "type": "depends_on",
+            "description": "Django commonly uses PostgreSQL as database",
+            "blocker_reason": null
+        },
+        {
+            "from": "nodejs",
+            "to": "express",
+            "type": "depends_on",
+            "description": "Express.js is built with Node.js runtime",
+            "blocker_reason": null
+        },
+        {
+            "from": "nginx",
+            "to": "express",
+            "type": "depends_on",
+            "description": "Express.js commonly uses nginx as reverse proxy",
+            "blocker_reason": null
+        },
+        {
+            "from": "nodejs",
+            "to": "react",
+            "type": "depends_on",
+            "description": "React is built with Node.js runtime",
+            "blocker_reason": null
+        },
+        {
+            "from": "nginx",
+            "to": "react",
+            "type": "depends_on",
+            "description": "React applications commonly use nginx for serving",
+            "blocker_reason": null
+        },
+        {
+            "from": "java-jdk",
+            "to": "spring-boot",
+            "type": "depends_on",
+            "description": "Spring Boot is built with Java JDK runtime",
+            "blocker_reason": null
+        },
+        {
+            "from": "postgresql",
+            "to": "spring-boot",
+            "type": "depends_on",
+            "description": "Spring Boot commonly uses PostgreSQL as database",
+            "blocker_reason": null
+        }
+    ]
+}

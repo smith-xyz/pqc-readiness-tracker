@@ -1,0 +1,111 @@
+{
+    "from_layer": 5,
+    "to_layer": 6,
+    "edges": [
+        {
+            "from": "kubernetes",
+            "to": "red-hat-openshift",
+            "type": "depends_on",
+            "description": "Red Hat OpenShift is built on Kubernetes",
+            "blocker_reason": null
+        },
+        {
+            "from": "rhel-10",
+            "to": "red-hat-openshift",
+            "type": "depends_on",
+            "description": "Red Hat OpenShift runs on RHEL 10 platform",
+            "blocker_reason": null
+        },
+        {
+            "from": "kubernetes",
+            "to": "amazon-eks",
+            "type": "depends_on",
+            "description": "Amazon EKS is built on Kubernetes",
+            "blocker_reason": null
+        },
+        {
+            "from": "amazon-linux-2023",
+            "to": "amazon-eks",
+            "type": "depends_on",
+            "description": "Amazon EKS runs on Amazon Linux 2023 platform",
+            "blocker_reason": null
+        },
+        {
+            "from": "kubernetes",
+            "to": "google-gke",
+            "type": "depends_on",
+            "description": "Google GKE is built on Kubernetes",
+            "blocker_reason": null
+        },
+        {
+            "from": "ubuntu-24",
+            "to": "google-gke",
+            "type": "depends_on",
+            "description": "Google GKE runs on Ubuntu 24.04+ platform",
+            "blocker_reason": null
+        },
+        {
+            "from": "kubernetes",
+            "to": "azure-aks",
+            "type": "depends_on",
+            "description": "Azure AKS is built on Kubernetes",
+            "blocker_reason": null
+        },
+        {
+            "from": "windows-server-2025",
+            "to": "azure-aks",
+            "type": "depends_on",
+            "description": "Azure AKS runs on Windows Server 2025 platform",
+            "blocker_reason": null
+        },
+        {
+            "from": "nodejs",
+            "to": "heroku",
+            "type": "depends_on",
+            "description": "Heroku supports Node.js applications",
+            "blocker_reason": null
+        },
+        {
+            "from": "nginx",
+            "to": "heroku",
+            "type": "depends_on",
+            "description": "Heroku uses nginx for application serving",
+            "blocker_reason": null
+        },
+        {
+            "from": "ubuntu-24",
+            "to": "heroku",
+            "type": "depends_on",
+            "description": "Heroku runs on Ubuntu 24.04+ platform",
+            "blocker_reason": null
+        },
+        {
+            "from": "nodejs",
+            "to": "vercel",
+            "type": "depends_on",
+            "description": "Vercel supports Node.js applications",
+            "blocker_reason": null
+        },
+        {
+            "from": "nginx",
+            "to": "vercel",
+            "type": "depends_on",
+            "description": "Vercel uses nginx for application serving",
+            "blocker_reason": null
+        },
+        {
+            "from": "postgresql",
+            "to": "mongodb-atlas",
+            "type": "depends_on",
+            "description": "MongoDB Atlas provides database services similar to PostgreSQL",
+            "blocker_reason": null
+        },
+        {
+            "from": "ubuntu-24",
+            "to": "mongodb-atlas",
+            "type": "depends_on",
+            "description": "MongoDB Atlas runs on Ubuntu 24.04+ platform",
+            "blocker_reason": null
+        }
+    ]
+}

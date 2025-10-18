@@ -1,0 +1,277 @@
+{
+    "id": "layer-6",
+    "type": "layer",
+    "layer": 6,
+    "name": "Commercial Products",
+    "description": "Enterprise Reality",
+    "color": "#ef4444",
+    "nodes": {
+        "red-hat-openshift": {
+            "id": "red-hat-openshift",
+            "type": "commercial_product",
+            "name": "Red Hat OpenShift",
+            "layer": 6,
+            "depends_on": [
+                "kubernetes",
+                "rhel-10"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "company": "Red Hat",
+                "category": "Container Platform",
+                "sources": [
+                    {
+                        "label": "Red Hat OpenShift Documentation",
+                        "url": "https://docs.openshift.com/"
+                    }
+                ]
+            }
+        },
+        "amazon-eks": {
+            "id": "amazon-eks",
+            "type": "commercial_product",
+            "name": "Amazon EKS",
+            "layer": 6,
+            "depends_on": [
+                "kubernetes",
+                "amazon-linux-2023"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "company": "Amazon",
+                "category": "Container Platform",
+                "sources": [
+                    {
+                        "label": "Amazon EKS Documentation",
+                        "url": "https://docs.aws.amazon.com/eks/"
+                    }
+                ]
+            }
+        },
+        "google-gke": {
+            "id": "google-gke",
+            "type": "commercial_product",
+            "name": "Google GKE",
+            "layer": 6,
+            "depends_on": [
+                "kubernetes",
+                "ubuntu-24"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "company": "Google",
+                "category": "Container Platform",
+                "sources": [
+                    {
+                        "label": "Google GKE Documentation",
+                        "url": "https://cloud.google.com/kubernetes-engine/docs"
+                    }
+                ]
+            }
+        },
+        "azure-aks": {
+            "id": "azure-aks",
+            "type": "commercial_product",
+            "name": "Azure AKS",
+            "layer": 6,
+            "depends_on": [
+                "kubernetes",
+                "windows-server-2025"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "company": "Microsoft",
+                "category": "Container Platform",
+                "sources": [
+                    {
+                        "label": "Azure AKS Documentation",
+                        "url": "https://docs.microsoft.com/en-us/azure/aks/"
+                    }
+                ]
+            }
+        },
+        "heroku": {
+            "id": "heroku",
+            "type": "commercial_product",
+            "name": "Heroku",
+            "layer": 6,
+            "depends_on": [
+                "nodejs",
+                "nginx",
+                "ubuntu-24"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "available",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "available",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "company": "Salesforce",
+                "category": "Cloud Platform",
+                "sources": [
+                    {
+                        "label": "Heroku Security Documentation",
+                        "url": "https://devcenter.heroku.com/articles/security"
+                    }
+                ]
+            }
+        },
+        "vercel": {
+            "id": "vercel",
+            "type": "commercial_product",
+            "name": "Vercel",
+            "layer": 6,
+            "depends_on": [
+                "nodejs",
+                "nginx"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "available",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "available",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "company": "Vercel",
+                "category": "Cloud Platform",
+                "sources": [
+                    {
+                        "label": "Vercel Security Documentation",
+                        "url": "https://vercel.com/docs/security"
+                    }
+                ]
+            }
+        },
+        "mongodb-atlas": {
+            "id": "mongodb-atlas",
+            "type": "commercial_product",
+            "name": "MongoDB Atlas",
+            "layer": 6,
+            "depends_on": [
+                "postgresql",
+                "ubuntu-24"
+            ],
+            "status": {
+                "ml_kem_api": "available",
+                "ml_dsa_api": "available",
+                "ml_kem_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                },
+                "ml_dsa_protocols": {
+                    "TLS 1.3": "available",
+                    "SSH": "not_applicable",
+                    "QUIC": "not_applicable",
+                    "DTLS": "not_applicable",
+                    "IPSec/IKEv2": "not_applicable"
+                }
+            },
+            "metadata": {
+                "company": "MongoDB",
+                "category": "Database Service",
+                "sources": [
+                    {
+                        "label": "MongoDB Atlas Security Documentation",
+                        "url": "https://docs.atlas.mongodb.com/security/"
+                    }
+                ]
+            }
+        }
+    }
+}

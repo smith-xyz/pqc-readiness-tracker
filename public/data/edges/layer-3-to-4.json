@@ -1,0 +1,153 @@
+{
+    "from_layer": 3,
+    "to_layer": 4,
+    "edges": [
+        {
+            "from": "openssl-3.5",
+            "to": "nodejs",
+            "type": "depends_on",
+            "description": "Node.js uses OpenSSL 3.5 for TLS implementation",
+            "blocker_reason": null
+        },
+        {
+            "from": "rhel-10",
+            "to": "nodejs",
+            "type": "depends_on",
+            "description": "Node.js runs on RHEL 10 platform",
+            "blocker_reason": null
+        },
+        {
+            "from": "openssl-3.5",
+            "to": "python-3",
+            "type": "depends_on",
+            "description": "Python 3 uses OpenSSL 3.5 for SSL/TLS implementation",
+            "blocker_reason": null
+        },
+        {
+            "from": "rhel-10",
+            "to": "python-3",
+            "type": "depends_on",
+            "description": "Python 3 runs on RHEL 10 platform",
+            "blocker_reason": null
+        },
+        {
+            "from": "go-stdlib-crypto",
+            "to": "go",
+            "type": "depends_on",
+            "description": "Go runtime uses Go standard library crypto implementation",
+            "blocker_reason": null
+        },
+        {
+            "from": "rhel-10",
+            "to": "go",
+            "type": "depends_on",
+            "description": "Go runtime runs on RHEL 10 platform",
+            "blocker_reason": null
+        },
+        {
+            "from": "nss",
+            "to": "java-jdk",
+            "type": "depends_on",
+            "description": "Java JDK uses NSS for TLS implementation",
+            "blocker_reason": null
+        },
+        {
+            "from": "rhel-10",
+            "to": "java-jdk",
+            "type": "depends_on",
+            "description": "Java JDK runs on RHEL 10 platform",
+            "blocker_reason": null
+        },
+        {
+            "from": "nss",
+            "to": "dotnet",
+            "type": "depends_on",
+            "description": ".NET uses NSS for TLS implementation",
+            "blocker_reason": null
+        },
+        {
+            "from": "rhel-10",
+            "to": "dotnet",
+            "type": "depends_on",
+            "description": ".NET runs on RHEL 10 platform",
+            "blocker_reason": null
+        },
+        {
+            "from": "openssl-3.5",
+            "to": "rust-lang",
+            "type": "depends_on",
+            "description": "Rust uses OpenSSL 3.5 for TLS implementation",
+            "blocker_reason": null
+        },
+        {
+            "from": "rhel-10",
+            "to": "rust-lang",
+            "type": "depends_on",
+            "description": "Rust runs on RHEL 10 platform",
+            "blocker_reason": null
+        },
+        {
+            "from": "openssl-3.5",
+            "to": "php",
+            "type": "depends_on",
+            "description": "PHP uses OpenSSL 3.5 for SSL/TLS implementation",
+            "blocker_reason": null
+        },
+        {
+            "from": "rhel-10",
+            "to": "php",
+            "type": "depends_on",
+            "description": "PHP runs on RHEL 10 platform",
+            "blocker_reason": null
+        },
+        {
+            "from": "openssl-3.5",
+            "to": "nginx",
+            "type": "depends_on",
+            "description": "nginx uses OpenSSL 3.5 for SSL/TLS implementation",
+            "blocker_reason": null
+        },
+        {
+            "from": "rhel-10",
+            "to": "nginx",
+            "type": "depends_on",
+            "description": "nginx runs on RHEL 10 platform",
+            "blocker_reason": null
+        },
+        {
+            "from": "openssl-3.5",
+            "to": "postgresql",
+            "type": "depends_on",
+            "description": "PostgreSQL uses OpenSSL 3.5 for SSL/TLS implementation",
+            "blocker_reason": null
+        },
+        {
+            "from": "rhel-10",
+            "to": "postgresql",
+            "type": "depends_on",
+            "description": "PostgreSQL runs on RHEL 10 platform",
+            "blocker_reason": null
+        },
+        {
+            "from": "openssl-3.5",
+            "to": "openssh",
+            "type": "depends_on",
+            "description": "OpenSSH uses OpenSSL 3.5 for cryptographic operations",
+            "blocker_reason": null
+        },
+        {
+            "from": "ietf-sshm-mlkem",
+            "to": "openssh",
+            "type": "depends_on",
+            "description": "OpenSSH implements IETF SSH ML-KEM draft",
+            "blocker_reason": null
+        },
+        {
+            "from": "rhel-10",
+            "to": "openssh",
+            "type": "depends_on",
+            "description": "OpenSSH runs on RHEL 10 platform",
+            "blocker_reason": null
+        }
+    ]
+}
