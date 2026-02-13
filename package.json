@@ -1,6 +1,7 @@
 {
   "name": "pqc-readiness-tracker",
   "version": "1.0.0",
+  "packageManager": "pnpm@9.15.0",
   "description": "Community-maintained dashboard tracking Post-Quantum Cryptography (PQC) implementation status across programming languages, crypto libraries, and standards.",
   "scripts": {
     "dev": "vite",
