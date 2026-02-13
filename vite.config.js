@@ -9,12 +9,12 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'vendor-graph': ['cytoscape', 'cytoscape-dagre'],
+          'vendor-three': ['three'],
+          'vendor-graph': ['react-force-graph-3d'],
           'vendor-react': ['react', 'react-dom']
         }
       }
     },
-    chunkSizeWarningLimit: 600
+    chunkSizeWarningLimit: 1200
   },
 });
-

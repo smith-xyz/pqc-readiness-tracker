@@ -1,331 +1,879 @@
 {
-    "last_updated": "2025-10-16",
+    "last_updated": "2026-02-11",
     "edges": [
         {
-            "from": "openssl-3.5",
+            "from": "proto-tls-pqc",
+            "to": "nist-fips-203",
+            "type": "specifies",
+            "status": "draft"
+        },
+        {
+            "from": "proto-ssh-pqc",
+            "to": "nist-fips-203",
+            "type": "specifies",
+            "status": "draft"
+        },
+        {
+            "from": "proto-x509-pqc",
+            "to": "nist-fips-203",
+            "type": "specifies",
+            "status": "draft"
+        },
+        {
+            "from": "proto-x509-pqc",
+            "to": "nist-fips-204",
+            "type": "specifies",
+            "status": "draft"
+        },
+        {
+            "from": "proto-x509-pqc",
+            "to": "nist-fips-205",
+            "type": "specifies",
+            "status": "draft"
+        },
+        {
+            "from": "proto-quic-pqc",
+            "to": "nist-fips-203",
+            "type": "specifies",
+            "status": "draft"
+        },
+        {
+            "from": "proto-dtls-pqc",
+            "to": "nist-fips-203",
+            "type": "specifies",
+            "status": "proposed"
+        },
+        {
+            "from": "proto-ipsec-pqc",
+            "to": "nist-fips-203",
+            "type": "specifies",
+            "status": "proposed"
+        },
+        {
+            "from": "proto-ipsec-pqc",
+            "to": "nist-fips-204",
+            "type": "specifies",
+            "status": "proposed"
+        },
+        {
+            "from": "proto-x509-pqc",
+            "to": "nist-falcon",
+            "type": "specifies",
+            "status": "proposed",
+            "metadata": {
+                "notes": "FN-DSA (Falcon) for X.509 under IETF LAMPS; pending NIST final publication"
+            }
+        },
+        {
+            "from": "bouncy-castle",
+            "to": "nist-falcon",
+            "type": "implements",
+            "status": "experimental"
+        },
+        {
+            "from": "openssl",
             "to": "nist-fips-203",
             "type": "implements",
-            "description": "OpenSSL implements ML-KEM algorithms from NIST standard"
+            "status": "available",
+            "metadata": {
+                "since": "3.5.0"
+            }
         },
         {
-            "from": "openssl-3.5",
+            "from": "openssl",
             "to": "nist-fips-204",
             "type": "implements",
-            "description": "OpenSSL implements ML-DSA algorithms from NIST standard"
+            "status": "available",
+            "metadata": {
+                "since": "3.5.0"
+            }
         },
         {
-            "from": "openssl-3.5",
+            "from": "openssl",
             "to": "nist-fips-205",
             "type": "implements",
-            "description": "OpenSSL implements SLH-DSA algorithms from NIST standard"
-        },
-        {
-            "from": "openssl-3.5",
-            "to": "ietf-tls-hybrid",
-            "type": "blocks_on",
-            "description": "OpenSSL TLS integration blocked on IETF standards"
-        },
-        {
-            "from": "openssl-3.5",
-            "to": "ietf-lamps-kyber",
-            "type": "blocks_on",
-            "description": "OpenSSL X.509 ML-KEM support blocked on IETF LAMPS draft"
-        },
-        {
-            "from": "openssl-3.5",
-            "to": "ietf-lamps-dilithium",
-            "type": "blocks_on",
-            "description": "OpenSSL X.509 ML-DSA support blocked on IETF LAMPS draft"
-        },
-        {
-            "from": "openssl-3.5",
-            "to": "ietf-lamps-x509-slhdsa",
-            "type": "blocks_on",
-            "description": "OpenSSL X.509 SLH-DSA support blocked on IETF LAMPS draft"
+            "status": "available",
+            "metadata": {
+                "since": "3.5.0"
+            }
         },
         {
             "from": "nss",
             "to": "nist-fips-203",
             "type": "implements",
-            "description": "NSS implements ML-KEM with hybrid TLS 1.3 support"
+            "status": "available",
+            "metadata": {
+                "since": "3.112"
+            }
         },
         {
             "from": "nss",
             "to": "nist-fips-204",
-            "type": "blocks_on",
-            "description": "NSS ML-DSA support under development, expected in RHEL 10.1+"
+            "type": "implements",
+            "status": "not_available"
         },
         {
-            "from": "nss",
-            "to": "ietf-lamps-dilithium",
-            "type": "blocks_on",
-            "description": "NSS X.509 ML-DSA support blocked on IETF LAMPS draft"
-        },
-        {
-            "from": "nss",
-            "to": "ietf-tls-hybrid",
-            "type": "blocks_on",
-            "description": "NSS TLS hybrid support blocked on IETF draft"
-        },
-        {
-            "from": "go-stdlib-crypto",
+            "from": "gnutls",
             "to": "nist-fips-203",
             "type": "implements",
-            "description": "Go crypto/tls implements ML-KEM with TLS integration"
+            "status": "available"
         },
         {
-            "from": "go-stdlib-crypto",
-            "to": "ietf-sshm-mlkem",
-            "type": "blocks_on",
-            "description": "Go SSH ML-KEM support blocked on IETF SSHM draft"
-        },
-        {
-            "from": "go-stdlib-crypto",
-            "to": "ietf-tls-hybrid",
-            "type": "blocks_on",
-            "description": "Go TLS hybrid support blocked on IETF draft"
-        },
-        {
-            "from": "ietf-lamps-kyber",
-            "to": "nist-fips-203",
-            "type": "depends_on",
-            "description": "IETF LAMPS Kyber draft depends on NIST ML-KEM standard"
-        },
-        {
-            "from": "ietf-lamps-dilithium",
-            "to": "nist-fips-204",
-            "type": "depends_on",
-            "description": "IETF LAMPS Dilithium draft depends on NIST ML-DSA standard"
-        },
-        {
-            "from": "ietf-lamps-x509-slhdsa",
-            "to": "nist-fips-205",
-            "type": "depends_on",
-            "description": "IETF LAMPS SLH-DSA draft depends on NIST SLH-DSA standard"
-        },
-        {
-            "from": "ietf-sshm-mlkem",
-            "to": "nist-fips-203",
-            "type": "depends_on",
-            "description": "IETF SSHM ML-KEM draft depends on NIST ML-KEM standard"
-        },
-        {
-            "from": "ietf-tls-hybrid",
-            "to": "nist-fips-203",
-            "type": "depends_on",
-            "description": "IETF TLS Hybrid draft depends on NIST ML-KEM standard"
-        },
-        {
-            "from": "nodejs",
-            "to": "openssl-3.5",
-            "type": "depends_on",
-            "description": "Node.js uses OpenSSL for crypto operations"
-        },
-        {
-            "from": "python-3",
-            "to": "openssl-3.5",
-            "type": "depends_on",
-            "description": "Python cryptography package uses OpenSSL"
-        },
-        {
-            "from": "go",
-            "to": "go-stdlib-crypto",
-            "type": "uses",
-            "description": "Go uses its own stdlib crypto implementation"
+            "from": "gnutls",
+            "to": "proto-tls-pqc",
+            "type": "supports",
+            "status": "available",
+            "metadata": {
+                "notes": "X25519MLKEM768, SecP256r1MLKEM768, SecP384r1MLKEM1024 hybrid TLS 1.3"
+            }
         },
         {
             "from": "boringssl",
             "to": "nist-fips-203",
             "type": "implements",
-            "description": "BoringSSL implements ML-KEM for Chrome/QUIC"
+            "status": "available"
+        },
+        {
+            "from": "boringssl",
+            "to": "nist-fips-204",
+            "type": "implements",
+            "status": "available"
+        },
+        {
+            "from": "go-stdlib-crypto",
+            "to": "nist-fips-203",
+            "type": "implements",
+            "status": "available",
+            "metadata": {
+                "since": "1.24"
+            }
         },
         {
             "from": "bouncy-castle",
             "to": "nist-fips-203",
             "type": "implements",
-            "description": "Bouncy Castle implements ML-KEM algorithms"
+            "status": "available",
+            "metadata": {
+                "since": "1.78"
+            }
         },
         {
             "from": "bouncy-castle",
             "to": "nist-fips-204",
             "type": "implements",
-            "description": "Bouncy Castle implements ML-DSA algorithms"
+            "status": "available",
+            "metadata": {
+                "since": "1.78"
+            }
         },
         {
             "from": "rustls",
             "to": "nist-fips-203",
             "type": "implements",
-            "description": "rustls experimental ML-KEM implementation"
+            "status": "experimental"
         },
         {
             "from": "wolfssl",
             "to": "nist-fips-203",
             "type": "implements",
-            "description": "wolfSSL implements ML-KEM algorithms"
+            "status": "available",
+            "metadata": {
+                "since": "5.7"
+            }
         },
         {
             "from": "wolfssl",
             "to": "nist-fips-204",
             "type": "implements",
-            "description": "wolfSSL implements ML-DSA algorithms"
+            "status": "available",
+            "metadata": {
+                "since": "5.7"
+            }
         },
         {
-            "from": "java-jdk",
-            "to": "bouncy-castle",
+            "from": "openssl",
+            "to": "proto-tls-pqc",
+            "type": "supports",
+            "status": "available",
+            "metadata": {
+                "notes": "X25519 + ML-KEM hybrid key exchange in TLS 1.3"
+            }
+        },
+        {
+            "from": "openssl",
+            "to": "proto-x509-pqc",
+            "type": "supports",
+            "status": "partial",
+            "metadata": {
+                "notes": "ML-DSA/SLH-DSA algorithm support available; hybrid X.509 certificate integration pending IETF finalization"
+            }
+        },
+        {
+            "from": "nss",
+            "to": "proto-tls-pqc",
+            "type": "supports",
+            "status": "available",
+            "metadata": {
+                "notes": "X25519 + ML-KEM hybrid TLS 1.3 key exchange"
+            }
+        },
+        {
+            "from": "boringssl",
+            "to": "proto-tls-pqc",
+            "type": "supports",
+            "status": "available"
+        },
+        {
+            "from": "boringssl",
+            "to": "proto-quic-pqc",
+            "type": "supports",
+            "status": "available",
+            "metadata": {
+                "notes": "Hybrid key exchange deployed in Chrome 131"
+            }
+        },
+        {
+            "from": "go-stdlib-crypto",
+            "to": "proto-tls-pqc",
+            "type": "supports",
+            "status": "available",
+            "metadata": {
+                "notes": "X25519 + ML-KEM hybrid key exchange in crypto/tls"
+            }
+        },
+        {
+            "from": "go-stdlib-crypto",
+            "to": "proto-quic-pqc",
+            "type": "supports",
+            "status": "available"
+        },
+        {
+            "from": "rustls",
+            "to": "proto-tls-pqc",
+            "type": "supports",
+            "status": "experimental"
+        },
+        {
+            "from": "wolfssl",
+            "to": "proto-tls-pqc",
+            "type": "supports",
+            "status": "available"
+        },
+        {
+            "from": "wolfssl",
+            "to": "proto-dtls-pqc",
+            "type": "supports",
+            "status": "available"
+        },
+        {
+            "from": "rhel-10",
+            "to": "openssl",
+            "type": "ships",
+            "status": "available",
+            "metadata": {
+                "version": "3.5.4"
+            }
+        },
+        {
+            "from": "rhel-10",
+            "to": "nss",
+            "type": "ships",
+            "status": "available",
+            "metadata": {
+                "version": "3.112"
+            }
+        },
+        {
+            "from": "rhel-10",
+            "to": "gnutls",
+            "type": "ships",
+            "status": "available",
+            "metadata": {
+                "version": "3.8.x"
+            }
+        },
+        {
+            "from": "rhel-9",
+            "to": "openssl",
+            "type": "ships",
+            "status": "partial",
+            "metadata": {
+                "version": "3.2.x (backported PQC)",
+                "notes": "RHEL 9.7+ backports ML-KEM and ML-DSA into OpenSSL via PQ crypto-policy subpolicy"
+            }
+        },
+        {
+            "from": "rhel-9",
+            "to": "nss",
+            "type": "ships",
+            "status": "partial",
+            "metadata": {
+                "notes": "RHEL 9.7+ enables ML-KEM for NSS via PQ crypto-policy subpolicy"
+            }
+        },
+        {
+            "from": "rhel-9",
+            "to": "gnutls",
+            "type": "ships",
+            "status": "partial",
+            "metadata": {
+                "notes": "RHEL 9.7+ enables ML-KEM for GnuTLS via PQ crypto-policy subpolicy"
+            }
+        },
+        {
+            "from": "fedora-42",
+            "to": "openssl",
+            "type": "ships",
+            "status": "available",
+            "metadata": {
+                "version": "3.5.x"
+            }
+        },
+        {
+            "from": "fedora-42",
+            "to": "gnutls",
+            "type": "ships",
+            "status": "available"
+        },
+        {
+            "from": "fedora-42",
+            "to": "nss",
+            "type": "ships",
+            "status": "available"
+        },
+        {
+            "from": "ubuntu-2404",
+            "to": "openssl",
+            "type": "ships",
+            "status": "not_available",
+            "metadata": {
+                "version": "3.0.x",
+                "notes": "No PQC support in this version"
+            }
+        },
+        {
+            "from": "ubuntu-2404",
+            "to": "gnutls",
+            "type": "ships",
+            "status": "not_available",
+            "metadata": {
+                "notes": "Ships GnuTLS but without PQC algorithm support"
+            }
+        },
+        {
+            "from": "windows-11",
+            "to": "symcrypt",
+            "type": "ships",
+            "status": "available",
+            "metadata": {
+                "notes": "SymCrypt powers CNG/SChannel; ML-KEM and ML-DSA GA in 24H2/25H2"
+            }
+        },
+        {
+            "from": "macos-15",
+            "to": "apple-cryptokit",
+            "type": "ships",
+            "status": "not_available",
+            "metadata": {
+                "notes": "CryptoKit available but PQC algorithms not included until macOS Tahoe 26"
+            }
+        },
+        {
+            "from": "ios-26",
+            "to": "apple-cryptokit",
+            "type": "ships",
+            "status": "available"
+        },
+        {
+            "from": "android",
+            "to": "boringssl",
+            "type": "ships",
+            "status": "partial",
+            "metadata": {
+                "notes": "Via Conscrypt JCA provider; Chrome on Android uses BoringSSL hybrid TLS directly"
+            }
+        },
+        {
+            "from": "apple-cryptokit",
+            "to": "nist-fips-203",
+            "type": "implements",
+            "status": "available"
+        },
+        {
+            "from": "apple-cryptokit",
+            "to": "proto-tls-pqc",
+            "type": "supports",
+            "status": "available",
+            "metadata": {
+                "notes": "X25519MLKEM768 hybrid TLS 1.3 enabled by default in iOS 26"
+            }
+        },
+        {
+            "from": "symcrypt",
+            "to": "nist-fips-203",
+            "type": "implements",
+            "status": "available"
+        },
+        {
+            "from": "symcrypt",
+            "to": "nist-fips-204",
+            "type": "implements",
+            "status": "available"
+        },
+        {
+            "from": "symcrypt",
+            "to": "proto-tls-pqc",
+            "type": "supports",
+            "status": "available",
+            "metadata": {
+                "notes": "ML-KEM-768 hybrid TLS 1.3 via SChannel on Windows 11 24H2+"
+            }
+        },
+        {
+            "from": "go",
+            "to": "go-stdlib-crypto",
             "type": "depends_on",
-            "description": "Java uses Bouncy Castle for PQC crypto"
+            "approach": "native",
+            "status": "available"
+        },
+        {
+            "from": "go",
+            "to": "openssl",
+            "type": "depends_on",
+            "approach": "binding",
+            "status": "available",
+            "metadata": {
+                "notes": "go-openssl bindings for FIPS/enterprise deployments"
+            }
         },
         {
             "from": "rust-lang",
             "to": "rustls",
             "type": "depends_on",
-            "description": "Rust applications use rustls for TLS"
+            "approach": "native",
+            "status": "experimental"
+        },
+        {
+            "from": "rust-lang",
+            "to": "openssl",
+            "type": "depends_on",
+            "approach": "binding",
+            "status": "available",
+            "metadata": {
+                "notes": "openssl crate FFI bindings"
+            }
+        },
+        {
+            "from": "java-jdk",
+            "to": "bouncy-castle",
+            "type": "depends_on",
+            "approach": "native",
+            "status": "available"
+        },
+        {
+            "from": "java-jdk",
+            "to": "openssl",
+            "type": "depends_on",
+            "approach": "binding",
+            "status": "available",
+            "metadata": {
+                "notes": "Tomcat Native / APR connector for OpenSSL TLS"
+            }
         },
         {
             "from": "dotnet",
-            "to": "openssl-3.5",
+            "to": "openssl",
             "type": "depends_on",
-            "description": ".NET depends on OpenSSL on Linux"
+            "approach": "delegated",
+            "status": "available",
+            "metadata": {
+                "notes": "On Linux; uses CNG/SymCrypt on Windows"
+            }
+        },
+        {
+            "from": "dotnet",
+            "to": "symcrypt",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "available",
+            "metadata": {
+                "notes": ".NET 10 on Windows uses CNG/SymCrypt for ML-KEM and ML-DSA"
+            }
+        },
+        {
+            "from": "nodejs",
+            "to": "openssl",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "available"
+        },
+        {
+            "from": "python-3",
+            "to": "openssl",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "experimental",
+            "metadata": {
+                "notes": "Current default via cryptography package. Maintainers actively moving away from OpenSSL; PQC APIs will NOT be added for OpenSSL backend."
+            }
+        },
+        {
+            "from": "python-3",
+            "to": "boringssl",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "experimental",
+            "metadata": {
+                "notes": "Planned primary backend via cryptography package. ML-KEM and ML-DSA APIs will only be available on BoringSSL/AWS-LC backends."
+            }
         },
         {
             "from": "ruby",
-            "to": "openssl-3.5",
+            "to": "openssl",
             "type": "depends_on",
-            "description": "Ruby depends on OpenSSL via openssl gem"
+            "approach": "delegated",
+            "status": "available",
+            "metadata": {
+                "notes": "Via ruby/openssl gem"
+            }
         },
         {
             "from": "php",
-            "to": "openssl-3.5",
+            "to": "openssl",
             "type": "depends_on",
-            "description": "PHP depends on OpenSSL for crypto"
+            "approach": "delegated",
+            "status": "available",
+            "metadata": {
+                "notes": "Via openssl extension"
+            }
+        },
+        {
+            "from": "deno",
+            "to": "boringssl",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "partial"
+        },
+        {
+            "from": "bun",
+            "to": "boringssl",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "partial"
         },
         {
             "from": "openssh",
-            "to": "openssl-3.5",
+            "to": "openssl",
             "type": "depends_on",
-            "description": "OpenSSH depends on OpenSSL for ML-KEM key exchange"
+            "approach": "delegated",
+            "status": "available"
+        },
+        {
+            "from": "openssh",
+            "to": "proto-ssh-pqc",
+            "type": "supports",
+            "status": "available",
+            "metadata": {
+                "notes": "mlkem768x25519-sha256 hybrid KEX default in OpenSSH 10.0"
+            }
         },
         {
             "from": "nginx",
-            "to": "openssl-3.5",
+            "to": "openssl",
             "type": "depends_on",
-            "description": "nginx depends on OpenSSL for TLS"
+            "approach": "delegated",
+            "status": "available"
         },
         {
             "from": "apache-httpd",
-            "to": "openssl-3.5",
+            "to": "openssl",
             "type": "depends_on",
-            "description": "Apache HTTP Server depends on OpenSSL for TLS"
+            "approach": "delegated",
+            "status": "available"
         },
         {
             "from": "haproxy",
-            "to": "openssl-3.5",
+            "to": "openssl",
             "type": "depends_on",
-            "description": "HAProxy depends on OpenSSL for TLS"
+            "approach": "delegated",
+            "status": "available"
         },
         {
             "from": "curl",
-            "to": "openssl-3.5",
+            "to": "openssl",
             "type": "depends_on",
-            "description": "curl/libcurl depends on OpenSSL for TLS"
+            "approach": "delegated",
+            "status": "available",
+            "metadata": {
+                "notes": "Default TLS backend on most Linux distributions"
+            }
+        },
+        {
+            "from": "curl",
+            "to": "gnutls",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "available",
+            "metadata": {
+                "notes": "Alternative TLS backend; used in Debian/Ubuntu default builds"
+            }
+        },
+        {
+            "from": "curl",
+            "to": "wolfssl",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "available",
+            "metadata": {
+                "notes": "Alternative TLS backend for embedded/IoT deployments"
+            }
         },
         {
             "from": "postgresql",
-            "to": "openssl-3.5",
+            "to": "openssl",
             "type": "depends_on",
-            "description": "PostgreSQL depends on OpenSSL for TLS connections"
+            "approach": "delegated",
+            "status": "available"
+        },
+        {
+            "from": "openshift",
+            "to": "go",
+            "type": "depends_on",
+            "approach": "native",
+            "status": "partial",
+            "metadata": {
+                "notes": "Control plane components written in Go"
+            }
+        },
+        {
+            "from": "openshift",
+            "to": "rhel-9",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "partial",
+            "metadata": {
+                "notes": "Runs on RHEL, inherits OS-level crypto policies"
+            }
+        },
+        {
+            "from": "openshift",
+            "to": "haproxy",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "available",
+            "metadata": {
+                "notes": "Default ingress router for external TLS termination"
+            }
+        },
+        {
+            "from": "openshift",
+            "to": "openssl",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "available",
+            "metadata": {
+                "notes": "Key crypto path via RHEL OpenSSL for TLS and certificate operations"
+            }
+        },
+        {
+            "from": "kubernetes",
+            "to": "go",
+            "type": "depends_on",
+            "approach": "native",
+            "status": "partial",
+            "metadata": {
+                "notes": "Written in Go, uses Go crypto/tls for all internal TLS"
+            }
+        },
+        {
+            "from": "ansible-aap",
+            "to": "python-3",
+            "type": "depends_on",
+            "approach": "native",
+            "status": "not_available",
+            "metadata": {
+                "notes": "Written in Python, limited by Python's lack of native PQC TLS"
+            }
+        },
+        {
+            "from": "ansible-aap",
+            "to": "rhel-9",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "partial",
+            "metadata": {
+                "notes": "Runs on RHEL, delegates system crypto to OS"
+            }
+        },
+        {
+            "from": "ansible-aap",
+            "to": "openssl",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "available",
+            "metadata": {
+                "notes": "Underlying crypto via RHEL OpenSSL, but Python cannot yet leverage PQC suites"
+            }
+        },
+        {
+            "from": "istio",
+            "to": "go",
+            "type": "depends_on",
+            "approach": "native",
+            "status": "partial",
+            "metadata": {
+                "notes": "Control plane (istiod) written in Go"
+            }
+        },
+        {
+            "from": "istio",
+            "to": "boringssl",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "available",
+            "metadata": {
+                "notes": "Envoy data plane uses BoringSSL for all mTLS and ingress TLS"
+            }
+        },
+        {
+            "from": "keycloak",
+            "to": "java-jdk",
+            "type": "depends_on",
+            "approach": "native",
+            "status": "partial",
+            "metadata": {
+                "notes": "Written in Java, runs on JVM"
+            }
+        },
+        {
+            "from": "keycloak",
+            "to": "bouncy-castle",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "available",
+            "metadata": {
+                "notes": "Bouncy Castle JCA provider enables PQC algorithms for TLS and signing"
+            }
+        },
+        {
+            "from": "vault",
+            "to": "go",
+            "type": "depends_on",
+            "approach": "native",
+            "status": "partial",
+            "metadata": {
+                "notes": "Written in Go, uses Go crypto/tls for API and cluster TLS"
+            }
+        },
+        {
+            "from": "kafka",
+            "to": "java-jdk",
+            "type": "depends_on",
+            "approach": "native",
+            "status": "partial",
+            "metadata": {
+                "notes": "Written in Java, runs on JVM"
+            }
+        },
+        {
+            "from": "kafka",
+            "to": "openssl",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "available",
+            "metadata": {
+                "notes": "TLS via Netty-tcnative OpenSSL binding for broker and client connections"
+            }
+        },
+        {
+            "from": "quay",
+            "to": "python-3",
+            "type": "depends_on",
+            "approach": "native",
+            "status": "not_available",
+            "metadata": {
+                "notes": "Backend written in Python"
+            }
+        },
+        {
+            "from": "quay",
+            "to": "go",
+            "type": "depends_on",
+            "approach": "native",
+            "status": "partial",
+            "metadata": {
+                "notes": "Some components (Clair, builders) written in Go"
+            }
+        },
+        {
+            "from": "quay",
+            "to": "rhel-9",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "partial",
+            "metadata": {
+                "notes": "Runs on RHEL"
+            }
+        },
+        {
+            "from": "aws-eks",
+            "to": "kubernetes",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "partial",
+            "metadata": {
+                "notes": "Managed upstream Kubernetes"
+            }
+        },
+        {
+            "from": "aws-eks",
+            "to": "boringssl",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "available",
+            "metadata": {
+                "notes": "AWS-LC (s2n-tls), a BoringSSL fork with ML-KEM hybrid support"
+            }
+        },
+        {
+            "from": "gke",
+            "to": "kubernetes",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "partial",
+            "metadata": {
+                "notes": "Managed upstream Kubernetes"
+            }
+        },
+        {
+            "from": "gke",
+            "to": "boringssl",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "available",
+            "metadata": {
+                "notes": "Google infrastructure uses BoringSSL with PQC support"
+            }
+        },
+        {
+            "from": "azure-aks",
+            "to": "kubernetes",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "partial",
+            "metadata": {
+                "notes": "Managed upstream Kubernetes"
+            }
+        },
+        {
+            "from": "azure-aks",
+            "to": "symcrypt",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "available",
+            "metadata": {
+                "notes": "Azure uses SymCrypt/CNG with ML-KEM for TLS"
+            }
         }
-    ],
-    "paths": {
-        "nodejs-to-standard": {
-            "description": "Node.js PQC readiness path",
-            "path": [
-                "nodejs",
-                "openssl-3.5",
-                "nist-fips-203"
-            ],
-            "blocker": "openssl-3.5",
-            "blocker_reason": "Node.js runtime hasn't integrated OpenSSL 3.5 TLS support yet"
-        },
-        "go-to-standard": {
-            "description": "Go PQC readiness path",
-            "path": [
-                "go",
-                "go-stdlib-crypto",
-                "nist-fips-203"
-            ],
-            "blocker": null,
-            "status": "ready"
-        },
-        "python-to-standard": {
-            "description": "Python PQC readiness path",
-            "path": [
-                "python-3",
-                "openssl-3.5",
-                "nist-fips-203"
-            ],
-            "blocker": "python-3",
-            "blocker_reason": "Python cryptography package hasn't adopted OpenSSL 3.5 yet"
-        },
-        "openssl-to-openssh": {
-            "description": "OpenSSH depends on OpenSSL for ML-KEM key exchange",
-            "path": [
-                "openssh",
-                "openssl-3.5",
-                "nist-fips-203"
-            ],
-            "blocker": null,
-            "status": "ready"
-        },
-        "openssl-to-nginx": {
-            "description": "nginx depends on OpenSSL for TLS",
-            "path": [
-                "nginx",
-                "openssl-3.5",
-                "nist-fips-203"
-            ],
-            "blocker": null,
-            "status": "ready"
-        },
-        "openssl-to-apache": {
-            "description": "Apache depends on OpenSSL for TLS",
-            "path": [
-                "apache-httpd",
-                "openssl-3.5",
-                "nist-fips-203"
-            ],
-            "blocker": null,
-            "status": "ready"
-        },
-        "openssl-to-haproxy": {
-            "description": "HAProxy depends on OpenSSL for TLS",
-            "path": [
-                "haproxy",
-                "openssl-3.5",
-                "nist-fips-203"
-            ],
-            "blocker": null,
-            "status": "ready"
-        },
-        "openssl-to-curl": {
-            "description": "curl depends on OpenSSL for TLS",
-            "path": [
-                "curl",
-                "openssl-3.5",
-                "nist-fips-203"
-            ],
-            "blocker": null,
-            "status": "ready"
-        },
-        "openssl-to-postgresql": {
-            "description": "PostgreSQL depends on OpenSSL for TLS",
-            "path": [
-                "postgresql",
-                "openssl-3.5",
-                "nist-fips-203"
-            ],
-            "blocker": null,
-            "status": "ready"
-        }
-    }
+    ]
 }

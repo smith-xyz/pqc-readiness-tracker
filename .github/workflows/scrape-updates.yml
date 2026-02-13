@@ -1,0 +1,59 @@
+name: Scrape PQC Updates
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run scraper
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/scrape-updates.mjs
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet public/data/; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create Pull Request
+        if: steps.changes.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'chore: update PQC readiness data from automated scrape'
+          title: 'Automated PQC Data Update'
+          body: |
+            Automated update from the PQC readiness scraper.
+
+            The scraper checked:
+            - GitHub releases for tracked crypto libraries, runtimes, and infrastructure
+            - IETF Datatracker for PQC-related draft/RFC status changes
+
+            Review the changes to `public/data/nodes.json` before merging.
+          branch: auto/scrape-updates
+          delete-branch: true
+          labels: automated,data-update

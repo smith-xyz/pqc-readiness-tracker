@@ -1,36 +1,29 @@
-import { LAYER_FILTERS, STATUS_FILTERS, UI_LABELS } from '../constants/labels';
+import { STATUS_FILTERS, LAYERS } from '../constants/labels';
+import { STATUS_COLORS } from '../constants/colors';
 
-function Controls({ layerFilter, setLayerFilter, statusFilter, setStatusFilter }) {
+function Controls({ statusFilter, setStatusFilter }) {
   return (
-    <section className="controls">
+    <div className="hud-panel controls-panel">
       <div className="filter-group">
-        <label>{UI_LABELS.SHOW_LAYER}</label>
-        {LAYER_FILTERS.map((filter) => (
-          <button
-            key={filter.value}
-            className={`filter-btn ${layerFilter === filter.value ? 'active' : ''}`}
-            onClick={() => setLayerFilter(filter.value)}
-          >
-            {filter.label}
-          </button>
-        ))}
+        <span className="filter-label">Status</span>
+        <div className="filter-buttons">
+          {STATUS_FILTERS.map(f => (
+            <button
+              key={f.value}
+              className={`filter-btn ${statusFilter === f.value ? 'active' : ''}`}
+              onClick={() => setStatusFilter(f.value)}
+              style={statusFilter === f.value && f.value !== LAYERS.ALL
+                ? { borderColor: STATUS_COLORS[f.value], color: STATUS_COLORS[f.value] }
+                : undefined
+              }
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
       </div>
-
-      <div className="filter-group">
-        <label>{UI_LABELS.STATUS}</label>
-        {STATUS_FILTERS.map((filter) => (
-          <button
-            key={filter.value}
-            className={`status-btn ${statusFilter === filter.value ? 'active' : ''}`}
-            onClick={() => setStatusFilter(filter.value)}
-          >
-            {filter.label}
-          </button>
-        ))}
-      </div>
-    </section>
+    </div>
   );
 }
 
 export default Controls;
-

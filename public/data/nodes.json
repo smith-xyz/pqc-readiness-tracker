@@ -1,17 +1,16 @@
 {
-    "last_updated": "2025-10-16",
+    "last_updated": "2026-02-13",
     "nodes": {
         "nist-fips-203": {
             "id": "nist-fips-203",
             "type": "standard",
             "name": "NIST FIPS 203 (ML-KEM)",
             "layer": 0,
-            "status": {
-                "specification": "final"
-            },
+            "status": "final",
             "metadata": {
                 "date": "2024-08-13",
                 "description": "Module-Lattice-Based Key-Encapsulation Mechanism",
+                "notes": "Primary PQC key encapsulation standard. Currently deployed in hybrid mode alongside classical algorithms (e.g., X25519 + ML-KEM). Designed to eventually replace ECDH/RSA for key agreement once confidence in lattice-based security matures.",
                 "sources": [
                     {
                         "label": "NIST FIPS 203",
@@ -25,12 +24,11 @@
             "type": "standard",
             "name": "NIST FIPS 204 (ML-DSA)",
             "layer": 0,
-            "status": {
-                "specification": "final"
-            },
+            "status": "final",
             "metadata": {
                 "date": "2024-08-13",
                 "description": "Module-Lattice-Based Digital Signature Standard",
+                "notes": "Primary PQC digital signature standard. Not yet deployed in hybrid TLS or certificate chains at scale. Intended to eventually replace RSA/ECDSA for authentication, but hybrid signature schemes are still being standardized by IETF.",
                 "sources": [
                     {
                         "label": "NIST FIPS 204",
@@ -44,19 +42,17 @@
             "type": "standard",
             "name": "NIST FIPS 205 (SLH-DSA)",
             "layer": 0,
-            "status": {
-                "specification": "final"
-            },
+            "status": "final",
             "metadata": {
                 "date": "2024-08-13",
                 "description": "Stateless Hash-Based Digital Signature Standard (SPHINCS+)",
+                "notes": "Conservative hash-based signature scheme. Slower and larger signatures than ML-DSA, but based on minimal security assumptions (hash function security only). Intended as a fallback if lattice-based schemes are broken. Not yet deployed in hybrid protocols.",
                 "sources": [
                     {
                         "label": "NIST FIPS 205",
                         "url": "https://csrc.nist.gov/pubs/fips/205/final"
                     }
-                ],
-                "notes": "Hash-based signatures, conservative choice for long-term security. Slower adoption due to larger signatures and lower performance compared to ML-DSA."
+                ]
             }
         },
         "nist-falcon": {
@@ -64,12 +60,11 @@
             "type": "standard",
             "name": "NIST Falcon (FN-DSA)",
             "layer": 0,
-            "status": {
-                "specification": "evaluation"
-            },
+            "status": "evaluation",
             "metadata": {
                 "est_date": "TBD",
                 "description": "Compact lattice-based digital signature algorithm",
+                "notes": "NIST Round 4 evaluation. ~30% more compact signatures than ML-DSA, but harder to implement securely due to floating-point arithmetic requirements. Future alternative for bandwidth-constrained applications. Not yet available for hybrid deployment.",
                 "sources": [
                     {
                         "label": "NIST Round 4 Submissions",
@@ -79,184 +74,191 @@
                         "label": "Falcon Sign",
                         "url": "https://falcon-sign.info/"
                     }
-                ],
-                "notes": "NIST Round 4 evaluation. ~30% more compact signatures than ML-DSA, but harder to implement securely. Future alternative for bandwidth-constrained applications."
+                ]
             }
         },
-        "ietf-tls-hybrid": {
-            "id": "ietf-tls-hybrid",
-            "type": "standard",
-            "name": "IETF TLS Hybrid KEX",
-            "layer": 0,
-            "depends_on": [
-                "nist-fips-203"
-            ],
-            "status": {
-                "specification": "draft"
-            },
+        "proto-tls-pqc": {
+            "id": "proto-tls-pqc",
+            "type": "protocol",
+            "name": "TLS 1.3 PQC Hybrid",
+            "layer": 1,
+            "status": "draft",
             "metadata": {
-                "est_date": "2026-Q2",
-                "description": "Hybrid key exchange for TLS 1.3",
+                "description": "Hybrid post-quantum key exchange for TLS 1.3 combining ML-KEM with X25519",
+                "notes": "Hybrid key exchange pairs ML-KEM with X25519 so that the connection remains secure even if one algorithm is broken. Required for PQC-protected HTTPS, API calls, and any TLS-based communication. Most critical protocol for broad PQC adoption. Pure PQC-only TLS is not yet standardized.",
+                "ietf_drafts": [
+                    {
+                        "name": "draft-ietf-tls-hybrid-design",
+                        "url": "https://datatracker.ietf.org/doc/draft-ietf-tls-hybrid-design/",
+                        "status": "draft"
+                    },
+                    {
+                        "name": "draft-ietf-tls-ecdhe-mlkem",
+                        "status": "draft",
+                        "title": "Post-quantum hybrid ECDHE-MLKEM Key Agreement for TLSv1.3",
+                        "rev": "04",
+                        "lastUpdated": "2026-02-11",
+                        "rfcNumber": null
+                    },
+                    {
+                        "name": "draft-ietf-tls-mlkem",
+                        "status": "draft",
+                        "title": "ML-KEM Post-Quantum Key Agreement for TLS 1.3",
+                        "rev": "07",
+                        "lastUpdated": "2026-02-12",
+                        "rfcNumber": null
+                    }
+                ],
                 "sources": [
                     {
                         "label": "IETF TLS Hybrid Draft",
                         "url": "https://datatracker.ietf.org/doc/draft-ietf-tls-hybrid-design/"
                     }
-                ],
-                "notes": "Required for PQC TLS cipher suites"
+                ]
             }
         },
-        "ietf-lamps-kyber": {
-            "id": "ietf-lamps-kyber",
-            "type": "standard",
-            "name": "IETF LAMPS Kyber Certificates",
-            "layer": 0,
-            "depends_on": [
-                "nist-fips-203"
-            ],
-            "status": {
-                "specification": "draft"
-            },
+        "proto-ssh-pqc": {
+            "id": "proto-ssh-pqc",
+            "type": "protocol",
+            "name": "SSH PQC Hybrid KEX",
+            "layer": 1,
+            "status": "draft",
             "metadata": {
-                "est_date": "2026-Q2",
-                "description": "X.509 certificate format for ML-KEM keys",
-                "sources": [
+                "description": "Hybrid post-quantum key exchange for SSH protocol",
+                "notes": "Defines hybrid key exchange combining ML-KEM with X25519 for secure shell connections. OpenSSH 10.0 already uses mlkem768x25519-sha256 as its default hybrid KEX. Authentication (host keys, user keys) remains classical RSA/Ed25519 -- hybrid signatures for SSH are not yet specified.",
+                "ietf_drafts": [
                     {
-                        "label": "IETF LAMPS Kyber Draft",
-                        "url": "https://datatracker.ietf.org/doc/draft-ietf-lamps-kyber-certificates/"
+                        "name": "draft-ietf-sshm-mlkem-hybrid-kex",
+                        "url": "https://datatracker.ietf.org/doc/draft-ietf-sshm-mlkem-hybrid-kex/",
+                        "status": "draft"
+                    },
+                    {
+                        "name": "draft-ietf-sshm-ntruprime-ssh",
+                        "url": "https://datatracker.ietf.org/doc/draft-ietf-sshm-ntruprime-ssh/",
+                        "status": "draft"
                     }
                 ],
-                "notes": "Defines how ML-KEM keys are encoded in X.509 certificates"
-            }
-        },
-        "ietf-lamps-dilithium": {
-            "id": "ietf-lamps-dilithium",
-            "type": "standard",
-            "name": "IETF LAMPS Dilithium Certificates",
-            "layer": 0,
-            "depends_on": [
-                "nist-fips-204"
-            ],
-            "status": {
-                "specification": "draft"
-            },
-            "metadata": {
-                "est_date": "2026-Q2",
-                "description": "X.509 certificate format for ML-DSA keys",
-                "sources": [
-                    {
-                        "label": "IETF LAMPS Dilithium Draft",
-                        "url": "https://datatracker.ietf.org/doc/draft-ietf-lamps-dilithium-certificates/"
-                    }
-                ],
-                "notes": "Defines how ML-DSA keys are encoded in X.509 certificates"
-            }
-        },
-        "ietf-sshm-mlkem": {
-            "id": "ietf-sshm-mlkem",
-            "type": "standard",
-            "name": "IETF SSHM ML-KEM Hybrid KEX",
-            "layer": 0,
-            "depends_on": [
-                "nist-fips-203"
-            ],
-            "status": {
-                "specification": "draft"
-            },
-            "metadata": {
-                "est_date": "2026-Q2",
-                "description": "Hybrid key exchange for SSH",
                 "sources": [
                     {
                         "label": "IETF SSHM ML-KEM Draft",
                         "url": "https://datatracker.ietf.org/doc/draft-ietf-sshm-mlkem-hybrid-kex/"
                     }
-                ],
-                "notes": "Defines ML-KEM hybrid key exchange for SSH protocol"
+                ]
             }
         },
-        "ietf-lamps-x509-slhdsa": {
-            "id": "ietf-lamps-x509-slhdsa",
-            "type": "standard",
-            "name": "IETF LAMPS X.509 SLH-DSA",
-            "layer": 0,
-            "depends_on": [
-                "nist-fips-205"
-            ],
-            "status": {
-                "specification": "draft"
-            },
-            "metadata": {
-                "est_date": "2026-Q2",
-                "description": "X.509 certificate format for SLH-DSA keys",
-                "sources": [
-                    {
-                        "label": "IETF LAMPS X.509 SLH-DSA Draft",
-                        "url": "https://datatracker.ietf.org/doc/draft-ietf-lamps-x509-slhdsa/"
-                    }
-                ],
-                "notes": "Defines how SLH-DSA keys are encoded in X.509 certificates"
-            }
-        },
-        "ietf-sshm-ntruprime": {
-            "id": "ietf-sshm-ntruprime",
-            "type": "standard",
-            "name": "IETF SSHM NTRU Prime",
-            "layer": 0,
-            "status": {
-                "specification": "draft"
-            },
-            "metadata": {
-                "est_date": "2026-Q2",
-                "description": "NTRU Prime key exchange for SSH",
-                "sources": [
-                    {
-                        "label": "IETF SSHM NTRU Prime Draft",
-                        "url": "https://datatracker.ietf.org/doc/draft-ietf-sshm-ntruprime-ssh/"
-                    }
-                ],
-                "notes": "Early SSH PQC implementation used by OpenSSH 9.0"
-            }
-        },
-        "openssl-3.5": {
-            "id": "openssl-3.5",
-            "type": "crypto_library",
-            "name": "OpenSSL 3.5",
+        "proto-x509-pqc": {
+            "id": "proto-x509-pqc",
+            "type": "protocol",
+            "name": "X.509 PQC Certificates",
             "layer": 1,
+            "status": "draft",
+            "metadata": {
+                "description": "X.509 certificate formats for ML-KEM, ML-DSA, and SLH-DSA keys",
+                "notes": "Defines how PQC keys are encoded in X.509 certificates for TLS authentication, code signing, and PKI. Hybrid certificate formats (carrying both classical and PQC keys) are under active IETF discussion. Full deployment blocked until CAs issue hybrid or PQC-only certificates.",
+                "ietf_drafts": [
+                    {
+                        "name": "draft-ietf-lamps-kyber-certificates",
+                        "url": "https://datatracker.ietf.org/doc/draft-ietf-lamps-kyber-certificates/",
+                        "status": "draft"
+                    },
+                    {
+                        "name": "draft-ietf-lamps-dilithium-certificates",
+                        "url": "https://datatracker.ietf.org/doc/draft-ietf-lamps-dilithium-certificates/",
+                        "status": "draft"
+                    },
+                    {
+                        "name": "draft-ietf-lamps-x509-slhdsa",
+                        "url": "https://datatracker.ietf.org/doc/draft-ietf-lamps-x509-slhdsa/",
+                        "status": "draft"
+                    },
+                    {
+                        "name": "draft-ietf-lamps-pq-composite-sigs",
+                        "status": "draft",
+                        "title": "Composite ML-DSA for use in X.509 Public Key Infrastructure",
+                        "rev": "14",
+                        "lastUpdated": "2026-02-04",
+                        "rfcNumber": null
+                    }
+                ],
+                "sources": [
+                    {
+                        "label": "IETF LAMPS Kyber Certs",
+                        "url": "https://datatracker.ietf.org/doc/draft-ietf-lamps-kyber-certificates/"
+                    },
+                    {
+                        "label": "IETF LAMPS Dilithium Certs",
+                        "url": "https://datatracker.ietf.org/doc/draft-ietf-lamps-dilithium-certificates/"
+                    }
+                ]
+            }
+        },
+        "proto-quic-pqc": {
+            "id": "proto-quic-pqc",
+            "type": "protocol",
+            "name": "QUIC PQC",
+            "layer": 1,
+            "status": "draft",
+            "metadata": {
+                "description": "Post-quantum key exchange for QUIC transport protocol",
+                "notes": "QUIC uses TLS 1.3 for its handshake, so PQC QUIC inherits hybrid key exchange (X25519 + ML-KEM) from the TLS PQC hybrid design. Already deployed in hybrid mode in Chrome 131+ via BoringSSL.",
+                "sources": [
+                    {
+                        "label": "QUIC RFC 9001",
+                        "url": "https://www.rfc-editor.org/rfc/rfc9001"
+                    }
+                ]
+            }
+        },
+        "proto-dtls-pqc": {
+            "id": "proto-dtls-pqc",
+            "type": "protocol",
+            "name": "DTLS PQC",
+            "layer": 1,
+            "status": "proposed",
+            "metadata": {
+                "description": "Post-quantum key exchange for Datagram TLS",
+                "notes": "DTLS is used for real-time and IoT communications. PQC support follows from TLS PQC hybrid design, combining ML-KEM with classical key exchange. wolfSSL already supports hybrid DTLS.",
+                "sources": [
+                    {
+                        "label": "DTLS 1.3 RFC 9147",
+                        "url": "https://www.rfc-editor.org/rfc/rfc9147"
+                    }
+                ]
+            }
+        },
+        "proto-ipsec-pqc": {
+            "id": "proto-ipsec-pqc",
+            "type": "protocol",
+            "name": "IPSec/IKEv2 PQC",
+            "layer": 1,
+            "status": "proposed",
+            "metadata": {
+                "description": "Post-quantum key exchange and authentication for IPSec/IKEv2",
+                "notes": "Critical for VPN and network-layer encryption. Hybrid PQC key exchange and authentication specifications for IKEv2 are still in early IETF drafting stages. No production hybrid IPSec deployments yet.",
+                "sources": [
+                    {
+                        "label": "IETF IPSecME WG",
+                        "url": "https://datatracker.ietf.org/wg/ipsecme/about/"
+                    }
+                ]
+            }
+        },
+        "openssl": {
+            "id": "openssl",
+            "type": "crypto_library",
+            "name": "OpenSSL",
+            "layer": 2,
             "version": "3.5.4",
-            "depends_on": [
-                "nist-fips-203",
-                "nist-fips-204",
-                "nist-fips-205",
-                "ietf-lamps-kyber",
-                "ietf-lamps-dilithium",
-                "ietf-lamps-x509-slhdsa",
-                "ietf-tls-hybrid"
-            ],
-            "status": {
-                "ml_kem_api": "available",
-                "ml_kem_protocols": {
-                    "tls": "available",
-                    "ipsec": "not_available"
-                },
-                "ml_dsa_api": "available",
-                "ml_dsa_protocols": {
-                    "tls": "not_available",
-                    "ipsec": "not_available"
-                },
-                "slh_dsa_api": "available",
-                "slh_dsa_protocols": {
-                    "tls": "not_available",
-                    "ipsec": "not_available"
-                }
-            },
+            "status": "available",
             "metadata": {
                 "date": "2025-04-08",
-                "description": "Widely used crypto library (LTS release)",
-                "protocols": {
-                    "TLS 1.3": "available",
-                    "SSH": "not_available",
-                    "IPSec/IKEv2": "not_available"
+                "description": "Widely used open-source crypto library (LTS release)",
+                "notes": "OpenSSL 3.5 (April 2025, LTS) includes ML-KEM, ML-DSA, and SLH-DSA algorithms. Hybrid key exchange (X25519 + ML-KEM) available in TLS 1.3. ML-DSA and SLH-DSA available as standalone APIs but not yet integrated into TLS handshake for hybrid authentication. Foundation for most server-side hybrid PQC.",
+                "fips": {
+                    "status": "validated",
+                    "certificate": "#4282",
+                    "includes_pqc": false,
+                    "notes": "OpenSSL 3.0.x FIPS provider has FIPS 140-3 validation (classical algorithms). OpenSSL 3.5.4 submitted for new FIPS 140-3 validation with PQC algorithms (ML-KEM, ML-DSA) in boundary -- CMVP review pending. Would be the first FIPS module with PQC."
                 },
                 "sources": [
                     {
@@ -266,36 +268,36 @@
                     {
                         "label": "GitHub Release",
                         "url": "https://github.com/openssl/openssl/releases/tag/openssl-3.5.4"
+                    },
+                    {
+                        "label": "FIPS 140-3 Submission",
+                        "url": "https://openssl-corporation.org/post/2025-10-09-ossl3.5.4-fips-submission/"
                     }
                 ],
-                "notes": "OpenSSL 3.5 (April 2025, LTS) includes ML-KEM/ML-DSA/SLH-DSA algorithms. ML-KEM in TLS 1.3 available. ML-DSA and SLH-DSA not yet integrated in TLS protocol layer."
+                "latestRelease": {
+                    "version": "3.6.1",
+                    "date": "2026-01-27",
+                    "url": "https://github.com/openssl/openssl/releases/tag/openssl-3.6.1",
+                    "tag": "openssl-3.6.1",
+                    "hasPqcMention": false
+                }
             }
         },
         "nss": {
             "id": "nss",
             "type": "crypto_library",
-            "name": "NSS (Network Security Services)",
-            "layer": 1,
+            "name": "NSS",
+            "layer": 2,
             "version": "3.112+",
-            "depends_on": [
-                "nist-fips-203",
-                "nist-fips-204",
-                "ietf-lamps-dilithium",
-                "ietf-tls-hybrid"
-            ],
-            "status": {
-                "ml_kem_api": "available",
-                "ml_kem_protocols": {
-                    "tls": "available"
-                },
-                "ml_dsa_api": "not_available",
-                "ml_dsa_protocols": {}
-            },
+            "status": "partial",
             "metadata": {
                 "date": "2024-11",
-                "description": "Mozilla's crypto library, used in Firefox and RHEL",
-                "protocols": {
-                    "TLS 1.3": "available"
+                "description": "Mozilla's Network Security Services library, used in Firefox and RHEL",
+                "notes": "NSS 3.112 includes ML-KEM support for hybrid TLS 1.3 key exchange (X25519 + ML-KEM). ML-DSA under active development, expected in future releases. Hybrid authentication (ML-DSA certificates) not yet available. RHEL 10.0 ships NSS 3.112.",
+                "fips": {
+                    "status": "in_test",
+                    "includes_pqc": false,
+                    "notes": "Listed as 'Implementation Under Test' for RHEL 10.0. No active FIPS 140-3 certificate. Current testing does not include PQC algorithms."
                 },
                 "sources": [
                     {
@@ -306,37 +308,76 @@
                         "label": "RHEL 10 PQC Blog",
                         "url": "https://www.redhat.com/en/blog/post-quantum-cryptography-red-hat-enterprise-linux-10"
                     }
-                ],
-                "notes": "Tracks upstream NSS. Enterprise distributions may include additional features. RHEL 10.0 ships with NSS 3.112 including ML-KEM support for hybrid TLS 1.3 key exchange. ML-DSA under active development, expected in RHEL 10.1+."
+                ]
+            }
+        },
+        "gnutls": {
+            "id": "gnutls",
+            "type": "crypto_library",
+            "name": "GnuTLS",
+            "layer": 2,
+            "version": "3.8+",
+            "status": "partial",
+            "metadata": {
+                "date": "2025-05",
+                "description": "GNU Transport Layer Security library, widely used in GNOME and RHEL",
+                "notes": "GnuTLS in RHEL 10 supports ML-KEM hybrid TLS 1.3 key exchange: X25519MLKEM768, SecP256r1MLKEM768, and SecP384r1MLKEM1024. Used by many GNOME applications and system services. ML-DSA signature support not yet available in GnuTLS.",
+                "fips": {
+                    "status": "not_available",
+                    "includes_pqc": false,
+                    "notes": "GnuTLS does not currently have FIPS 140-3 validation."
+                },
+                "sources": [
+                    {
+                        "label": "GnuTLS",
+                        "url": "https://gnutls.org/"
+                    },
+                    {
+                        "label": "RHEL 10 PQC Blog",
+                        "url": "https://www.redhat.com/en/blog/post-quantum-cryptography-red-hat-enterprise-linux-10"
+                    }
+                ]
+            }
+        },
+        "boringssl": {
+            "id": "boringssl",
+            "type": "crypto_library",
+            "name": "BoringSSL",
+            "layer": 2,
+            "status": "available",
+            "metadata": {
+                "date": "2025-08",
+                "description": "Google's OpenSSL fork powering Chrome and Android",
+                "notes": "ML-KEM fully standardized via openssl/mlkem.h (prestandard Kyber API removed). ML-DSA-65 public API available via openssl/mldsa.h with key generation and signing. Hybrid X25519MLKEM768 deployed in Chrome 131+ by default for all TLS 1.3 connections. Internal Google project, not intended for general external use.",
+                "fips": {
+                    "status": "validated",
+                    "certificate": "#5104",
+                    "includes_pqc": false,
+                    "notes": "BoringCrypto module FIPS 140-3 validated (cert #5104, Apr 2024). Current certificate covers classical algorithms only; PQC not yet in FIPS boundary. Multiple pending validations in 2025."
+                },
+                "sources": [
+                    {
+                        "label": "BoringSSL Source",
+                        "url": "https://boringssl.googlesource.com/boringssl/"
+                    }
+                ]
             }
         },
         "go-stdlib-crypto": {
             "id": "go-stdlib-crypto",
             "type": "crypto_library",
             "name": "Go stdlib crypto",
-            "layer": 1,
+            "layer": 2,
             "version": "1.24",
-            "depends_on": [
-                "nist-fips-203",
-                "ietf-sshm-mlkem",
-                "ietf-tls-hybrid"
-            ],
-            "independent": true,
-            "status": {
-                "ml_kem_api": "available",
-                "ml_kem_protocols": {
-                    "tls": "available",
-                    "quic": "available"
-                },
-                "ml_dsa_api": "planned",
-                "ml_dsa_protocols": {}
-            },
+            "status": "partial",
             "metadata": {
                 "date": "2025-02",
-                "description": "Go's built-in crypto implementation",
-                "protocols": {
-                    "TLS 1.3": "available",
-                    "QUIC": "available"
+                "description": "Go's built-in crypto implementation (independent, no OpenSSL dependency)",
+                "notes": "Go 1.23 introduced X25519Kyber768Draft00 hybrid key exchange in crypto/tls. Go 1.24 adds dedicated crypto/mlkem package implementing FIPS 203. Production-ready hybrid PQC for TLS 1.3 and QUIC. ML-DSA support expected in Go 1.27; hybrid authentication not yet available.",
+                "fips": {
+                    "status": "in_progress",
+                    "includes_pqc": false,
+                    "notes": "Go 1.24 includes FIPS 140-3 compliance mode (crypto/internal/fips140). No CMVP certificate yet. Designed to facilitate compliance; formal validation pending."
                 },
                 "sources": [
                     {
@@ -344,104 +385,408 @@
                         "url": "https://go.dev/doc/go1.24#crypto-mlkem"
                     },
                     {
-                        "label": "Go 1.23 Release",
-                        "url": "https://go.dev/doc/go1.23"
-                    },
-                    {
                         "label": "GitHub Issue #64537",
                         "url": "https://github.com/golang/go/issues/64537"
+                    },
+                    {
+                        "label": "Go FIPS 140-3",
+                        "url": "https://go.dev/doc/security/fips140"
+                    }
+                ]
+            }
+        },
+        "bouncy-castle": {
+            "id": "bouncy-castle",
+            "type": "crypto_library",
+            "name": "Bouncy Castle",
+            "layer": 2,
+            "version": "1.78+",
+            "status": "available",
+            "metadata": {
+                "date": "2024-09",
+                "description": "Java/Kotlin cryptography library with comprehensive PQC algorithm support",
+                "notes": "API support for ML-KEM and ML-DSA as standalone algorithms. No direct hybrid TLS protocol integration; used as a JCA provider for Java applications that need raw PQC operations. Hybrid TLS requires JDK-level support.",
+                "fips": {
+                    "status": "not_available",
+                    "includes_pqc": false,
+                    "notes": "Bouncy Castle FIPS Java API (bc-fips) exists but does not yet include PQC algorithms. Current FIPS module covers classical algorithms only."
+                },
+                "sources": [
+                    {
+                        "label": "Bouncy Castle",
+                        "url": "https://www.bouncycastle.org/"
+                    }
+                ]
+            }
+        },
+        "rustls": {
+            "id": "rustls",
+            "type": "crypto_library",
+            "name": "rustls",
+            "layer": 2,
+            "version": "0.23+",
+            "status": "experimental",
+            "metadata": {
+                "date": "2024-10",
+                "description": "Modern TLS library written in Rust",
+                "notes": "Experimental hybrid PQC TLS support via rustls-post-quantum crate with prefer-post-quantum feature flag. X25519 + ML-KEM hybrid key exchange available but not yet stable. No hybrid signature support.",
+                "fips": {
+                    "status": "not_available",
+                    "includes_pqc": false,
+                    "notes": "No FIPS 140-3 validation path. rustls uses aws-lc-rs or ring as crypto backends; aws-lc-rs has a separate FIPS path via AWS-LC."
+                },
+                "sources": [
+                    {
+                        "label": "rustls GitHub",
+                        "url": "https://github.com/rustls/rustls"
                     }
                 ],
-                "notes": "Go 1.23 introduced X25519Kyber768Draft00 in crypto/tls. Go 1.24 adds dedicated crypto/mlkem package implementing FIPS 203. Production-ready PQC for TLS and QUIC. Independent implementation, doesn't wait for IETF standards. ML-DSA support still pending."
+                "latestRelease": {
+                    "version": "0.23.36",
+                    "date": "2026-01-05",
+                    "url": "https://github.com/rustls/rustls/releases/tag/v/0.23.36",
+                    "tag": "v/0.23.36",
+                    "hasPqcMention": false
+                }
+            }
+        },
+        "wolfssl": {
+            "id": "wolfssl",
+            "type": "crypto_library",
+            "name": "wolfSSL",
+            "layer": 2,
+            "version": "5.7+",
+            "status": "available",
+            "metadata": {
+                "date": "2024-06",
+                "description": "Lightweight embedded-focused crypto library with CNSA 2.0 compliance",
+                "notes": "Full ML-KEM and ML-DSA implementation with hybrid TLS 1.3 and DTLS support. Among the first crypto providers to support CNSA 2.0 hybrid requirements. Includes hash-based signatures (LMS, XMSS) for firmware signing. Supports both hybrid and pure PQC modes.",
+                "fips": {
+                    "status": "validated",
+                    "certificate": "#4718",
+                    "includes_pqc": false,
+                    "notes": "wolfCrypt FIPS 140-3 validated (cert #4718, Jul 2024, active through 2029). Also holds cert #5041. Validated on 80+ operating environments. Current certificates cover classical algorithms; PQC not yet in FIPS boundary."
+                },
+                "sources": [
+                    {
+                        "label": "wolfSSL",
+                        "url": "https://www.wolfssl.com/"
+                    },
+                    {
+                        "label": "PQC Solutions",
+                        "url": "https://www.wolfssl.com/wolfssl-unveils-post-quantum-cryptography-and-security-solutions-at-embedded-world-2025/"
+                    },
+                    {
+                        "label": "wolfCrypt FIPS",
+                        "url": "https://www.wolfssl.com/license/fips/"
+                    }
+                ],
+                "latestRelease": {
+                    "version": "5.8.4",
+                    "date": "2025-11-21",
+                    "url": "https://github.com/wolfSSL/wolfssl/releases/tag/v5.8.4-stable",
+                    "tag": "v5.8.4-stable",
+                    "hasPqcMention": true
+                }
+            }
+        },
+        "apple-cryptokit": {
+            "id": "apple-cryptokit",
+            "type": "crypto_library",
+            "name": "Apple CryptoKit",
+            "layer": 2,
+            "status": "available",
+            "metadata": {
+                "date": "2025-06",
+                "description": "Apple's native cryptography framework for iOS, macOS, and related platforms",
+                "notes": "CryptoKit added ML-KEM and quantum-secure HPKE APIs at WWDC 2025. iOS 26/macOS Tahoe 26 enable hybrid TLS 1.3 (X25519MLKEM768) by default for URLSession and Network.framework. Proprietary, closed-source implementation tightly integrated with Apple platforms.",
+                "fips": {
+                    "status": "not_available",
+                    "includes_pqc": false,
+                    "notes": "Apple corecrypto has had FIPS 140-2 validations historically. No public FIPS 140-3 validation with PQC algorithms."
+                },
+                "sources": [
+                    {
+                        "label": "WWDC 2025 PQC Session",
+                        "url": "https://developer.apple.com/videos/play/wwdc2025/314/"
+                    },
+                    {
+                        "label": "Apple TLS PQC Guide",
+                        "url": "https://support.apple.com/en-us/122756"
+                    }
+                ]
+            }
+        },
+        "symcrypt": {
+            "id": "symcrypt",
+            "type": "crypto_library",
+            "name": "SymCrypt / CNG",
+            "layer": 2,
+            "version": "106.0+",
+            "status": "available",
+            "metadata": {
+                "date": "2025-11",
+                "description": "Microsoft's core cryptographic library powering CNG (Cryptography: Next Generation) and SChannel on Windows",
+                "notes": "ML-KEM and ML-DSA GA in Windows 11 24H2/25H2 and Windows Server 2025 (November 2025). Hybrid TLS 1.3 via SChannel (ML-KEM-768 + ECDH). CNG APIs expose ML-KEM and ML-DSA directly. Enterprise PKI via Active Directory Certificate Services planned for early 2026.",
+                "fips": {
+                    "status": "validated",
+                    "certificate": "#4920",
+                    "includes_pqc": false,
+                    "notes": "SymCrypt.dll FIPS 140-3 validated for classical algorithms. PQC algorithms (ML-KEM, ML-DSA) are in SymCrypt but not yet within the FIPS validation boundary."
+                },
+                "sources": [
+                    {
+                        "label": "Microsoft PQC GA",
+                        "url": "https://techcommunity.microsoft.com/blog/microsoft-security-blog/post-quantum-cryptography-apis-now-generally-available-on-microsoft-platforms/4469093"
+                    },
+                    {
+                        "label": "CNG ML-KEM",
+                        "url": "https://learn.microsoft.com/en-us/windows/win32/seccng/cng-mlkem-examples"
+                    }
+                ],
+                "latestRelease": {
+                    "version": "103.8.0",
+                    "date": "2025-01-29",
+                    "url": "https://github.com/microsoft/SymCrypt/releases/tag/v103.8.0",
+                    "tag": "v103.8.0",
+                    "hasPqcMention": false
+                }
+            }
+        },
+        "rhel-10": {
+            "id": "rhel-10",
+            "type": "os_distribution",
+            "name": "RHEL 10",
+            "layer": 3,
+            "version": "10.0",
+            "status": "available",
+            "metadata": {
+                "date": "2025-05",
+                "description": "Red Hat Enterprise Linux 10",
+                "notes": "Ships OpenSSL 3.5 and NSS 3.112 with ML-KEM support. First enterprise Linux distribution with production hybrid PQC capabilities. Hybrid TLS 1.3 key exchange (X25519 + ML-KEM) available out of the box. Hybrid authentication (ML-DSA certificates) not yet available at the OS level.",
+                "sources": [
+                    {
+                        "label": "RHEL 10 PQC Blog",
+                        "url": "https://www.redhat.com/en/blog/post-quantum-cryptography-red-hat-enterprise-linux-10"
+                    }
+                ]
+            }
+        },
+        "rhel-9": {
+            "id": "rhel-9",
+            "type": "os_distribution",
+            "name": "RHEL 9",
+            "layer": 3,
+            "version": "9.7+",
+            "status": "partial",
+            "metadata": {
+                "date": "2025-11",
+                "description": "Red Hat Enterprise Linux 9",
+                "notes": "RHEL 9.7 introduced the PQ crypto-policy subpolicy enabling hybrid ML-KEM key exchange and ML-DSA signatures system-wide (update-crypto-policies --set DEFAULT:PQ). PQC is available across OpenSSL, GnuTLS, and NSS but requires explicit opt-in via the subpolicy. RHEL 9 versions prior to 9.7 do not have PQC support.",
+                "sources": [
+                    {
+                        "label": "RHEL 9 Crypto Policies",
+                        "url": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/using-the-system-wide-cryptographic-policies_security-hardening"
+                    },
+                    {
+                        "label": "Red Hat PQC Path",
+                        "url": "https://www.redhat.com/en/blog/how-red-hat-integrating-post-quantum-cryptography-our-products"
+                    }
+                ]
+            }
+        },
+        "fedora-42": {
+            "id": "fedora-42",
+            "type": "os_distribution",
+            "name": "Fedora 42",
+            "layer": 3,
+            "version": "42",
+            "status": "available",
+            "metadata": {
+                "date": "2025-04",
+                "description": "Fedora Linux 42",
+                "notes": "Ships OpenSSL 3.5 with hybrid PQC support. Fedora serves as the upstream proving ground for RHEL. Hybrid key exchange (X25519 + ML-KEM) available ahead of enterprise adoption.",
+                "sources": [
+                    {
+                        "label": "Fedora Project",
+                        "url": "https://fedoraproject.org/"
+                    }
+                ]
+            }
+        },
+        "ubuntu-2404": {
+            "id": "ubuntu-2404",
+            "type": "os_distribution",
+            "name": "Ubuntu 24.04 LTS",
+            "layer": 3,
+            "version": "24.04",
+            "status": "not_available",
+            "metadata": {
+                "date": "2024-04",
+                "description": "Ubuntu 24.04 LTS (Noble Numbat)",
+                "notes": "Ships OpenSSL 3.0.x which does not include PQC algorithm support. As an LTS release, it will not receive OpenSSL 3.5 backports. PQC requires upgrading to a newer Ubuntu release or manual OpenSSL compilation.",
+                "sources": [
+                    {
+                        "label": "Ubuntu 24.04",
+                        "url": "https://releases.ubuntu.com/24.04/"
+                    }
+                ]
+            }
+        },
+        "windows-11": {
+            "id": "windows-11",
+            "type": "os_distribution",
+            "name": "Windows 11",
+            "layer": 3,
+            "version": "24H2",
+            "status": "partial",
+            "metadata": {
+                "date": "2024-10",
+                "description": "Microsoft Windows 11 with CNG cryptographic provider",
+                "notes": "Windows CNG (Cryptography Next Generation) includes native ML-KEM and ML-DSA algorithm support starting with Windows 11 24H2 and Windows Server 2025. .NET 10 leverages CNG on Windows for PQC operations. Hybrid TLS integration at the OS/Schannel level is partial.",
+                "sources": [
+                    {
+                        "label": "Windows CNG",
+                        "url": "https://learn.microsoft.com/en-us/windows/win32/seccng/cng-portal"
+                    }
+                ]
+            }
+        },
+        "macos-15": {
+            "id": "macos-15",
+            "type": "os_distribution",
+            "name": "macOS Sequoia",
+            "layer": 3,
+            "version": "15",
+            "status": "not_available",
+            "metadata": {
+                "date": "2024-09",
+                "description": "Apple macOS 15 (Sequoia)",
+                "notes": "Ships LibreSSL which does not include PQC algorithm support. Applications needing PQC on macOS must bundle their own crypto library (e.g., Homebrew OpenSSL 3.5). macOS Tahoe 26 (2025) adds CryptoKit ML-KEM and hybrid TLS by default.",
+                "sources": [
+                    {
+                        "label": "Apple Security",
+                        "url": "https://support.apple.com/en-us/100100"
+                    }
+                ]
+            }
+        },
+        "ios-26": {
+            "id": "ios-26",
+            "type": "os_distribution",
+            "name": "iOS / iPadOS 26",
+            "layer": 3,
+            "version": "26",
+            "status": "available",
+            "metadata": {
+                "date": "2025-09",
+                "description": "Apple iOS 26 and iPadOS 26",
+                "notes": "Hybrid quantum-secure TLS (X25519MLKEM768) enabled by default for URLSession and Network.framework. CryptoKit provides ML-KEM and quantum-secure HPKE APIs for custom protocols. First major mobile OS with PQC enabled by default.",
+                "sources": [
+                    {
+                        "label": "WWDC 2025 PQC Session",
+                        "url": "https://developer.apple.com/videos/play/wwdc2025/314/"
+                    },
+                    {
+                        "label": "Apple TLS PQC Guide",
+                        "url": "https://support.apple.com/en-us/122756"
+                    }
+                ]
+            }
+        },
+        "android": {
+            "id": "android",
+            "type": "os_distribution",
+            "name": "Android",
+            "layer": 3,
+            "version": "13-16",
+            "status": "partial",
+            "metadata": {
+                "date": "2024-11",
+                "description": "Google Android mobile operating system",
+                "notes": "Ships BoringSSL as system crypto library via Conscrypt JCA provider. Chrome on Android negotiates hybrid PQC TLS (X25519MLKEM768) by default since Chrome 124. System-wide hybrid TLS support depends on the BoringSSL version shipped with each Android release. Conscrypt does not yet expose ML-KEM APIs directly to app developers.",
+                "sources": [
+                    {
+                        "label": "Conscrypt",
+                        "url": "https://github.com/google/conscrypt"
+                    },
+                    {
+                        "label": "Android BoringSSL",
+                        "url": "https://android.googlesource.com/platform/external/boringssl/"
+                    }
+                ]
             }
         },
         "nodejs": {
             "id": "nodejs",
-            "type": "runtime",
+            "type": "dynamic_language",
             "name": "Node.js",
-            "layer": 2,
+            "layer": 6,
             "version": "24.7+",
-            "depends_on": [
-                "openssl-3.5"
-            ],
-            "inherits_status": true,
-            "status": {
-                "ml_kem_api": "available",
-                "ml_kem_protocols": {},
-                "ml_dsa_api": "available",
-                "ml_dsa_protocols": {}
-            },
+            "status": "partial",
             "metadata": {
                 "date": "2025-08-27",
-                "est_tls_date": "2027-Q1",
-                "description": "JavaScript runtime",
+                "description": "JavaScript runtime built on V8 and OpenSSL",
+                "notes": "Node.js 24+ exposes ML-KEM and ML-DSA via the node:crypto API when linked against OpenSSL 3.5. Hybrid PQC TLS depends on the system OpenSSL version. No native hybrid TLS negotiation independent of OpenSSL -- inherits whatever hybrid support OpenSSL provides. Pure JS ML-KEM implementations (e.g., mlkem npm package) exist for application-layer use but are not production TLS paths.",
                 "sources": [
                     {
                         "label": "Node.js v24.7.0 Release",
                         "url": "https://nodejs.org/en/blog/release/v24.7.0"
                     }
                 ],
-                "notes": "Waiting on OpenSSL TLS support. As it stands, node:crypto API implemented PQC standards so you could encrypt your own data."
+                "latestRelease": {
+                    "version": "25.6.1",
+                    "date": "2026-02-10",
+                    "url": "https://github.com/nodejs/node/releases/tag/v25.6.1",
+                    "tag": "v25.6.1",
+                    "hasPqcMention": false
+                }
             }
         },
         "python-3": {
             "id": "python-3",
-            "type": "runtime",
+            "type": "dynamic_language",
             "name": "Python 3.x",
-            "layer": 2,
-            "depends_on": [
-                "openssl-3.5"
-            ],
-            "status": {
-                "ml_kem_api": "experimental",
-                "ml_kem_protocols": {
-                    "tls": "experimental"
-                },
-                "ml_dsa_api": "experimental",
-                "ml_dsa_protocols": {}
-            },
+            "layer": 6,
+            "status": "experimental",
             "metadata": {
-                "date": "2024-12",
-                "est_tls_date": "2027-Q1",
-                "description": "Python interpreter with cryptography package",
+                "date": "2026-01",
+                "description": "Python interpreter with cryptography ecosystem",
+                "notes": "The pyca/cryptography package (primary Python crypto library) currently delegates to OpenSSL but is actively moving away. As of Jan 2026, maintainers announced ML-KEM and ML-DSA APIs will only be available on BoringSSL/AWS-LC backends, not OpenSSL. Wheels are exploring switching from statically linked OpenSSL to a BoringSSL/AWS-LC fork. Pure Python PQC libraries exist (kyber-py, quantcrypt) but are research/educational only. Hybrid PQC TLS depends entirely on which backend the cryptography package links against.",
                 "sources": [
                     {
                         "label": "cryptography.io",
                         "url": "https://cryptography.io/"
                     },
                     {
-                        "label": "PQClean GitHub",
-                        "url": "https://github.com/PQClean/PQClean"
+                        "label": "State of OpenSSL",
+                        "url": "https://cryptography.io/en/latest/statements/state-of-openssl/"
                     },
                     {
-                        "label": "quantcrypt GitHub",
+                        "label": "quantcrypt",
                         "url": "https://github.com/aabmets/quantcrypt"
                     }
                 ],
-                "notes": "Third-party API libraries available: quantcrypt (PQClean wrapper), kyber-py (pure Python ML-KEM). AWS-LC integration enables hybrid ML-KEM TLS 1.3 via s2n-tls. Standard cryptography package awaiting OpenSSL 3.5 adoption for mainstream support."
+                "latestRelease": {
+                    "version": "3.14.3",
+                    "date": null,
+                    "url": "https://github.com/python/cpython/releases/tag/v3.14.3",
+                    "tag": "v3.14.3",
+                    "hasPqcMention": false
+                }
             }
         },
         "go": {
             "id": "go",
-            "type": "runtime",
+            "type": "compiled_language",
             "name": "Go",
-            "layer": 2,
+            "layer": 4,
             "version": "1.24+",
-            "depends_on": [
-                "go-stdlib-crypto"
-            ],
-            "status": {
-                "ml_kem_api": "available",
-                "ml_kem_protocols": {
-                    "tls": "available",
-                    "quic": "available"
-                },
-                "ml_dsa_api": "planned",
-                "ml_dsa_protocols": {}
-            },
+            "status": "partial",
             "metadata": {
                 "date": "2025-02",
-                "description": "Go programming language",
+                "description": "Go programming language with built-in crypto",
+                "notes": "Go 1.24 has production-ready hybrid ML-KEM key exchange for TLS 1.3 and QUIC (X25519 + ML-KEM). Independent implementation (no OpenSSL dependency). ML-DSA support expected in Go 1.27; hybrid authentication not yet available.",
                 "sources": [
                     {
                         "label": "Go 1.24 Release",
@@ -452,327 +797,217 @@
                         "url": "https://go.dev/doc/go1.24#crypto-mlkem"
                     }
                 ],
-                "notes": "PQC support: Go 1.23 introduced X25519Kyber768Draft00 in crypto/tls. Go 1.24 added dedicated crypto/mlkem package implementing FIPS 203. Production-ready PQC for TLS and QUIC. MLDSA support seems likely in Go 1.27."
-            }
-        },
-        "boringssl": {
-            "id": "boringssl",
-            "type": "crypto_library",
-            "name": "BoringSSL",
-            "layer": 1,
-            "depends_on": [
-                "nist-fips-203"
-            ],
-            "status": {
-                "ml_kem_api": "available",
-                "ml_kem_protocols": {
-                    "tls": "available",
-                    "quic": "available"
-                },
-                "ml_dsa_api": "experimental",
-                "ml_dsa_protocols": {}
-            },
-            "metadata": {
-                "date": "2024-08",
-                "description": "Google's OpenSSL fork for Chrome/Android",
-                "protocols": {
-                    "TLS 1.3": "available",
-                    "QUIC": "available"
-                },
-                "sources": [
-                    {
-                        "label": "BoringSSL Commit",
-                        "url": "https://boringssl.googlesource.com/boringssl/+/7fb4d3da5082225c7180267e9daad291887ce982"
-                    }
-                ],
-                "notes": "X25519MLKEM768 hybrid key exchange committed August 27, 2024. Integrated into Chrome 131 (stable November 6, 2024). ML-DSA has interfaces but not stable. Internal Google project, not intended for general external use."
-            }
-        },
-        "bouncy-castle": {
-            "id": "bouncy-castle",
-            "type": "crypto_library",
-            "name": "Bouncy Castle",
-            "layer": 1,
-            "version": "1.78+",
-            "depends_on": [
-                "nist-fips-203",
-                "nist-fips-204"
-            ],
-            "status": {
-                "ml_kem_api": "available",
-                "ml_kem_protocols": {},
-                "ml_dsa_api": "available",
-                "ml_dsa_protocols": {}
-            },
-            "metadata": {
-                "date": "2024-09",
-                "description": "Java cryptography library",
-                "sources": [
-                    {
-                        "label": "Bouncy Castle",
-                        "url": "https://www.bouncycastle.org/"
-                    }
-                ],
-                "notes": "API support for ML-KEM and ML-DSA"
-            }
-        },
-        "rustls": {
-            "id": "rustls",
-            "type": "crypto_library",
-            "name": "rustls",
-            "layer": 1,
-            "version": "0.23+",
-            "depends_on": [
-                "nist-fips-203"
-            ],
-            "status": {
-                "ml_kem_api": "experimental",
-                "ml_kem_protocols": {
-                    "tls": "experimental"
-                },
-                "ml_dsa_api": "not_available",
-                "ml_dsa_protocols": {}
-            },
-            "metadata": {
-                "date": "2024-10",
-                "description": "Rust TLS library",
-                "protocols": {
-                    "TLS 1.3": "experimental"
-                },
-                "sources": [
-                    {
-                        "label": "rustls GitHub",
-                        "url": "https://github.com/rustls/rustls"
-                    }
-                ],
-                "notes": "Experimental PQC TLS support via rustls-post-quantum"
-            }
-        },
-        "wolfssl": {
-            "id": "wolfssl",
-            "type": "crypto_library",
-            "name": "wolfSSL",
-            "layer": 1,
-            "version": "5.7+",
-            "depends_on": [
-                "nist-fips-203",
-                "nist-fips-204"
-            ],
-            "status": {
-                "ml_kem_api": "available",
-                "ml_kem_protocols": {
-                    "tls": "available",
-                    "dtls": "available"
-                },
-                "ml_dsa_api": "available",
-                "ml_dsa_protocols": {}
-            },
-            "metadata": {
-                "date": "2024-06",
-                "description": "Embedded-focused crypto library",
-                "protocols": {
-                    "TLS 1.3": "available",
-                    "DTLS": "available"
-                },
-                "sources": [
-                    {
-                        "label": "wolfSSL",
-                        "url": "https://www.wolfssl.com/"
-                    },
-                    {
-                        "label": "PQC Solutions Blog",
-                        "url": "https://www.wolfssl.com/wolfssl-unveils-post-quantum-cryptography-and-security-solutions-at-embedded-world-2025/"
-                    }
-                ],
-                "notes": "Full ML-KEM and ML-DSA implementation with TLS 1.3 support. Among the first crypto providers to support CNSA 2.0 compliance, particularly for embedded systems and IoT. Includes hash-based signatures (LMS, XMSS) for firmware signing."
+                "latestRelease": {
+                    "version": "1.26.0",
+                    "date": null,
+                    "url": "https://go.dev/doc/go1.26.0",
+                    "tag": "go1.26.0",
+                    "hasPqcMention": false
+                }
             }
         },
         "java-jdk": {
             "id": "java-jdk",
-            "type": "runtime",
+            "type": "managed_runtime",
             "name": "Java JDK",
-            "layer": 2,
+            "layer": 5,
             "version": "24+",
-            "depends_on": [
-                "bouncy-castle"
-            ],
-            "status": {
-                "ml_kem_api": "available",
-                "ml_kem_protocols": {},
-                "ml_dsa_api": "available",
-                "ml_dsa_protocols": {}
-            },
+            "status": "partial",
             "metadata": {
                 "date": "2025-03-18",
-                "est_tls_date": "2026-Q4",
                 "description": "Java runtime environment",
-                "protocols": {
-                    "TLS 1.3": "not_available"
-                },
+                "notes": "JDK 24 (GA March 2025) introduced native APIs for ML-KEM and ML-DSA in core Java security. JDK 25 LTS (September 2025) inherits these. Bouncy Castle provider adds additional PQC algorithm support. Hybrid TLS integration not yet available in JSSE -- applications cannot negotiate hybrid PQC key exchange natively.",
                 "sources": [
                     {
                         "label": "JEP 497",
                         "url": "https://openjdk.org/jeps/497"
                     }
-                ],
-                "notes": "JDK 24 (GA: March 18, 2025) introduced native APIs for ML-KEM and ML-DSA in core Java security. Short-term non-LTS release, succeeded by JDK 25 LTS in September 2025. Also uses Bouncy Castle provider for additional PQC support."
+                ]
             }
         },
         "rust-lang": {
             "id": "rust-lang",
-            "type": "runtime",
+            "type": "compiled_language",
             "name": "Rust",
-            "layer": 2,
+            "layer": 4,
             "version": "1.80+",
-            "depends_on": [
-                "rustls"
-            ],
-            "status": {
-                "ml_kem_api": "experimental",
-                "ml_kem_protocols": {
-                    "tls": "experimental"
-                },
-                "ml_dsa_api": "planned",
-                "ml_dsa_protocols": {}
-            },
+            "status": "partial",
             "metadata": {
                 "date": "2024-10",
                 "description": "Rust programming language",
+                "notes": "ML-KEM crates available: libcrux-ml-kem (SIMD-accelerated), enc_rust (pure Rust). Rustls added experimental X25519 + ML-KEM hybrid key exchange. ML-DSA planned for enc_rust. All current PQC TLS usage is hybrid only.",
                 "sources": [
                     {
                         "label": "Rust Lang",
                         "url": "https://www.rust-lang.org/"
                     },
                     {
-                        "label": "libcrux GitHub",
+                        "label": "libcrux",
                         "url": "https://github.com/cryspen/libcrux"
                     }
                 ],
-                "notes": "ML-KEM crates available: libcrux-ml-kem (SIMD-accelerated), enc_rust (pure Rust). Rustls added experimental Kyber/X25519 hybrid key exchange in 2024, now in main crate with prefer-post-quantum feature flag. ML-DSA planned for enc_rust."
+                "latestRelease": {
+                    "version": "1.93.1",
+                    "date": "2026-02-12",
+                    "url": "https://github.com/rust-lang/rust/releases/tag/1.93.1",
+                    "tag": "1.93.1",
+                    "hasPqcMention": false
+                }
             }
         },
         "dotnet": {
             "id": "dotnet",
-            "type": "runtime",
+            "type": "managed_runtime",
             "name": ".NET",
-            "layer": 2,
+            "layer": 5,
             "version": "10+",
-            "depends_on": [
-                "openssl-3.5"
-            ],
-            "status": {
-                "ml_kem_api": "available",
-                "ml_kem_protocols": {
-                    "tls": "available"
-                },
-                "ml_dsa_api": "available",
-                "ml_dsa_protocols": {}
-            },
+            "status": "available",
             "metadata": {
                 "date": "2025-11",
                 "description": ".NET runtime",
-                "protocols": {
-                    "TLS 1.3": "available"
-                },
+                "notes": ".NET 10 (November 2025) introduced native MLKem and MLDsa classes for standalone PQC operations. Inherits hybrid TLS support from OpenSSL on Linux. Windows CNG integration includes native ML-KEM and ML-DSA algorithm access. Hybrid TLS negotiation depends on the underlying OS crypto provider.",
                 "sources": [
                     {
                         "label": ".NET Documentation",
                         "url": "https://dotnet.microsoft.com/"
                     },
                     {
-                        "label": "MLKem API Reference",
+                        "label": "MLKem API",
                         "url": "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.mlkem"
                     }
                 ],
-                "notes": ".NET 10 (November 2025) introduced native MLKem and MLDsa classes. These were finalized through Preview 6 and 7 releases. Inherits OpenSSL TLS support on Linux. Windows CNG integration includes native ML-KEM and ML-DSA support."
+                "latestRelease": {
+                    "version": "10.0.3",
+                    "date": "2026-02-10",
+                    "url": "https://github.com/dotnet/runtime/releases/tag/v10.0.3",
+                    "tag": "v10.0.3",
+                    "hasPqcMention": false
+                }
             }
         },
         "ruby": {
             "id": "ruby",
-            "type": "runtime",
+            "type": "dynamic_language",
             "name": "Ruby 3.x",
-            "layer": 2,
+            "layer": 6,
             "version": "3.3",
-            "depends_on": [
-                "openssl-3.5"
-            ],
-            "inherits_status": true,
-            "status": {
-                "ml_kem_api": "available",
-                "ml_kem_protocols": {
-                    "tls": "available"
-                },
-                "ml_dsa_api": "available",
-                "ml_dsa_protocols": {}
-            },
+            "status": "partial",
             "metadata": {
                 "date": "2025-10",
                 "description": "Ruby programming language",
+                "notes": "No native PQC libraries. Relies on ruby/openssl gem bindings to system OpenSSL. Hybrid PQC key exchange available when linked with OpenSSL 3.5+ -- inherits hybrid support transparently.",
                 "sources": [
                     {
                         "label": "Ruby Lang",
                         "url": "https://www.ruby-lang.org/"
                     },
                     {
-                        "label": "ruby/openssl GitHub",
+                        "label": "ruby/openssl",
                         "url": "https://github.com/ruby/openssl"
                     }
                 ],
-                "notes": "No native PQC libraries. Relies on ruby/openssl gem bindings to system OpenSSL. When linked with OpenSSL 3.5+, PQC-capable TLS 1.3 connections become available. Support depends on system configuration and gem bindings."
+                "latestRelease": {
+                    "version": "3.4.8",
+                    "date": "2025-12-17",
+                    "url": "https://github.com/ruby/ruby/releases/tag/v3_4_8",
+                    "tag": "v3_4_8",
+                    "hasPqcMention": false
+                }
             }
         },
         "php": {
             "id": "php",
-            "type": "runtime",
+            "type": "dynamic_language",
             "name": "PHP 8.x",
-            "layer": 2,
+            "layer": 6,
             "version": "8.3",
-            "depends_on": [
-                "openssl-3.5"
-            ],
-            "inherits_status": true,
-            "status": {
-                "ml_kem_api": "available",
-                "ml_kem_protocols": {
-                    "tls": "available"
-                },
-                "ml_dsa_api": "available",
-                "ml_dsa_protocols": {}
-            },
+            "status": "partial",
             "metadata": {
                 "date": "2025-10",
                 "description": "PHP programming language",
+                "notes": "No native PQC libraries. Entirely dependent on system OpenSSL via openssl extension. Hybrid PQC key exchange available when system provides OpenSSL 3.5+ -- inherits hybrid support transparently.",
                 "sources": [
                     {
                         "label": "PHP.net",
                         "url": "https://www.php.net/"
                     },
                     {
-                        "label": "OpenSSL Manual",
+                        "label": "OpenSSL Extension",
                         "url": "https://www.php.net/manual/en/book.openssl.php"
                     }
                 ],
-                "notes": "No native or pure-PHP PQC libraries. Entirely dependent on system OpenSSL via openssl extension. With OpenSSL 3.5+ configured, PHP can leverage PQC for TLS 1.3. Support is indirect and requires proper system configuration."
+                "latestRelease": {
+                    "version": "8.5.3",
+                    "date": "2026-02-12",
+                    "url": "https://github.com/php/php-src/releases/tag/php-8.5.3",
+                    "tag": "php-8.5.3",
+                    "hasPqcMention": false
+                }
+            }
+        },
+        "deno": {
+            "id": "deno",
+            "type": "dynamic_language",
+            "name": "Deno",
+            "layer": 6,
+            "version": "2.x",
+            "status": "partial",
+            "metadata": {
+                "date": "2025-10",
+                "description": "Secure JavaScript/TypeScript runtime built on V8 and BoringSSL",
+                "notes": "Delegates all cryptography to BoringSSL. Hybrid PQC TLS key exchange (X25519 + ML-KEM) inherited from BoringSSL when available. No independent PQC implementation path -- fully delegated to the underlying crypto engine.",
+                "sources": [
+                    {
+                        "label": "Deno",
+                        "url": "https://deno.land/"
+                    }
+                ],
+                "latestRelease": {
+                    "version": "2.6.9",
+                    "date": "2026-02-10",
+                    "url": "https://github.com/denoland/deno/releases/tag/v2.6.9",
+                    "tag": "v2.6.9",
+                    "hasPqcMention": false
+                }
+            }
+        },
+        "bun": {
+            "id": "bun",
+            "type": "dynamic_language",
+            "name": "Bun",
+            "layer": 6,
+            "version": "1.x",
+            "status": "partial",
+            "metadata": {
+                "date": "2025-10",
+                "description": "Fast JavaScript/TypeScript runtime built on JavaScriptCore and BoringSSL",
+                "notes": "Delegates all cryptography to BoringSSL. Hybrid PQC TLS key exchange (X25519 + ML-KEM) inherited from BoringSSL when available. No independent PQC implementation path -- fully delegated to the underlying crypto engine.",
+                "sources": [
+                    {
+                        "label": "Bun",
+                        "url": "https://bun.sh/"
+                    }
+                ],
+                "latestRelease": {
+                    "version": "1.3.9",
+                    "date": "2026-02-08",
+                    "url": "https://github.com/oven-sh/bun/releases/tag/bun-v1.3.9",
+                    "tag": "bun-v1.3.9",
+                    "hasPqcMention": false
+                }
             }
         },
         "openssh": {
             "id": "openssh",
             "type": "infrastructure",
             "name": "OpenSSH",
-            "layer": 3,
-            "inherits_status": true,
-            "status": {
-                "ml_kem_api": "available",
-                "ml_kem_protocols": {
-                    "ssh": "available"
-                },
-                "ml_dsa_api": "not_available",
-                "ml_dsa_protocols": {}
-            },
+            "layer": 7,
+            "version": "10.0+",
+            "status": "available",
             "metadata": {
-                "version": "10.0+",
                 "date": "2025-04",
                 "description": "Secure shell protocol implementation",
+                "notes": "OpenSSH 10.0 (April 2025) uses mlkem768x25519-sha256 as default hybrid key exchange, combining ML-KEM with X25519 via OpenSSL 3.5. Key exchange is hybrid PQC; authentication (host keys, user keys) remains classical RSA/Ed25519. Hybrid or PQC-only signatures not yet implemented.",
                 "sources": [
                     {
                         "label": "OpenSSH 10.0 Release",
@@ -783,162 +1018,549 @@
                         "url": "https://www.openssh.com/releasenotes.html"
                     }
                 ],
-                "notes": "OpenSSH 10.0 (April 2025) uses mlkem768x25519-sha256 as default hybrid key exchange, combining ML-KEM from OpenSSL 3.5+ with X25519. SSH protocol uses custom KEX (not TLS). ML-DSA for signatures not yet implemented, still using RSA/ECDSA. OpenSSH 9.0 (2024) used independent sntrup761x25519 implementation based on draft-ietf-sshm-ntruprime-ssh."
+                "latestRelease": {
+                    "version": "10.2p1",
+                    "date": null,
+                    "url": "https://github.com/openssh/openssh-portable/releases/tag/V_10_2_P1",
+                    "tag": "V_10_2_P1",
+                    "hasPqcMention": false
+                }
             }
         },
         "nginx": {
             "id": "nginx",
             "type": "infrastructure",
             "name": "nginx",
-            "layer": 3,
-            "inherits_status": true,
-            "status": {
-                "ml_kem_api": "available",
-                "ml_kem_protocols": {
-                    "tls": "available"
-                },
-                "ml_dsa_api": "available",
-                "ml_dsa_protocols": {}
-            },
+            "layer": 7,
+            "version": "1.26+",
+            "status": "available",
             "metadata": {
-                "version": "1.26+",
                 "date": "2024-05",
                 "description": "High-performance web server and reverse proxy",
+                "notes": "Inherits hybrid PQC TLS 1.3 key exchange when compiled with OpenSSL 3.5+. Requires ssl_conf_command to enable hybrid cipher suites (X25519 + ML-KEM). No code changes needed in nginx itself -- hybrid support is transparent from OpenSSL.",
                 "sources": [
                     {
                         "label": "nginx.org",
                         "url": "https://nginx.org/"
-                    },
-                    {
-                        "label": "HTTPS Configuration",
-                        "url": "https://nginx.org/en/docs/http/configuring_https_servers.html"
                     }
-                ],
-                "notes": "Inherits PQC TLS 1.3 support when compiled with OpenSSL 3.5+. No code changes required in nginx itself. Requires ssl_conf_command to enable hybrid cipher suites. Widely used in enterprise reverse proxy and load balancing."
+                ]
             }
         },
         "apache-httpd": {
             "id": "apache-httpd",
             "type": "infrastructure",
             "name": "Apache HTTP Server",
-            "layer": 3,
-            "inherits_status": true,
-            "status": {
-                "ml_kem_api": "available",
-                "ml_kem_protocols": {
-                    "tls": "available"
-                },
-                "ml_dsa_api": "available",
-                "ml_dsa_protocols": {}
-            },
+            "layer": 7,
+            "version": "2.4.62+",
+            "status": "available",
             "metadata": {
-                "version": "2.4.62+",
                 "date": "2024-07",
-                "description": "Apache web server",
+                "description": "Apache web server with mod_ssl",
+                "notes": "Inherits hybrid PQC TLS 1.3 key exchange when compiled with OpenSSL 3.5+. SSLCipherSuite configuration may need updates to enable hybrid KEMs (X25519 + ML-KEM).",
                 "sources": [
                     {
                         "label": "Apache HTTP Server",
                         "url": "https://httpd.apache.org/"
                     },
                     {
-                        "label": "mod_ssl Documentation",
+                        "label": "mod_ssl",
                         "url": "https://httpd.apache.org/docs/2.4/mod/mod_ssl.html"
                     }
-                ],
-                "notes": "Inherits PQC TLS 1.3 support when compiled with OpenSSL 3.5+. SSLCipherSuite configuration may need updates for hybrid KEMs. Widely deployed in enterprise environments."
+                ]
             }
         },
         "haproxy": {
             "id": "haproxy",
             "type": "infrastructure",
             "name": "HAProxy",
-            "layer": 3,
-            "inherits_status": true,
-            "status": {
-                "ml_kem_api": "available",
-                "ml_kem_protocols": {
-                    "tls": "available"
-                },
-                "ml_dsa_api": "available",
-                "ml_dsa_protocols": {}
-            },
+            "layer": 7,
+            "version": "2.8+",
+            "status": "available",
             "metadata": {
-                "version": "2.8+",
                 "date": "2023-11",
                 "description": "High-performance TCP/HTTP load balancer",
+                "notes": "Inherits hybrid PQC TLS 1.3 key exchange when compiled with OpenSSL 3.5+. Used for load balancing and hybrid TLS termination in enterprise infrastructure.",
                 "sources": [
                     {
                         "label": "HAProxy",
                         "url": "https://www.haproxy.org/"
-                    },
-                    {
-                        "label": "Configuration Manual",
-                        "url": "https://www.haproxy.com/documentation/haproxy-configuration-manual/latest/"
                     }
                 ],
-                "notes": "Inherits PQC TLS 1.3 support when compiled with OpenSSL 3.5+. Used extensively for load balancing and TLS termination in enterprise infrastructure. Configuration updates may be needed for hybrid cipher suites."
+                "latestRelease": {
+                    "version": "3.3.0",
+                    "date": null,
+                    "url": "https://github.com/haproxy/haproxy/releases/tag/v3.3.0",
+                    "tag": "v3.3.0",
+                    "hasPqcMention": false
+                }
             }
         },
         "curl": {
             "id": "curl",
             "type": "infrastructure",
             "name": "curl/libcurl",
-            "layer": 3,
-            "inherits_status": true,
-            "status": {
-                "ml_kem_api": "available",
-                "ml_kem_protocols": {
-                    "tls": "available"
-                },
-                "ml_dsa_api": "available",
-                "ml_dsa_protocols": {}
-            },
+            "layer": 7,
+            "version": "8.5+",
+            "status": "available",
             "metadata": {
-                "version": "8.5+",
                 "date": "2024-01",
                 "description": "Command-line tool and library for transferring data",
+                "notes": "Inherits hybrid PQC TLS 1.3 key exchange when compiled with OpenSSL 3.5+. libcurl is embedded in countless applications. Automatic hybrid PQC for any app using libcurl with updated OpenSSL.",
                 "sources": [
                     {
                         "label": "curl.se",
                         "url": "https://curl.se/"
-                    },
-                    {
-                        "label": "SSL Certificates",
-                        "url": "https://curl.se/docs/sslcerts.html"
                     }
                 ],
-                "notes": "Inherits PQC TLS 1.3 support when compiled with OpenSSL 3.5+. libcurl is embedded in countless applications and scripts. Automatic PQC support for any application using libcurl with updated OpenSSL."
+                "latestRelease": {
+                    "version": "8.18.0",
+                    "date": "2026-01-07",
+                    "url": "https://github.com/curl/curl/releases/tag/curl-8_18_0",
+                    "tag": "curl-8_18_0",
+                    "hasPqcMention": false
+                }
             }
         },
         "postgresql": {
             "id": "postgresql",
             "type": "infrastructure",
             "name": "PostgreSQL",
-            "layer": 3,
-            "inherits_status": true,
-            "status": {
-                "ml_kem_api": "available",
-                "ml_kem_protocols": {
-                    "tls": "available"
-                },
-                "ml_dsa_api": "available",
-                "ml_dsa_protocols": {}
-            },
+            "layer": 7,
+            "version": "17+",
+            "status": "available",
             "metadata": {
-                "version": "17+",
                 "date": "2024-09",
                 "description": "Open-source relational database",
+                "notes": "Inherits hybrid PQC TLS 1.3 key exchange when compiled with OpenSSL 3.5+. Database client-server connections can use hybrid PQC cipher suites for quantum-resistant data-in-transit protection.",
                 "sources": [
                     {
                         "label": "PostgreSQL",
                         "url": "https://www.postgresql.org/"
                     },
                     {
-                        "label": "SSL/TCP Documentation",
+                        "label": "SSL/TLS Docs",
                         "url": "https://www.postgresql.org/docs/current/ssl-tcp.html"
                     }
+                ]
+            }
+        },
+        "openshift": {
+            "id": "openshift",
+            "type": "platform",
+            "name": "OpenShift",
+            "layer": 8,
+            "version": "4.x",
+            "status": "partial",
+            "metadata": {
+                "date": "2025-10",
+                "description": "Red Hat enterprise Kubernetes platform",
+                "notes": "Control plane uses Go (ML-KEM available in Go 1.24+). Runs on RHEL with OpenSSL providing the crypto foundation. HAProxy-based ingress router inherits PQC TLS when compiled with OpenSSL 3.5+. Identity (X.509 cluster PKI) and image signing (Sigstore/cosign) remain classical.",
+                "sources": [
+                    {
+                        "label": "OpenShift",
+                        "url": "https://www.redhat.com/en/technologies/cloud-computing/openshift"
+                    }
                 ],
-                "notes": "Inherits PQC TLS 1.3 support when compiled with OpenSSL 3.5+. Database client-server connections can use PQC cipher suites. Widely deployed in enterprise environments and shipped with RHEL."
+                "pqc_surfaces": {
+                    "transport": {
+                        "status": "partial",
+                        "note": "Go 1.24+ ML-KEM in TLS handshake for API server and inter-component communication"
+                    },
+                    "identity": {
+                        "status": "not_available",
+                        "note": "X.509 certificate signing still uses classical RSA/ECDSA"
+                    },
+                    "ingress": {
+                        "status": "partial",
+                        "note": "HAProxy + OpenSSL 3.5+ path exists for hybrid PQC TLS termination"
+                    },
+                    "secrets": {
+                        "status": "n/a",
+                        "note": "etcd encryption at rest uses AES-256, not PQC-impacted"
+                    },
+                    "signing": {
+                        "status": "not_available",
+                        "note": "Sigstore/cosign image signing uses classical algorithms"
+                    }
+                }
+            }
+        },
+        "kubernetes": {
+            "id": "kubernetes",
+            "type": "platform",
+            "name": "Kubernetes",
+            "layer": 8,
+            "version": "1.32+",
+            "status": "partial",
+            "metadata": {
+                "date": "2025-12",
+                "description": "Open-source container orchestration platform",
+                "notes": "Written in Go. Go 1.24+ provides native ML-KEM hybrid key exchange for TLS connections between API server, kubelet, etcd, and controllers. Cluster PKI (certificate signing) remains classical RSA/ECDSA. Ingress PQC readiness depends on the chosen ingress controller.",
+                "sources": [
+                    {
+                        "label": "Kubernetes",
+                        "url": "https://kubernetes.io/"
+                    },
+                    {
+                        "label": "GitHub",
+                        "url": "https://github.com/kubernetes/kubernetes"
+                    }
+                ],
+                "pqc_surfaces": {
+                    "transport": {
+                        "status": "partial",
+                        "note": "Go 1.24+ ML-KEM hybrid key exchange for internal TLS"
+                    },
+                    "identity": {
+                        "status": "not_available",
+                        "note": "Cluster PKI still uses classical RSA/ECDSA certificate signing"
+                    },
+                    "ingress": {
+                        "status": "partial",
+                        "note": "Depends on ingress controller and its crypto library"
+                    },
+                    "secrets": {
+                        "status": "n/a",
+                        "note": "Secret encryption at rest uses AES, not PQC-impacted"
+                    }
+                },
+                "latestRelease": {
+                    "version": "1.35.1",
+                    "date": "2026-02-10",
+                    "url": "https://github.com/kubernetes/kubernetes/releases/tag/v1.35.1",
+                    "tag": "v1.35.1",
+                    "hasPqcMention": false
+                }
+            }
+        },
+        "ansible-aap": {
+            "id": "ansible-aap",
+            "type": "platform",
+            "name": "Ansible Automation Platform",
+            "layer": 8,
+            "version": "2.x",
+            "status": "not_available",
+            "metadata": {
+                "date": "2025-10",
+                "description": "Red Hat enterprise automation platform",
+                "notes": "Written in Python, which has no native PQC TLS support. Runs on RHEL and delegates crypto to OpenSSL via the OS, but Python's ssl module does not yet expose PQC cipher suites. All transport and identity surfaces remain classical.",
+                "sources": [
+                    {
+                        "label": "Ansible",
+                        "url": "https://www.redhat.com/en/technologies/management/ansible"
+                    }
+                ],
+                "pqc_surfaces": {
+                    "transport": {
+                        "status": "not_available",
+                        "note": "Python ssl module does not expose PQC cipher suites"
+                    },
+                    "identity": {
+                        "status": "not_available",
+                        "note": "Token and certificate handling uses classical algorithms"
+                    },
+                    "secrets": {
+                        "status": "n/a",
+                        "note": "Vault encryption uses AES, not PQC-impacted"
+                    }
+                }
+            }
+        },
+        "istio": {
+            "id": "istio",
+            "type": "platform",
+            "name": "Istio / Envoy",
+            "layer": 8,
+            "version": "1.24+",
+            "status": "partial",
+            "metadata": {
+                "date": "2025-12",
+                "description": "Service mesh with Envoy proxy data plane",
+                "notes": "Istio control plane (istiod) is written in Go with ML-KEM available in Go 1.24+. Envoy proxy data plane uses BoringSSL which has ML-KEM and ML-DSA support, enabling hybrid PQC mTLS between services. Certificate signing via Citadel still uses classical algorithms.",
+                "sources": [
+                    {
+                        "label": "Istio",
+                        "url": "https://istio.io/"
+                    },
+                    {
+                        "label": "Envoy",
+                        "url": "https://www.envoyproxy.io/"
+                    }
+                ],
+                "pqc_surfaces": {
+                    "transport": {
+                        "status": "partial",
+                        "note": "Envoy uses BoringSSL with ML-KEM for hybrid PQC mTLS between services"
+                    },
+                    "identity": {
+                        "status": "not_available",
+                        "note": "Citadel certificate signing still uses classical RSA/ECDSA"
+                    },
+                    "ingress": {
+                        "status": "partial",
+                        "note": "Envoy gateway uses BoringSSL with PQC-capable TLS termination"
+                    }
+                },
+                "latestRelease": {
+                    "version": "1.28.3",
+                    "date": "2026-01-20",
+                    "url": "https://github.com/istio/istio/releases/tag/1.28.3",
+                    "tag": "1.28.3",
+                    "hasPqcMention": false
+                }
+            }
+        },
+        "keycloak": {
+            "id": "keycloak",
+            "type": "platform",
+            "name": "Keycloak",
+            "layer": 8,
+            "version": "26+",
+            "status": "partial",
+            "metadata": {
+                "date": "2025-12",
+                "description": "Open-source identity and access management",
+                "notes": "Java-based identity provider. Can use Bouncy Castle as a JCA provider which supports ML-KEM and ML-DSA, enabling hybrid PQC for TLS transport and potentially PQC token signing. Default JDK crypto provider does not yet include PQC algorithms (expected in Java 24+).",
+                "sources": [
+                    {
+                        "label": "Keycloak",
+                        "url": "https://www.keycloak.org/"
+                    },
+                    {
+                        "label": "GitHub",
+                        "url": "https://github.com/keycloak/keycloak"
+                    }
+                ],
+                "pqc_surfaces": {
+                    "transport": {
+                        "status": "partial",
+                        "note": "Java TLS with Bouncy Castle provider enables hybrid PQC key exchange"
+                    },
+                    "identity": {
+                        "status": "partial",
+                        "note": "Bouncy Castle supports ML-DSA for token and certificate signing"
+                    },
+                    "secrets": {
+                        "status": "n/a",
+                        "note": "Credential storage uses hashing/AES, not PQC-impacted"
+                    }
+                },
+                "latestRelease": {
+                    "version": "26.5.3",
+                    "date": "2026-02-10",
+                    "url": "https://github.com/keycloak/keycloak/releases/tag/26.5.3",
+                    "tag": "26.5.3",
+                    "hasPqcMention": false
+                }
+            }
+        },
+        "vault": {
+            "id": "vault",
+            "type": "platform",
+            "name": "HashiCorp Vault",
+            "layer": 8,
+            "version": "1.18+",
+            "status": "partial",
+            "metadata": {
+                "date": "2025-10",
+                "description": "Secrets management and data protection platform",
+                "notes": "Written in Go. Transport layer benefits from Go 1.24+ ML-KEM hybrid TLS. However, the PKI secrets engine (certificate signing), transit engine (encryption/signing), and seal/unseal operations all use classical algorithms. Vault's core secret management functions are not yet PQC-ready.",
+                "sources": [
+                    {
+                        "label": "Vault",
+                        "url": "https://www.vaultproject.io/"
+                    },
+                    {
+                        "label": "GitHub",
+                        "url": "https://github.com/hashicorp/vault"
+                    }
+                ],
+                "pqc_surfaces": {
+                    "transport": {
+                        "status": "partial",
+                        "note": "Go 1.24+ ML-KEM hybrid key exchange for API and cluster TLS"
+                    },
+                    "identity": {
+                        "status": "not_available",
+                        "note": "PKI secrets engine uses classical RSA/ECDSA for certificate signing"
+                    },
+                    "secrets": {
+                        "status": "not_available",
+                        "note": "Seal/unseal and transit engine use classical encryption and signing"
+                    }
+                },
+                "latestRelease": {
+                    "version": "1.21.2",
+                    "date": "2026-01-07",
+                    "url": "https://github.com/hashicorp/vault/releases/tag/v1.21.2",
+                    "tag": "v1.21.2",
+                    "hasPqcMention": false
+                }
+            }
+        },
+        "kafka": {
+            "id": "kafka",
+            "type": "platform",
+            "name": "Apache Kafka",
+            "layer": 8,
+            "version": "3.9+",
+            "status": "partial",
+            "metadata": {
+                "date": "2025-10",
+                "description": "Distributed event streaming platform",
+                "notes": "Java-based. TLS for broker-to-broker and client-to-broker communication can use OpenSSL via Netty-tcnative for hybrid PQC key exchange. Alternatively, Bouncy Castle JCA provider adds PQC cipher suites. mTLS certificate authentication still uses classical signing algorithms.",
+                "sources": [
+                    {
+                        "label": "Kafka",
+                        "url": "https://kafka.apache.org/"
+                    },
+                    {
+                        "label": "GitHub",
+                        "url": "https://github.com/apache/kafka"
+                    }
+                ],
+                "pqc_surfaces": {
+                    "transport": {
+                        "status": "partial",
+                        "note": "Java TLS via OpenSSL (Netty-tcnative) or Bouncy Castle for hybrid PQC"
+                    },
+                    "identity": {
+                        "status": "not_available",
+                        "note": "mTLS certificates still use classical RSA/ECDSA signing"
+                    }
+                }
+            }
+        },
+        "quay": {
+            "id": "quay",
+            "type": "platform",
+            "name": "Quay",
+            "layer": 8,
+            "version": "3.x",
+            "status": "not_available",
+            "metadata": {
+                "date": "2025-10",
+                "description": "Container image registry",
+                "notes": "Backend written in Python (no native PQC TLS) with some Go components. Runs on RHEL. Python's ssl module does not yet expose PQC cipher suites, and container image signing uses classical algorithms. PQC readiness blocked by Python ecosystem limitations.",
+                "sources": [
+                    {
+                        "label": "Quay",
+                        "url": "https://www.redhat.com/en/technologies/cloud-computing/quay"
+                    }
+                ],
+                "pqc_surfaces": {
+                    "transport": {
+                        "status": "not_available",
+                        "note": "Python lacks native PQC TLS support"
+                    },
+                    "signing": {
+                        "status": "not_available",
+                        "note": "Container image signing uses classical algorithms"
+                    }
+                }
+            }
+        },
+        "aws-eks": {
+            "id": "aws-eks",
+            "type": "platform",
+            "name": "AWS EKS",
+            "layer": 8,
+            "version": "1.32+",
+            "status": "partial",
+            "metadata": {
+                "date": "2025-12",
+                "description": "Amazon Elastic Kubernetes Service",
+                "notes": "Managed Kubernetes on AWS. AWS infrastructure uses AWS-LC (s2n-tls), a BoringSSL fork with ML-KEM hybrid key exchange support. ALB/NLB load balancers support TLS 1.3 PQC via s2n-tls. EKS-issued cluster certificates still use classical signing.",
+                "sources": [
+                    {
+                        "label": "AWS EKS",
+                        "url": "https://aws.amazon.com/eks/"
+                    },
+                    {
+                        "label": "AWS PQC",
+                        "url": "https://aws.amazon.com/security/post-quantum-cryptography/"
+                    }
+                ],
+                "pqc_surfaces": {
+                    "transport": {
+                        "status": "partial",
+                        "note": "AWS-LC/s2n-tls supports ML-KEM hybrid key exchange"
+                    },
+                    "identity": {
+                        "status": "not_available",
+                        "note": "EKS-issued certificates still use classical RSA/ECDSA"
+                    },
+                    "ingress": {
+                        "status": "partial",
+                        "note": "ALB supports TLS 1.3 PQC via s2n-tls"
+                    }
+                }
+            }
+        },
+        "gke": {
+            "id": "gke",
+            "type": "platform",
+            "name": "Google GKE",
+            "layer": 8,
+            "version": "1.32+",
+            "status": "partial",
+            "metadata": {
+                "date": "2025-12",
+                "description": "Google Kubernetes Engine",
+                "notes": "Managed Kubernetes on Google Cloud. Google infrastructure uses BoringSSL with ML-KEM support across Google Front End (GFE) and Cloud Load Balancing. GKE cluster certificates still use classical signing algorithms.",
+                "sources": [
+                    {
+                        "label": "GKE",
+                        "url": "https://cloud.google.com/kubernetes-engine"
+                    },
+                    {
+                        "label": "Google PQC",
+                        "url": "https://cloud.google.com/blog/products/identity-security/how-google-is-preparing-for-a-post-quantum-world"
+                    }
+                ],
+                "pqc_surfaces": {
+                    "transport": {
+                        "status": "partial",
+                        "note": "BoringSSL with ML-KEM in GFE and Cloud Load Balancing"
+                    },
+                    "identity": {
+                        "status": "not_available",
+                        "note": "GKE cluster certificates still use classical signing"
+                    }
+                }
+            }
+        },
+        "azure-aks": {
+            "id": "azure-aks",
+            "type": "platform",
+            "name": "Azure AKS",
+            "layer": 8,
+            "version": "1.32+",
+            "status": "partial",
+            "metadata": {
+                "date": "2025-12",
+                "description": "Azure Kubernetes Service",
+                "notes": "Managed Kubernetes on Azure. Azure infrastructure uses SymCrypt/CNG with ML-KEM support for TLS. Azure PKI and AKS cluster certificates still use classical signing algorithms.",
+                "sources": [
+                    {
+                        "label": "AKS",
+                        "url": "https://azure.microsoft.com/en-us/products/kubernetes-service"
+                    },
+                    {
+                        "label": "Microsoft PQC",
+                        "url": "https://www.microsoft.com/en-us/research/project/post-quantum-cryptography/"
+                    }
+                ],
+                "pqc_surfaces": {
+                    "transport": {
+                        "status": "partial",
+                        "note": "SymCrypt with ML-KEM for hybrid PQC TLS"
+                    },
+                    "identity": {
+                        "status": "not_available",
+                        "note": "Azure PKI still uses classical certificate signing"
+                    }
+                }
             }
         }
     }
