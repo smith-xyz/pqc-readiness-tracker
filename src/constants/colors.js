@@ -21,7 +21,8 @@ export const LAYER_COLORS = {
   5: '#ff6644',
   6: '#66ddff',
   7: '#ff4466',
-  8: '#ffcc00'
+  8: '#ffcc00',
+  9: '#ff66aa'
 };
 
 export const LAYER_EMISSIVE = {
@@ -33,7 +34,8 @@ export const LAYER_EMISSIVE = {
   5: '#441100',
   6: '#224466',
   7: '#441122',
-  8: '#443300'
+  8: '#443300',
+  9: '#441133'
 };
 
 export const EDGE_COLORS = {
@@ -53,7 +55,8 @@ export const LAYER_RADII = {
   5: 1520,
   6: 1760,
   7: 2020,
-  8: 2300
+  8: 2300,
+  9: 2600
 };
 
 export const FIPS_COLORS = {
@@ -65,13 +68,14 @@ export const FIPS_COLORS = {
 };
 
 export const LAYER_NODE_SIZE = {
-  0: 20,
-  1: 16,
-  2: 14,
-  3: 12,
-  4: 11,
-  5: 11,
-  6: 10,
-  7: 10,
-  8: 10
+  0: 30,
+  1: 24,
+  2: 21,
+  3: 18,
+  4: 16,
+  5: 16,
+  6: 15,
+  7: 15,
+  8: 15,
+  9: 15
 };

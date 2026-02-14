@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 
-function SearchBar({ nodes, onSelect }) {
+function SearchBar({ nodes, onSelect, inline }) {
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef(null);
@@ -48,7 +48,7 @@ function SearchBar({ nodes, onSelect }) {
   };
 
   return (
-    <div className="hud-panel search-panel" ref={containerRef}>
+    <div className={inline ? 'search-panel-inline' : 'hud-panel search-panel'} ref={containerRef}>
       <div className="search-input-wrapper">
         <input
           ref={inputRef}

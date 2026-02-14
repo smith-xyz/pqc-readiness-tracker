@@ -10,7 +10,8 @@ const LAYER_ITEMS = [
   { layer: 5, label: LAYER_LABELS[LAYERS.MANAGED_RUNTIMES] },
   { layer: 6, label: LAYER_LABELS[LAYERS.DYNAMIC_LANGUAGES] },
   { layer: 7, label: LAYER_LABELS[LAYERS.INFRASTRUCTURE] },
-  { layer: 8, label: LAYER_LABELS[LAYERS.PLATFORMS] }
+  { layer: 8, label: LAYER_LABELS[LAYERS.PLATFORMS] },
+  { layer: 9, label: LAYER_LABELS[LAYERS.SERVICES] }
 ];
 
 const STATUS_ITEMS = [

@@ -467,8 +467,11 @@
             "from": "java-jdk",
             "to": "bouncy-castle",
             "type": "depends_on",
-            "approach": "native",
-            "status": "available"
+            "approach": "third_party",
+            "status": "available",
+            "metadata": {
+                "notes": "Optional JCA provider for additional PQC algorithms beyond JDK defaults"
+            }
         },
         {
             "from": "java-jdk",
@@ -637,6 +640,16 @@
         },
         {
             "from": "openshift",
+            "to": "kubernetes",
+            "type": "depends_on",
+            "approach": "native",
+            "status": "partial",
+            "metadata": {
+                "notes": "OpenShift is a Kubernetes distribution with enterprise extensions"
+            }
+        },
+        {
+            "from": "openshift",
             "to": "go",
             "type": "depends_on",
             "approach": "native",
@@ -749,7 +762,7 @@
             "from": "keycloak",
             "to": "bouncy-castle",
             "type": "depends_on",
-            "approach": "delegated",
+            "approach": "third_party",
             "status": "available",
             "metadata": {
                 "notes": "Bouncy Castle JCA provider enables PQC algorithms for TLS and signing"
@@ -873,6 +886,106 @@
             "status": "available",
             "metadata": {
                 "notes": "Azure uses SymCrypt/CNG with ML-KEM for TLS"
+            }
+        },
+        {
+            "from": "istio",
+            "to": "openshift",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "partial",
+            "metadata": {
+                "notes": "OpenShift Service Mesh is built on Istio"
+            }
+        },
+        {
+            "from": "istio",
+            "to": "kubernetes",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "partial",
+            "metadata": {
+                "notes": "Runs on Kubernetes as a service mesh"
+            }
+        },
+        {
+            "from": "keycloak",
+            "to": "openshift",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "partial",
+            "metadata": {
+                "notes": "Commonly deployed on OpenShift for SSO/IAM"
+            }
+        },
+        {
+            "from": "keycloak",
+            "to": "kubernetes",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "partial",
+            "metadata": {
+                "notes": "Runs on Kubernetes as an identity provider"
+            }
+        },
+        {
+            "from": "vault",
+            "to": "openshift",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "partial",
+            "metadata": {
+                "notes": "Deployed on OpenShift for secrets management"
+            }
+        },
+        {
+            "from": "vault",
+            "to": "kubernetes",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "partial",
+            "metadata": {
+                "notes": "Runs on Kubernetes with sidecar injection for secret delivery"
+            }
+        },
+        {
+            "from": "kafka",
+            "to": "openshift",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "partial",
+            "metadata": {
+                "notes": "AMQ Streams (Strimzi operator) runs Kafka on OpenShift"
+            }
+        },
+        {
+            "from": "kafka",
+            "to": "kubernetes",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "partial",
+            "metadata": {
+                "notes": "Strimzi operator deploys Kafka on Kubernetes"
+            }
+        },
+        {
+            "from": "quay",
+            "to": "openshift",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "partial",
+            "metadata": {
+                "notes": "Quay registry deployed on OpenShift"
+            }
+        },
+        {
+            "from": "ansible-aap",
+            "to": "openshift",
+            "type": "depends_on",
+            "approach": "delegated",
+            "status": "partial",
+            "metadata": {
+                "notes": "AAP 2.x runs on OpenShift as the deployment platform"
             }
         }
     ]

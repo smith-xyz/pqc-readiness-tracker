@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from 'react';
 import { useGraphData } from './hooks/useGraphData';
-import { buildGraphData, computeFipsSet } from './utils/graphUtils';
+import { buildGraphData, buildNodeMap, computeFipsSet, computeStackChain } from './utils/graphUtils';
 import { LAYERS } from './constants/labels';
 import Graph from './components/Graph';
 import Controls from './components/Controls';
@@ -9,6 +9,7 @@ import Legend from './components/Legend';
 import NodeDetails from './components/NodeDetails';
 import StatusBar from './components/StatusBar';
 import ExplorationBreadcrumb from './components/ExplorationBreadcrumb';
+import StackAssessment from './components/StackAssessment';
 
 function App() {
   const { nodesData, edgesData, loading, error } = useGraphData();
@@ -18,16 +19,37 @@ function App() {
   const [chain, setChain] = useState([]);
   const [fipsOverlay, setFipsOverlay] = useState('off');
   const [showLabels, setShowLabels] = useState(true);
+  const [stackOpen, setStackOpen] = useState(false);
+  const [stackOverlay, setStackOverlay] = useState(false);
+  const [stackSelection, setStackSelection] = useState([]);
 
   const graphData = useMemo(() => {
     if (!nodesData || !edgesData) return { nodes: [], links: [] };
     return buildGraphData(nodesData, edgesData);
   }, [nodesData, edgesData]);
 
+  const nodeMap = useMemo(() => buildNodeMap(graphData.nodes), [graphData.nodes]);
+
   const fipsSets = useMemo(() => {
     if (!graphData.nodes.length || fipsOverlay === 'off') return { fipsReachable: new Set(), neutralIds: new Set() };
     return computeFipsSet(graphData.nodes, graphData.links, fipsOverlay);
   }, [graphData, fipsOverlay]);
+
+  const stackChain = useMemo(() => {
+    if (!stackOverlay || stackSelection.length === 0) return new Set();
+    return computeStackChain(stackSelection, graphData.links, nodeMap);
+  }, [stackOverlay, stackSelection, graphData.links, nodeMap]);
+
+  const handleStackAssess = useCallback((selectedIds) => {
+    setStackSelection(selectedIds);
+    setStackOverlay(true);
+    setFipsOverlay('off');
+  }, []);
+
+  const handleStackClear = useCallback(() => {
+    setStackOverlay(false);
+    setStackSelection([]);
+  }, []);
 
   const handleExplore = useCallback((node) => {
     const lastNode = chain.length > 0 ? chain[chain.length - 1] : null;
@@ -106,6 +128,8 @@ function App() {
         onGoBack={handleGoBack}
         fipsOverlay={fipsOverlay !== 'off'}
         fipsSets={fipsSets}
+        stackOverlay={stackOverlay}
+        stackChain={stackChain}
         showLabels={showLabels}
       />
 
@@ -118,9 +142,12 @@ function App() {
             />
             <button
               className={`fips-toggle ${fipsOverlay !== 'off' ? 'active' : ''}`}
-              onClick={() => setFipsOverlay(prev =>
-                prev === 'off' ? 'pqc' : prev === 'pqc' ? 'classical' : 'off'
-              )}
+              onClick={() => {
+                setFipsOverlay(prev =>
+                  prev === 'off' ? 'pqc' : prev === 'pqc' ? 'classical' : 'off'
+                );
+                setStackOverlay(false);
+              }}
             >
               {fipsOverlay === 'off' ? 'FIPS 140-3' :
                fipsOverlay === 'pqc' ? 'FIPS + PQC' : 'FIPS Classical'}
@@ -136,7 +163,35 @@ function App() {
             <h1>PQC Readiness Tracker</h1>
             <span className="hud-subtitle">Post-Quantum Cryptography Ecosystem Map</span>
           </div>
-          <SearchBar nodes={graphData.nodes} onSelect={handleSearchSelect} />
+          <div className="hud-right-group">
+            <div className="hud-panel right-tabbed-panel">
+              <div className="right-tabs">
+                <button
+                  className={`right-tab ${!stackOpen ? 'active' : ''}`}
+                  onClick={() => setStackOpen(false)}
+                >
+                  Search
+                </button>
+                <button
+                  className={`right-tab ${stackOpen ? 'active' : ''}`}
+                  onClick={() => setStackOpen(true)}
+                >
+                  Assess
+                </button>
+              </div>
+              {!stackOpen ? (
+                <SearchBar nodes={graphData.nodes} onSelect={handleSearchSelect} inline />
+              ) : (
+                <StackAssessment
+                  graphData={graphData}
+                  onAssess={handleStackAssess}
+                  onClear={handleStackClear}
+                  isActive={stackOverlay}
+                  inline
+                />
+              )}
+            </div>
+          </div>
         </div>
 
         <ExplorationBreadcrumb

@@ -205,6 +205,43 @@ export function computeFipsSet(nodes, links, mode = 'pqc') {
   return { fipsReachable, neutralIds };
 }
 
+export function computeStackChain(selectedIds, links, nodeMap) {
+  const chain = new Set(selectedIds);
+
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const link of links) {
+      const srcId = typeof link.source === 'object' ? link.source.id : link.source;
+      const tgtId = typeof link.target === 'object' ? link.target.id : link.target;
+      if ((link.type === 'depends_on' || link.type === 'ships') && chain.has(srcId) && !chain.has(tgtId)) {
+        chain.add(tgtId);
+        changed = true;
+      }
+    }
+  }
+
+  for (const id of chain) {
+    const node = nodeMap.get(id);
+    if (node && node.layer <= 1) {
+      for (const link of links) {
+        const srcId = typeof link.source === 'object' ? link.source.id : link.source;
+        const tgtId = typeof link.target === 'object' ? link.target.id : link.target;
+        if (chain.has(srcId) && !chain.has(tgtId)) {
+          const tgtNode = nodeMap.get(tgtId);
+          if (tgtNode && tgtNode.layer <= 1) chain.add(tgtId);
+        }
+        if (chain.has(tgtId) && !chain.has(srcId)) {
+          const srcNode = nodeMap.get(srcId);
+          if (srcNode && srcNode.layer <= 1) chain.add(srcId);
+        }
+      }
+    }
+  }
+
+  return chain;
+}
+
 export function getCameraPositionForNode(node, distance = 800) {
   if (!node || node.x == null) return OVERVIEW_CAMERA;
   return {

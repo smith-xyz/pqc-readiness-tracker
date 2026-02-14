@@ -7,7 +7,8 @@ export const NODE_TYPES = {
   MANAGED_RUNTIME: 'managed_runtime',
   DYNAMIC_LANGUAGE: 'dynamic_language',
   INFRASTRUCTURE: 'infrastructure',
-  PLATFORM: 'platform'
+  PLATFORM: 'platform',
+  SERVICE: 'service'
 };
 
 export const NODE_TYPE_LABELS = {
@@ -19,7 +20,8 @@ export const NODE_TYPE_LABELS = {
   [NODE_TYPES.MANAGED_RUNTIME]: 'Managed Runtime',
   [NODE_TYPES.DYNAMIC_LANGUAGE]: 'Dynamic Language',
   [NODE_TYPES.INFRASTRUCTURE]: 'Infrastructure',
-  [NODE_TYPES.PLATFORM]: 'Platform'
+  [NODE_TYPES.PLATFORM]: 'Platform',
+  [NODE_TYPES.SERVICE]: 'Service'
 };
 
 export const EDGE_TYPES = {
@@ -65,12 +67,14 @@ export const STATUS_LABELS = {
 export const APPROACH = {
   NATIVE: 'native',
   BINDING: 'binding',
-  DELEGATED: 'delegated'
+  DELEGATED: 'delegated',
+  THIRD_PARTY: 'third_party'
 };
 
 export const APPROACH_LABELS = {
   [APPROACH.NATIVE]: 'Native',
   [APPROACH.BINDING]: 'Binding',
+  [APPROACH.THIRD_PARTY]: 'Third Party',
   [APPROACH.DELEGATED]: 'Delegated'
 };
 
@@ -100,7 +104,8 @@ export const LAYERS = {
   MANAGED_RUNTIMES: '5',
   DYNAMIC_LANGUAGES: '6',
   INFRASTRUCTURE: '7',
-  PLATFORMS: '8'
+  PLATFORMS: '8',
+  SERVICES: '9'
 };
 
 export const LAYER_LABELS = {
@@ -113,7 +118,8 @@ export const LAYER_LABELS = {
   [LAYERS.MANAGED_RUNTIMES]: 'Managed Runtimes',
   [LAYERS.DYNAMIC_LANGUAGES]: 'Dynamic Languages',
   [LAYERS.INFRASTRUCTURE]: 'Infrastructure',
-  [LAYERS.PLATFORMS]: 'Platforms'
+  [LAYERS.PLATFORMS]: 'Platforms',
+  [LAYERS.SERVICES]: 'Services'
 };
 
 export const LAYER_FILTERS = [
@@ -126,7 +132,8 @@ export const LAYER_FILTERS = [
   { value: LAYERS.MANAGED_RUNTIMES, label: LAYER_LABELS[LAYERS.MANAGED_RUNTIMES] },
   { value: LAYERS.DYNAMIC_LANGUAGES, label: LAYER_LABELS[LAYERS.DYNAMIC_LANGUAGES] },
   { value: LAYERS.INFRASTRUCTURE, label: LAYER_LABELS[LAYERS.INFRASTRUCTURE] },
-  { value: LAYERS.PLATFORMS, label: LAYER_LABELS[LAYERS.PLATFORMS] }
+  { value: LAYERS.PLATFORMS, label: LAYER_LABELS[LAYERS.PLATFORMS] },
+  { value: LAYERS.SERVICES, label: LAYER_LABELS[LAYERS.SERVICES] }
 ];
 
 export const STATUS_FILTERS = [

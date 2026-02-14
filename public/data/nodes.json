@@ -816,7 +816,7 @@
             "metadata": {
                 "date": "2025-03-18",
                 "description": "Java runtime environment",
-                "notes": "JDK 24 (GA March 2025) introduced native APIs for ML-KEM and ML-DSA in core Java security. JDK 25 LTS (September 2025) inherits these. Bouncy Castle provider adds additional PQC algorithm support. Hybrid TLS integration not yet available in JSSE -- applications cannot negotiate hybrid PQC key exchange natively.",
+                "notes": "JDK 24 (GA March 2025) introduced native ML-KEM and ML-DSA APIs via the default SunJCE/SunEC providers in javax.crypto and java.security. JDK 25 LTS (September 2025) inherits these. Upgrading to JDK 24+ gives native PQC without third-party dependencies. Bouncy Castle is an optional third-party JCA provider that adds additional PQC algorithms. Hybrid TLS integration not yet available in JSSE -- applications cannot negotiate hybrid PQC key exchange natively.",
                 "sources": [
                     {
                         "label": "JEP 497",
@@ -1235,9 +1235,9 @@
         },
         "ansible-aap": {
             "id": "ansible-aap",
-            "type": "platform",
+            "type": "service",
             "name": "Ansible Automation Platform",
-            "layer": 8,
+            "layer": 9,
             "version": "2.x",
             "status": "not_available",
             "metadata": {
@@ -1268,9 +1268,9 @@
         },
         "istio": {
             "id": "istio",
-            "type": "platform",
+            "type": "service",
             "name": "Istio / Envoy",
-            "layer": 8,
+            "layer": 9,
             "version": "1.24+",
             "status": "partial",
             "metadata": {
@@ -1312,9 +1312,9 @@
         },
         "keycloak": {
             "id": "keycloak",
-            "type": "platform",
+            "type": "service",
             "name": "Keycloak",
-            "layer": 8,
+            "layer": 9,
             "version": "26+",
             "status": "partial",
             "metadata": {
@@ -1356,9 +1356,9 @@
         },
         "vault": {
             "id": "vault",
-            "type": "platform",
+            "type": "service",
             "name": "HashiCorp Vault",
-            "layer": 8,
+            "layer": 9,
             "version": "1.18+",
             "status": "partial",
             "metadata": {
@@ -1400,9 +1400,9 @@
         },
         "kafka": {
             "id": "kafka",
-            "type": "platform",
+            "type": "service",
             "name": "Apache Kafka",
-            "layer": 8,
+            "layer": 9,
             "version": "3.9+",
             "status": "partial",
             "metadata": {
@@ -1433,9 +1433,9 @@
         },
         "quay": {
             "id": "quay",
-            "type": "platform",
+            "type": "service",
             "name": "Quay",
-            "layer": 8,
+            "layer": 9,
             "version": "3.x",
             "status": "not_available",
             "metadata": {

@@ -24,9 +24,18 @@ function setNodeBrightness(obj, opacity, _unused, glowOp, labelOp) {
   if (label?.material) label.material.opacity = labelOp;
 }
 
-function applyNodeVisual(obj, nodeId, node, revDepth, cIds, frontier, chainLen, neighbors, fipsOn, fipsReachable, fipsNeutral) {
+function applyNodeVisual(obj, nodeId, node, revDepth, cIds, frontier, chainLen, neighbors, fipsOn, fipsReachable, fipsNeutral, stackOn, stackChainSet) {
   if (!obj?.children) return;
   if (!obj.children[0]?.material) return;
+
+  if (stackOn && stackChainSet.size > 0) {
+    if (stackChainSet.has(nodeId)) {
+      setNodeBrightness(obj, 1.0, 1.2, 0.2, 1.0);
+    } else {
+      setNodeBrightness(obj, 0.06, 0.02, 0.0, 0.05);
+    }
+    return;
+  }
 
   if (fipsOn) {
     if (fipsNeutral.has(nodeId)) {
@@ -67,7 +76,7 @@ function applyNodeVisual(obj, nodeId, node, revDepth, cIds, frontier, chainLen, 
   setNodeBrightness(obj, 0.15, 0.08, 0.01, 0.12);
 }
 
-function Graph({ graphData, statusFilter, revealedDepth, chain, onExplore, onGoBack, fipsOverlay, fipsSets, showLabels }) {
+function Graph({ graphData, statusFilter, revealedDepth, chain, onExplore, onGoBack, fipsOverlay, fipsSets, stackOverlay, stackChain, showLabels }) {
   const fgRef = useRef();
   const initDone = useRef(false);
   const nodeObjects = useRef(new Map());
@@ -82,6 +91,8 @@ function Graph({ graphData, statusFilter, revealedDepth, chain, onExplore, onGoB
   const fipsOverlayRef = useRef(false);
   const fipsReachableRef = useRef(new Set());
   const fipsNeutralRef = useRef(new Set());
+  const stackOverlayRef = useRef(false);
+  const stackChainRef = useRef(new Set());
 
   const filteredData = useMemo(() => {
     const visibleNodes = graphData.nodes.filter(n => isNodeVisible(n, LAYERS.ALL, statusFilter));
@@ -143,6 +154,11 @@ function Graph({ graphData, statusFilter, revealedDepth, chain, onExplore, onGoB
     fipsReachableRef.current = fipsSets.fipsReachable;
     fipsNeutralRef.current = fipsSets.neutralIds;
   }, [fipsOverlay, fipsSets]);
+
+  useEffect(() => {
+    stackOverlayRef.current = stackOverlay;
+    stackChainRef.current = stackChain;
+  }, [stackOverlay, stackChain]);
 
   useEffect(() => {
     const handleResize = () => setDimensions({ width: window.innerWidth, height: window.innerHeight });
@@ -221,9 +237,9 @@ function Graph({ graphData, statusFilter, revealedDepth, chain, onExplore, onGoB
       const node = nodeMap.get(nodeId);
       if (!node) return;
       applyNodeVisual(obj, nodeId, node, revealedDepth, chainIds, connectedAtFrontier, chain.length,
-        chainNeighbors, fipsOverlay, fipsSets.fipsReachable, fipsSets.neutralIds);
+        chainNeighbors, fipsOverlay, fipsSets.fipsReachable, fipsSets.neutralIds, stackOverlay, stackChain);
     });
-  }, [chain, chainIds, revealedDepth, connectedAtFrontier, chainNeighbors, nodeMap, fipsOverlay, fipsSets]);
+  }, [chain, chainIds, revealedDepth, connectedAtFrontier, chainNeighbors, nodeMap, fipsOverlay, fipsSets, stackOverlay, stackChain]);
 
   useEffect(() => {
     nodeObjects.current.forEach((obj) => {
@@ -255,7 +271,9 @@ function Graph({ graphData, statusFilter, revealedDepth, chain, onExplore, onGoB
         chainNeighborsRef.current,
         fipsOverlayRef.current,
         fipsReachableRef.current,
-        fipsNeutralRef.current
+        fipsNeutralRef.current,
+        stackOverlayRef.current,
+        stackChainRef.current
       );
     }
     return obj;
@@ -270,6 +288,13 @@ function Graph({ graphData, statusFilter, revealedDepth, chain, onExplore, onGoB
     const fn = fipsSets.neutralIds;
 
     if (!srcNode || !tgtNode) return '#080810';
+
+    if (stackOverlay && stackChain.size > 0) {
+      if (stackChain.has(srcId) && stackChain.has(tgtId)) {
+        return EDGE_COLORS[link.type] || '#333344';
+      }
+      return 'rgba(8,8,16,0.02)';
+    }
 
     if (fipsOverlay) {
       const srcFips = fr.has(srcId) || fn.has(srcId);
@@ -297,12 +322,16 @@ function Graph({ graphData, statusFilter, revealedDepth, chain, onExplore, onGoB
     }
 
     return '#12121a';
-  }, [chainIds, connectedAtFrontier, chainNeighbors, revealedDepth, fipsOverlay, fipsSets]);
+  }, [chainIds, connectedAtFrontier, chainNeighbors, revealedDepth, fipsOverlay, fipsSets, stackOverlay, stackChain]);
 
   const linkWidth = useCallback((link) => {
     const srcId = typeof link.source === 'object' ? link.source.id : link.source;
     const tgtId = typeof link.target === 'object' ? link.target.id : link.target;
     const fr = fipsSets.fipsReachable;
+
+    if (stackOverlay && stackChain.size > 0) {
+      return (stackChain.has(srcId) && stackChain.has(tgtId)) ? 1.5 : 0.1;
+    }
 
     if (fipsOverlay) {
       return (fr.has(srcId) || fr.has(tgtId)) ? 1.5 : 0.1;
@@ -321,12 +350,16 @@ function Graph({ graphData, statusFilter, revealedDepth, chain, onExplore, onGoB
     }
 
     return 0.3;
-  }, [chainIds, connectedAtFrontier, chainNeighbors, fipsOverlay, fipsSets]);
+  }, [chainIds, connectedAtFrontier, chainNeighbors, fipsOverlay, fipsSets, stackOverlay, stackChain]);
 
   const linkParticles = useCallback((link) => {
     const srcId = typeof link.source === 'object' ? link.source.id : link.source;
     const tgtId = typeof link.target === 'object' ? link.target.id : link.target;
     const fr = fipsSets.fipsReachable;
+
+    if (stackOverlay && stackChain.size > 0) {
+      return (stackChain.has(srcId) && stackChain.has(tgtId)) ? 2 : 0;
+    }
 
     if (fipsOverlay) {
       return (fr.has(srcId) && fr.has(tgtId)) ? 2 : 0;
@@ -343,7 +376,7 @@ function Graph({ graphData, statusFilter, revealedDepth, chain, onExplore, onGoB
     }
 
     return 0;
-  }, [chainIds, connectedAtFrontier, chainNeighbors, fipsOverlay, fipsSets]);
+  }, [chainIds, connectedAtFrontier, chainNeighbors, fipsOverlay, fipsSets, stackOverlay, stackChain]);
 
   const [camPos, setCamPos] = useState(null);
 
