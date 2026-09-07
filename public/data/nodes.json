@@ -1,5 +1,5 @@
 {
-    "last_updated": "2026-02-13",
+    "last_updated": "2026-09-07",
     "nodes": {
         "nist-fips-203": {
             "id": "nist-fips-203",
@@ -275,10 +275,10 @@
                     }
                 ],
                 "latestRelease": {
-                    "version": "3.6.1",
-                    "date": "2026-01-27",
-                    "url": "https://github.com/openssl/openssl/releases/tag/openssl-3.6.1",
-                    "tag": "openssl-3.6.1",
+                    "version": "4.0.2",
+                    "date": "2026-08-25",
+                    "url": "https://github.com/openssl/openssl/releases/tag/openssl-4.0.2",
+                    "tag": "openssl-4.0.2",
                     "hasPqcMention": false
                 }
             }
@@ -442,10 +442,10 @@
                     }
                 ],
                 "latestRelease": {
-                    "version": "0.23.36",
-                    "date": "2026-01-05",
-                    "url": "https://github.com/rustls/rustls/releases/tag/v/0.23.36",
-                    "tag": "v/0.23.36",
+                    "version": "0.23.43",
+                    "date": "2026-07-29",
+                    "url": "https://github.com/rustls/rustls/releases/tag/v/0.23.43",
+                    "tag": "v/0.23.43",
                     "hasPqcMention": false
                 }
             }
@@ -482,10 +482,10 @@
                     }
                 ],
                 "latestRelease": {
-                    "version": "5.8.4",
-                    "date": "2025-11-21",
-                    "url": "https://github.com/wolfSSL/wolfssl/releases/tag/v5.8.4-stable",
-                    "tag": "v5.8.4-stable",
+                    "version": "5.9.2",
+                    "date": "2026-06-25",
+                    "url": "https://github.com/wolfSSL/wolfssl/releases/tag/v5.9.2-stable",
+                    "tag": "v5.9.2-stable",
                     "hasPqcMention": true
                 }
             }
@@ -545,10 +545,10 @@
                     }
                 ],
                 "latestRelease": {
-                    "version": "103.8.0",
-                    "date": "2025-01-29",
-                    "url": "https://github.com/microsoft/SymCrypt/releases/tag/v103.8.0",
-                    "tag": "v103.8.0",
+                    "version": "103.13.0",
+                    "date": "2026-09-04",
+                    "url": "https://github.com/microsoft/SymCrypt/releases/tag/v103.13.0",
+                    "tag": "v103.13.0",
                     "hasPqcMention": false
                 }
             }
@@ -735,10 +735,10 @@
                     }
                 ],
                 "latestRelease": {
-                    "version": "25.6.1",
-                    "date": "2026-02-10",
-                    "url": "https://github.com/nodejs/node/releases/tag/v25.6.1",
-                    "tag": "v25.6.1",
+                    "version": "26.8.1",
+                    "date": "2026-08-26",
+                    "url": "https://github.com/nodejs/node/releases/tag/v26.8.1",
+                    "tag": "v26.8.1",
                     "hasPqcMention": false
                 }
             }
@@ -768,10 +768,10 @@
                     }
                 ],
                 "latestRelease": {
-                    "version": "3.14.3",
+                    "version": "3.14.7",
                     "date": null,
-                    "url": "https://github.com/python/cpython/releases/tag/v3.14.3",
-                    "tag": "v3.14.3",
+                    "url": "https://github.com/python/cpython/releases/tag/v3.14.7",
+                    "tag": "v3.14.7",
                     "hasPqcMention": false
                 }
             }
@@ -798,10 +798,10 @@
                     }
                 ],
                 "latestRelease": {
-                    "version": "1.26.0",
+                    "version": "1.27.1",
                     "date": null,
-                    "url": "https://go.dev/doc/go1.26.0",
-                    "tag": "go1.26.0",
+                    "url": "https://go.dev/doc/go1.27.1",
+                    "tag": "go1.27.1",
                     "hasPqcMention": false
                 }
             }
@@ -847,10 +847,10 @@
                     }
                 ],
                 "latestRelease": {
-                    "version": "1.93.1",
-                    "date": "2026-02-12",
-                    "url": "https://github.com/rust-lang/rust/releases/tag/1.93.1",
-                    "tag": "1.93.1",
+                    "version": "1.98.1",
+                    "date": "2026-09-03",
+                    "url": "https://github.com/rust-lang/rust/releases/tag/1.98.1",
+                    "tag": "1.98.1",
                     "hasPqcMention": false
                 }
             }
@@ -877,10 +877,10 @@
                     }
                 ],
                 "latestRelease": {
-                    "version": "10.0.3",
-                    "date": "2026-02-10",
-                    "url": "https://github.com/dotnet/runtime/releases/tag/v10.0.3",
-                    "tag": "v10.0.3",
+                    "version": "10.0.11",
+                    "date": "2026-08-11",
+                    "url": "https://github.com/dotnet/runtime/releases/tag/v10.0.11",
+                    "tag": "v10.0.11",
                     "hasPqcMention": false
                 }
             }
@@ -907,10 +907,10 @@
                     }
                 ],
                 "latestRelease": {
-                    "version": "3.4.8",
-                    "date": "2025-12-17",
-                    "url": "https://github.com/ruby/ruby/releases/tag/v3_4_8",
-                    "tag": "v3_4_8",
+                    "version": "3.4.10",
+                    "date": "2026-06-30",
+                    "url": "https://github.com/ruby/ruby/releases/tag/v3_4_10",
+                    "tag": "v3_4_10",
                     "hasPqcMention": false
                 }
             }
@@ -937,10 +937,10 @@
                     }
                 ],
                 "latestRelease": {
-                    "version": "8.5.3",
-                    "date": "2026-02-12",
-                    "url": "https://github.com/php/php-src/releases/tag/php-8.5.3",
-                    "tag": "php-8.5.3",
+                    "version": "8.5.10",
+                    "date": "2026-08-28",
+                    "url": "https://github.com/php/php-src/releases/tag/php-8.5.10",
+                    "tag": "php-8.5.10",
                     "hasPqcMention": false
                 }
             }
@@ -963,10 +963,10 @@
                     }
                 ],
                 "latestRelease": {
-                    "version": "2.6.9",
-                    "date": "2026-02-10",
-                    "url": "https://github.com/denoland/deno/releases/tag/v2.6.9",
-                    "tag": "v2.6.9",
+                    "version": "2.9.6",
+                    "date": "2026-08-27",
+                    "url": "https://github.com/denoland/deno/releases/tag/v2.9.6",
+                    "tag": "v2.9.6",
                     "hasPqcMention": false
                 }
             }
@@ -989,10 +989,10 @@
                     }
                 ],
                 "latestRelease": {
-                    "version": "1.3.9",
-                    "date": "2026-02-08",
-                    "url": "https://github.com/oven-sh/bun/releases/tag/bun-v1.3.9",
-                    "tag": "bun-v1.3.9",
+                    "version": "1.4.2",
+                    "date": "2026-09-05",
+                    "url": "https://github.com/oven-sh/bun/releases/tag/bun-v1.4.2",
+                    "tag": "bun-v1.4.2",
                     "hasPqcMention": false
                 }
             }
@@ -1019,10 +1019,10 @@
                     }
                 ],
                 "latestRelease": {
-                    "version": "10.2p1",
+                    "version": "10.5p1",
                     "date": null,
-                    "url": "https://github.com/openssh/openssh-portable/releases/tag/V_10_2_P1",
-                    "tag": "V_10_2_P1",
+                    "url": "https://github.com/openssh/openssh-portable/releases/tag/V_10_5_P1",
+                    "tag": "V_10_5_P1",
                     "hasPqcMention": false
                 }
             }
@@ -1087,10 +1087,10 @@
                     }
                 ],
                 "latestRelease": {
-                    "version": "3.3.0",
+                    "version": "3.4.0",
                     "date": null,
-                    "url": "https://github.com/haproxy/haproxy/releases/tag/v3.3.0",
-                    "tag": "v3.3.0",
+                    "url": "https://github.com/haproxy/haproxy/releases/tag/v3.4.0",
+                    "tag": "v3.4.0",
                     "hasPqcMention": false
                 }
             }
@@ -1113,10 +1113,10 @@
                     }
                 ],
                 "latestRelease": {
-                    "version": "8.18.0",
-                    "date": "2026-01-07",
-                    "url": "https://github.com/curl/curl/releases/tag/curl-8_18_0",
-                    "tag": "curl-8_18_0",
+                    "version": "8.22.0",
+                    "date": "2026-09-02",
+                    "url": "https://github.com/curl/curl/releases/tag/curl-8_22_0",
+                    "tag": "curl-8_22_0",
                     "hasPqcMention": false
                 }
             }
@@ -1225,10 +1225,10 @@
                     }
                 },
                 "latestRelease": {
-                    "version": "1.35.1",
-                    "date": "2026-02-10",
-                    "url": "https://github.com/kubernetes/kubernetes/releases/tag/v1.35.1",
-                    "tag": "v1.35.1",
+                    "version": "1.37.0",
+                    "date": "2026-08-26",
+                    "url": "https://github.com/kubernetes/kubernetes/releases/tag/v1.37.0",
+                    "tag": "v1.37.0",
                     "hasPqcMention": false
                 }
             }
@@ -1302,10 +1302,10 @@
                     }
                 },
                 "latestRelease": {
-                    "version": "1.28.3",
-                    "date": "2026-01-20",
-                    "url": "https://github.com/istio/istio/releases/tag/1.28.3",
-                    "tag": "1.28.3",
+                    "version": "1.31.0",
+                    "date": "2026-08-31",
+                    "url": "https://github.com/istio/istio/releases/tag/1.31.0",
+                    "tag": "1.31.0",
                     "hasPqcMention": false
                 }
             }
@@ -1346,10 +1346,10 @@
                     }
                 },
                 "latestRelease": {
-                    "version": "26.5.3",
-                    "date": "2026-02-10",
-                    "url": "https://github.com/keycloak/keycloak/releases/tag/26.5.3",
-                    "tag": "26.5.3",
+                    "version": "26.7.3",
+                    "date": "2026-08-31",
+                    "url": "https://github.com/keycloak/keycloak/releases/tag/26.7.3",
+                    "tag": "26.7.3",
                     "hasPqcMention": false
                 }
             }
@@ -1390,11 +1390,11 @@
                     }
                 },
                 "latestRelease": {
-                    "version": "1.21.2",
-                    "date": "2026-01-07",
-                    "url": "https://github.com/hashicorp/vault/releases/tag/v1.21.2",
-                    "tag": "v1.21.2",
-                    "hasPqcMention": false
+                    "version": "2.1.0",
+                    "date": "2026-09-01",
+                    "url": "https://github.com/hashicorp/vault/releases/tag/v2.1.0",
+                    "tag": "v2.1.0",
+                    "hasPqcMention": true
                 }
             }
         },
